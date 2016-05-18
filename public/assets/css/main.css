@@ -1,3 +1,8 @@
+html {
+    margin: 0 auto;
+    background-image: url(../img/15-000_267.jpg);
+}
+
 body {
     min-height:0vh;
     display: flex;
@@ -16,26 +21,32 @@ main {
 
 
 header {
-    background: rgba(198, 212, 224, .48);
+    background: rgba(217,217,217, .4);
     color: #2c2828;
     border-radius: 5px;
 /*    margin: auto;*/
-    padding: 1rem;
+    padding: .4rem;
     text-align: center;
 /*    justify-content: center;*/
 /*    margin: auto;*/
     margin-bottom: 0.5rem;
 }
 h1 {
-    font-weight: 200;
+    font-size: 5rem;
+/*    font-weight: 400;*/
+    text-shadow:
+        -0.4em 0 rgba( 229,110,86, 0.3),
+        0.4em 0 rgba(134,184,195, 0.6);
+
+        line-height: 1rem;
 }
 
 section {
-    background: rgba(198, 212, 224, .4);
+    background: rgba(217,217,217, .2);
     color: #fff;
     border-radius: 5px;
     margin: 0 0.5rem;
-    padding: .5rem;;
+
     text-align: left;
     
     display: flex;
@@ -48,14 +59,27 @@ section {
 }
 section p {
     margin: auto;
-    color: aquamarine;
-    background: rgba(188, 39, 85, 0.9);
+    font-size: 6rem;
+    padding: 1em;
 
 }
 
+section p:first-of-type {
+    color: #efe8e8;
+    background: rgba(229, 110, 86, 1);
+    letter-spacing: 0.1em;
+    border-radius: 10px 50px;
+}
+
+section p:last-of-type {
+    color: #efe8e8;
+    background: rgba(134, 184, 195, 1);
+    border-radius: 50px 10px;
+}
+
 footer {
-    background: #555353;
-    color: #fff;
+    background: rgba(85, 83, 83, .6);
+    color: #b1b1b1;
     border-radius: 5px; 
     padding: 0.5rem;
     margin-top: 0.5rem;
@@ -63,25 +87,25 @@ footer {
 }
 
 aside {
-    background: rgba(198, 212, 224, .4);
-    color: #fff;
+    background: rgba(217, 217, 217, .4);
     border-radius: 5px;
-    text-align: justify;
+    text-align: left;  
+    color: #2c2828;
 }
 nav {
-    background: rgba(198, 212, 224, .4);
-    color: #fff;
+    background: rgba(217, 217, 217, .4);
+    color: #2c2828;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     order: -1;
-    justify-content: space-between;
+/*    justify-content: space-between;*/
 
 }
 
 
 nav a {
-    color: #fff;
+    color: #2c2828;
     text-decoration: none;
     border-bottom: solid 1px #fff;
 }
