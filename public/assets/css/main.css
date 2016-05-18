@@ -1,4 +1,5 @@
 html {
+    @import url(https://fonts.googleapis.com/css?family=Oxygen:400,300,700);
     margin: 0 auto;
     background-image: url(../img/15-000_267.jpg);
 }
@@ -9,7 +10,7 @@ body {
     flex-direction: column;
 
 
-    font-family: helvetica;
+    font-family: 'Oxygen', Helvetica, sans-serif;
     font-weight: 200; 
 }
 
@@ -21,8 +22,8 @@ main {
 
 
 header {
-    background: rgba(217,217,217, .4);
-    color: #2c2828;
+    background: rgba(252, 246, 218, 0.2);
+    color: #404E57;
     border-radius: 5px;
 /*    margin: auto;*/
     padding: .4rem;
@@ -40,9 +41,12 @@ h1 {
 
         line-height: 1rem;
 }
+h1 span {
+    color: #efe8e8;
+}
 
 section {
-    background: rgba(217,217,217, .2);
+    background: rgba(252, 246, 218, 0.2);
     color: #fff;
     border-radius: 5px;
     margin: 0 0.5rem;
@@ -59,6 +63,8 @@ section {
 }
 section p {
     margin: auto;
+    font-family: 'Oxygen', Helvetica, sans-serif;
+    font-weight: 400; 
     font-size: 6rem;
     padding: 1em;
 
@@ -87,13 +93,13 @@ footer {
 }
 
 aside {
-    background: rgba(217, 217, 217, .4);
+    background: rgba(252, 246, 218, 0.2);
     border-radius: 5px;
     text-align: left;  
-    color: #2c2828;
+    color: #404E57;
 }
 nav {
-    background: rgba(217, 217, 217, .4);
+    background: rgba(252, 246, 218, 0.2);
     color: #2c2828;
     border-radius: 5px;
     display: flex;
@@ -105,9 +111,11 @@ nav {
 
 
 nav a {
-    color: #2c2828;
+    color: #efe8e8;
     text-decoration: none;
-    border-bottom: solid 1px #fff;
+/*    border-bottom: solid 1px #fff;*/
+    background: #76746d;
+    border-radius: 3px;
 }
 nav,
 aside {
