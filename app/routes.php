@@ -1,5 +1,16 @@
 <?php
 	
+
 	$w_routes = array(
-		['GET', '/', 'Default#home', 'home'],
+		// ['GET|POST', '/login', 'Default#login', 'login'],
+		['GET|POST', '/inscription', 'AdminController#inscription', 'inscription'],
+	
+		// Attention à la gloutonnerie = ordre des routes
+		// ['GET|POST', '/', 'Default#home', 'home'],
+		// Attention à la gloutonnerie = ordre des routes
+		// ['GET', '/liste', 'Default#liste', 'liste'],
+		 // ['GET', '/contact', 'Default#contact', 'contact'],
+		// // ['POST', '/murl', 'Default#murl', 'murl'],
+		// ['GET', '/[:code]', 'Default#go', 'redirection'],
+
 	);

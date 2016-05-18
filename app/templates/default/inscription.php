@@ -1,6 +1,6 @@
 <?php $this->layout('layout', ['title' => 'Inscription au carnet d’entrainement de la course à pied']) ?>
 
-
+<!-- 'erreurs'=>$erreurs]); -->
 
 <!-- <p>Et maintenant, RTFM dans <strong><a href="../docs/tuto/" title="Documentation de W">docs/tuto</a></strong>.</p> -->
 <!-- include -->
@@ -28,7 +28,7 @@
        <input  name="finscription[pseudo]" type="text" id="pseudoId" class="form-control" placeholder ="Saisissez votre pseudo">
     </div>
   </div>
-  <input  name="finscription[role]" type="hidden" value="0">
+ 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
      <button name="submit" type="submit" class="btn btn-primary" >Valider</button>
