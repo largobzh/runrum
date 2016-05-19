@@ -90,6 +90,8 @@ footer {
     padding: 0.5rem;
     margin-top: 0.5rem;
     text-align: center;
+    justify-content: space-between;
+    
 }
 
 aside {
@@ -97,6 +99,7 @@ aside {
     border-radius: 5px;
     text-align: left;  
     color: #404E57;
+    order: -1;
 }
 nav {
     background: rgba(252, 246, 218, 0.2);
@@ -104,7 +107,7 @@ nav {
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    order: -1;
+
 /*    justify-content: space-between;*/
 
 }
@@ -114,8 +117,12 @@ nav a {
     color: #efe8e8;
     text-decoration: none;
 /*    border-bottom: solid 1px #fff;*/
-    background: #76746d;
+    background: transparent;
+    border: solid 1px #efe8e8;
     border-radius: 3px;
+    padding: .2rem;
+    padding-left: 1rem;
+    margin-bottom: .2rem;
 }
 nav,
 aside {
