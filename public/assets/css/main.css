@@ -32,17 +32,41 @@ header {
 /*    margin: auto;*/
     margin-bottom: 0.5rem;
 }
+
+
 h1 {
+    
+    color:#404E57;
+    font-size: 2rem;
+/*    font-weight: 400;*/
+    text-shadow:
+        -0.4em 0 rgba( 229,110,86, 0.3),
+        0.4em 0 rgba(134,184,195, 0.6);
+    line-height: 2rem;
+}
+
+
+h2 {
     font-size: 5rem;
 /*    font-weight: 400;*/
     text-shadow:
         -0.4em 0 rgba( 229,110,86, 0.3),
         0.4em 0 rgba(134,184,195, 0.6);
+    line-height: 1rem;
+}
+h2 span {
+    color: #efe8e8;
+    z-index: 1;
+}
+
+h3 {
+    font-size: 1.5rem;
+/*    font-weight: 400;*/
+    text-shadow:
+        -0.3em 0 rgba( 229,110,86, 0.3),
+        0.3em 0 rgba(134,184,195, 0.6);
 
         line-height: 1rem;
-}
-h1 span {
-    color: #efe8e8;
 }
 
 section {
@@ -58,30 +82,67 @@ section {
 }
 
 
+
+/*=================== main content =================*/
 .content {
     flex:1;
 }
-section p {
+section a {
+/*    box-sizing: content-box;*/
     margin: auto;
     font-family: 'Oxygen', Helvetica, sans-serif;
     font-weight: 400; 
     font-size: 6rem;
     padding: 1em;
-
 }
 
-section p:first-of-type {
+section a.styleBouton:link {
+    text-decoration: none;
+}
+
+section a:first-of-type {
     color: #efe8e8;
     background: rgba(229, 110, 86, 1);
     letter-spacing: 0.1em;
     border-radius: 10px 50px;
+
 }
 
-section p:last-of-type {
+section a:last-of-type {
     color: #efe8e8;
     background: rgba(134, 184, 195, 1);
     border-radius: 50px 10px;
 }
+
+
+section a:hover {
+
+    padding: calc(1em - 6px);
+    box-shadow:
+        .0em
+        .0em
+        .9em
+        .8em
+        rgba(64, 78, 87, .4);
+}
+
+section a:first-of-type:hover {
+    border: solid 6px rgb(134, 184, 195);
+
+}
+
+section a:last-of-type:hover {
+    border: solid 6px rgb(229, 110, 86);
+
+}
+
+
+
+
+
+/*=================== fin main content =================*/
+
+
 
 footer {
     background: rgba(85, 83, 83, .6);
@@ -91,7 +152,18 @@ footer {
     margin-top: 0.5rem;
     text-align: center;
     justify-content: space-between;
+}
+
+footer div a {
+    color: rgba(134, 184, 195, 1);
+    padding: 1px 4px;
+}
+
+footer div a:hover {
+    background: rgba(229, 110, 86, 1);
+    border-radius: 3px;
     
+;
 }
 
 aside {
@@ -111,7 +183,9 @@ nav {
 /*    justify-content: space-between;*/
 
 }
-
+nav h1 {
+    text-align: center;
+}
 
 nav a {
     color: #efe8e8;
@@ -124,10 +198,18 @@ nav a {
     padding-left: 1rem;
     margin-bottom: .2rem;
 }
+
+nav a:hover {
+    background: rgba(229, 110, 86, 1);
+;
+}
 nav,
 aside {
     width: 15em;
     padding: 0.5rem;
+}
+aside h3 {
+    padding-top: .5em;
 }
 
 
