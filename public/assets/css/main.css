@@ -140,18 +140,18 @@ section a:last-of-type:hover {
 section article {
     display: column;
     flex:1;
-    padding: 1vw;
+    padding: 1.5vw;
 }
 
 #categories,
 #navPages {
     display: flex;
-    min-height: 6vh;
+    min-height: 5vh;
 }
 
 #apercuPosts{
     display: column;
-    min-height: 88vh;
+    min-height: 90vh;
 }
 
 li {
@@ -172,7 +172,49 @@ ul {
 
 #navPages li:nth-child(2) {
     flex-grow: 4;
+    margin: 0 .4vw;
 }
+
+ article div div h4 {
+     font-size: 1.5vw;
+     padding: .9vw;
+     border-radius: 5px;
+}
+.couleurCR {
+     background:  rgb(134, 184, 195);
+}
+.couleurNEWS {
+     background:  rgb(237, 237, 97);
+}
+.couleurQR {
+     background:  rgb(244, 175, 81);
+}
+
+article div div p {
+    color: #404E57;
+}
+
+p.couleurFondCR {
+    
+    background:  rgba(134, 184, 195, 0.3);
+    padding: .9vw;
+    border-radius: 5px;
+}
+
+p.couleurFondNEWS {
+    
+    background:  rgba(237, 237, 97, .3);
+    padding: .9vw;
+    border-radius: 5px;
+}
+
+p.couleurFondQR {
+    
+    background:  rgba(244, 175, 81, .3);
+    padding: .9vw;
+    border-radius: 5px;
+}
+
 /*
 div ul li {
 
