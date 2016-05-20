@@ -2,9 +2,9 @@
 	
 
 	$w_routes = array(
-		// ['GET|POST', '/login', 'Default#login', 'login'],
+		['GET|POST', '/login', 'AdminController#login', 'login'],
 		['GET|POST', '/inscription', 'AdminController#inscription', 'inscription'],
-	
+	// ['GET|POST', '/inscription', 'Default#inscription', 'inscription'],
 		// Attention à la gloutonnerie = ordre des routes
 		// ['GET|POST', '/', 'Default#home', 'home'],
 		// Attention à la gloutonnerie = ordre des routes

@@ -1,9 +1,12 @@
 <?php
+// namespace Manager;
+
+
 namespace Manager;
-// namespace vendor;
+
 class TokenManager extends  \W\Manager\Manager 
 {
 
 
 }
-?>
+
