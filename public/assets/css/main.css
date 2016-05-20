@@ -146,10 +146,39 @@ section article {
 #categories,
 #navPages,
 #navComment,
-#navPostComment{
+#navPostComment,
+#nav404403{
     display: flex;
     min-height: 5vh;
 }
+
+#comment{
+    display: flex;
+    min-height: 50vh;
+    
+
+}
+#comment p:first-of-type{
+
+    font-size: 11vh;
+    font-weight: 700;
+    color: rgba(229, 110, 86, 1);
+    margin: 0 .4vw;
+    background: rgba(204, 234, 240, 0.4);
+    margin: 0 .4vw 0 0;
+}
+
+#comment p:last-of-type{
+    padding: 5vh 0 0 5vw;
+    font-size: 6vh;
+    font-weight: 400;
+    flex-grow: 4;
+    margin: 0 .4vw;
+    background: rgba(204, 234, 240, 0.4);
+    margin: 0 0 0 .7vw;
+}
+
+
 #fPostComment {
     display: column;
     flex:1;
@@ -223,6 +252,21 @@ li {
 ul {
     padding-left: 0;
     }
+
+#nav404403 li:nth-child(1) {
+
+    margin: 0 .4vw;
+    background: rgba(229, 110, 86, 1);
+    margin: 0 .4vw 0 0;
+}
+
+#nav404403 li:nth-child(2) {  
+    flex-grow: 4;
+    margin: 0 .4vw;
+    background: rgba(147, 201, 23, 1);
+    margin: 0 0 0 .4vw;
+}
+
 
 #navPages li:nth-child(2) {
     flex-grow: 4;
@@ -300,6 +344,17 @@ p.couleurFondQR {
     padding: .9vw;
     border-radius: 5px;
 }
+
+p.text404403 {
+    
+    background: rgba(204, 234, 240, 0.4);
+    padding: .9vw;
+    border-radius: 5px;
+}
+
+
+
+
 
 .infosPost1 {
     background: #434343;
