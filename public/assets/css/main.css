@@ -150,6 +150,21 @@ section article {
     min-height: 5vh;
 }
 
+#thumbnail {
+    display: flex;
+    justify-content: flex-end;
+    
+
+/*
+    min-height: 10vh;
+    max-height: 20vh;
+*/
+    
+}
+#thumbnail img {
+    margin-left: 1.65vw;
+}
+
 /*
 #renseignPost {
     color:red;
