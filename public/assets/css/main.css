@@ -215,6 +215,19 @@ p.couleurFondQR {
     border-radius: 5px;
 }
 
+.infosPost1 {
+    background: #434343;
+    color: rgba(255, 255, 255, .9);
+    font-size: .7rem;
+    padding: 4px 9px;
+}
+
+.infosPost2 {
+    background: #4c5d62;
+    color: rgba(255, 255, 255, .9);
+    font-size: .7rem;
+    padding: 4px 9px;
+}
 /*
 div ul li {
 
