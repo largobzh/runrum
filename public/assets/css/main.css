@@ -150,10 +150,21 @@ section article {
     min-height: 5vh;
 }
 
+/*
+#renseignPost {
+    color:red;
+    display: flex;
+*/
+/*    justify-content: flex-end;*/
+/*    align-content: flex-end;*/
+}
+
 #apercuPosts{
     display: column;
     min-height: 90vh;
 }
+
+
 
 li {
     display: inline-flex;
@@ -180,12 +191,14 @@ ul {
 
     margin: 0 .4vw;
     background: rgba(229, 110, 86, 1);
+    margin: 0 .4vw 0 0;
 }
 
 #navComment li:nth-child(2) {
     flex-grow: 1;
     margin: 0 .4vw;
     background: rgba(147, 201, 23, 1);
+    margin: 0 0 0 .4vw;
 }
 
 
@@ -242,6 +255,21 @@ p.couleurFondQR {
     font-size: .7rem;
     padding: 4px 9px;
 }
+
+
+
+p.couleurComment {
+    
+    background: rgba(244, 246, 247, 0.4);
+    margin : 0 0 0 10.4vw;
+    margin-bottom: 0.5rem;
+    padding: .9vw;
+    border-radius: 5px;
+
+}
+
+
+
 /*
 div ul li {
 
