@@ -145,7 +145,8 @@ section article {
 
 #categories,
 #navPages,
-#navComment {
+#navComment,
+#navPostComment{
     display: flex;
     min-height: 5vh;
 }
@@ -217,6 +218,19 @@ ul {
 }
 
 
+#navPostComment li:nth-child(1) {
+
+    margin: 0 .4vw;
+    background: rgba(229, 110, 86, 1);
+    margin: 0 .4vw 0 0;
+}
+
+#navPostComment li:nth-child(2) {
+    flex-grow: 1;
+    margin: 0 .4vw;
+    background: rgba(147, 201, 23, 1);
+    margin: 0 0 0 .4vw;
+}
  article div div h4 {
      font-size: 1.5vw;
      padding: .9vw;
