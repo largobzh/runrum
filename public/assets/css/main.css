@@ -150,6 +150,23 @@ section article {
     display: flex;
     min-height: 5vh;
 }
+#fPostComment {
+    display: column;
+    flex:1;
+    padding: 1.5vw; 
+}
+textarea {
+    background: rgba(244, 246, 247, 0.4);
+    padding: .9vw;
+    border-radius: 5px;
+    font-family: 'Oxygen', Helvetica, sans-serif;
+    font-size: 1rem;
+    font-weight: 200; 
+    color: #1d2327;
+    border: none 1px rgba(255, 255, 255, .9);
+    width:calc(100% - 1.7vw);
+    height: 50vh;
+}
 
 #thumbnail {
     display: flex;
@@ -178,6 +195,15 @@ section article {
 #apercuPosts{
     display: column;
     min-height: 90vh;
+}
+
+#formPostComment{
+    display: column;
+    min-height: 100vh;
+}
+
+#textComment {
+    
 }
 
 
