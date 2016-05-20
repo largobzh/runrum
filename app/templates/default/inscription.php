@@ -5,38 +5,56 @@
 <!-- include -->
 <?php $this->start('main_content') ?>
 
- 
+
 <form name="finscription" class="form-horizontal" method="POST" action="inscription">
   <div class="form-group">
     <label for="emailId"   class="col-sm-2 control-label" >Email : </label>
     <div class="col-sm-4">
-         <input name="form[email]" type="text" id="emailId" class="form-control" placeholder ="votre email"> 
+         <input name="form[email]" type="text" id="emailId" class="form-control" 
+         placeholder ="votre email" value=<?php 
+         if(!empty($_POST['form']['email']))
+            { echo $_POST['form']['email'];} ?>> 
+
     </div>
-     <?php  if (array_key_exists('email', $erreur)) { ?>
-    <p><?= $erreur['email'] ?></p> <?php } ?>  
+    <?php
+    foreach ($msg as $key => $value) {
+      if(is_array($value) && array_key_exists('email', $value))
+       {?><p><?= $value['email'] ?></p> <?php } ?>  
+    <?php } ?> 
   </div>
   
-
 
 
   <div class="form-group">
     <label for="passwordId"  class="col-sm-2 control-label">Mot de passe : </label>
     <div class="col-sm-4">
-   		 <input  name="form[password]" type="password" id="passwordId" class="form-control" placeholder ="Saisissez votre mot de passe">
+   		 <input  name="form[password]" type="password" id="passwordId" class="form-control"  value=<?php 
+         if(!empty($_POST['form']['password']))
+            { echo $_POST['form']['password'];} ?>  placeholder ="Saisissez votre mot de passe">
     </div>
   </div>
+
+
 
   <label for="pseudoId"  class="col-sm-2 control-label">Pseudo : </label>
     <div class="col-sm-4">
-       <input  name="form[pseudo]" type="text" id="pseudoId" class="form-control" placeholder ="Saisissez votre pseudo">
+       <input  name="form[pseudo]" type="text" id="pseudoId" class="form-control"  placeholder ="Saisissez votre pseudo"
+         value=<?php 
+         if(!empty($_POST['form']['pseudo']))
+            { echo $_POST['form']['pseudo'];} ?> >
     </div>
-    <?php  if (array_key_exists('email', $erreur)) { ?>
-    <p><?= $erreur['pseudo'] ?></p> <?php } ?>  
+
+
+  <?php
+    foreach ($msg as $key => $value) {
+      if(is_array($value) && array_key_exists('pseudo', $value))
+       {?><p><?= $value['pseudo'] ?></p> <?php } ?>  
+    <?php } ?> 
   </div>
   
 
-    <?php  if (array_key_exists('info', $info)) { ?>
-    <p><?= $info['info'] ?></p> <?php } ?>  
+   <?php  if (array_key_exists('info', $msg)) { ?>
+    <p><?= $msg['info'] ?></p> <?php } ?>  
  
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">

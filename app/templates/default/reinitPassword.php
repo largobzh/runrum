@@ -4,26 +4,11 @@
 <?php $this->start('main_content') ?>
 
 
-<form name="flogin" class="form-horizontal" method="POST" action="login">
+<form name="flogin" class="form-horizontal" method="POST" action="reinitPassword">
   <div class="form-group">
     
 
-     
-    <label for="emailId"   class="col-sm-2 control-label" >Email : </label>
-    <div class="col-sm-4">
-         <input name="form[email]" type="text" id="emailId" class="form-control"  value=<?php 
-         if(!empty($_POST['form']['email']))
-            { echo $_POST['form']['email'];} ?>  placeholder ="votre email"> 
-    </div>
-  <?php
-    foreach ($msg as $key => $value) {
-      if(is_array($value) && array_key_exists('email', $value))
-       {?><p><?= $value['email'] ?></p> <?php } ?>  
-    <?php } ?> 
   
-    </div>
-
-
   <div class="form-group">
     
     <label for="passwordId"  class="col-sm-2 control-label">Mot de passe : </label>
@@ -39,6 +24,26 @@
   <?php } ?> 
 
   </div>
+
+
+
+<div class="form-group">
+    
+    <label for="passwordId"  class="col-sm-2 control-label">Confirmez votre mot de passe : </label>
+    <div class="col-sm-4">
+       <input  name="form[password]" type="password" id="passwordId" class="form-control"  value=<?php 
+         if(!empty($_POST['form']['confPassword']))
+            { echo $_POST['form']['confPpassword'];} ?>  placeholder ="Resaisissez votre mot de passe">
+    </div>
+  <?php
+  foreach ($msg as $key => $value) {
+    if(is_array($value) && array_key_exists('confPpassword', $value))
+     {?><p><?= $value['confPpassword'] ?></p> <?php } ?>  
+  <?php } ?> 
+
+  </div>
+
+
   
  <?php  if (array_key_exists('info', $msg)) { ?>
     <p><?= $msg['info'] ?></p> <?php } ?>  

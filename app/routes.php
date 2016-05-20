@@ -4,6 +4,7 @@
 	$w_routes = array(
 		['GET|POST', '/login', 'AdminController#login', 'login'],
 		['GET|POST', '/inscription', 'AdminController#inscription', 'inscription'],
+		['GET|POST', '/oubliPassword', 'AdminController#oubliPassword', 'oubliPassword'],
 	// ['GET|POST', '/inscription', 'Default#inscription', 'inscription'],
 		// Attention à la gloutonnerie = ordre des routes
 		// ['GET|POST', '/', 'Default#home', 'home'],

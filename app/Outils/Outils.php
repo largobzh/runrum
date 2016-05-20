@@ -4,7 +4,7 @@ namespace Outils;
 class Outils
 {
 
-	static function envoiMail($lien,$from,$sentTo)
+	static function envoiMail($lien,$from,$sentTo,$Subject,$body)
 	{       
 		$mail = new \PHPMailer;
 
@@ -33,6 +33,8 @@ class Outils
 
 		$mail->Subject = 'Activer votre compte sur runrum';
 		$mail->Body    = 'Bonjour, activer votre compte : ' .  $lien . '  >'; 
+		$mail->Subject = $Subject;
+		$mail->Body    = $body;
 
 		return($mail->send()) ? true : false;
 
