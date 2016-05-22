@@ -11,7 +11,7 @@
     <label for="emailId"   class="col-sm-2 control-label" >Email : </label>
     <div class="col-sm-4">
          <input name="form[email]" type="text" id="emailId" class="form-control" 
-         placeholder ="votre email" value=<?php 
+         placeholder ="Votre email" value=<?php 
          if(!empty($_POST['form']['email']))
             { echo $_POST['form']['email'];} ?>> 
 
@@ -30,7 +30,7 @@
     <div class="col-sm-4">
    		 <input  name="form[password]" type="password" id="passwordId" class="form-control"  value=<?php 
          if(!empty($_POST['form']['password']))
-            { echo $_POST['form']['password'];} ?>  placeholder ="Saisissez votre mot de passe">
+            { echo $_POST['form']['password'];} ?>  placeholder ="Votre mot de passe">
     </div>
   </div>
 
@@ -38,7 +38,7 @@
 
   <label for="pseudoId"  class="col-sm-2 control-label">Pseudo : </label>
     <div class="col-sm-4">
-       <input  name="form[pseudo]" type="text" id="pseudoId" class="form-control"  placeholder ="Saisissez votre pseudo"
+       <input  name="form[pseudo]" type="text" id="pseudoId" class="form-control"  placeholder ="Votre pseudo"
          value=<?php 
          if(!empty($_POST['form']['pseudo']))
             { echo $_POST['form']['pseudo'];} ?> >

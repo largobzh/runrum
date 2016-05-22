@@ -11,9 +11,13 @@
      
     <label for="emailId"   class="col-sm-2 control-label" >Email : </label>
     <div class="col-sm-4">
-         <input name="form[email]" type="text" id="emailId" class="form-control"  value=<?php 
+
+ <input name="form[email]" type="text" id="emailId" class="form-control" 
+         placeholder ="votre email" value=<?php 
          if(!empty($_POST['form']['email']))
-            { echo $_POST['form']['email'];} ?>  placeholder ="votre email"> 
+            { echo $_POST['form']['email'];} ?>> 
+
+        
     </div>
   <?php
     foreach ($msg as $key => $value) {
@@ -30,7 +34,7 @@
     <div class="col-sm-4">
        <input  name="form[password]" type="password" id="passwordId" class="form-control"  value=<?php 
          if(!empty($_POST['form']['password']))
-            { echo $_POST['form']['password'];} ?>  placeholder ="Saisissez votre mot de passe">
+            { echo $_POST['form']['password'];} ?>  placeholder ="votre mot de passe">
     </div>
   <?php
   foreach ($msg as $key => $value) {
