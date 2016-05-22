@@ -140,6 +140,52 @@ section article {
     padding: 1.5vw;
 }
 
+
+h4.couleurCR {
+/*    background: red;*/
+    border-radius: 5px;
+    font-size: 1.5vw;
+    padding: .9vw;
+}
+
+h4.couleurQR {
+/*    background: red;*/
+    border-radius: 5px;
+    font-size: 1.5vw;
+    padding: .9vw;
+}
+
+h4.couleurNEWS {
+/*    background: red;*/
+    border-radius: 5px;
+    font-size: 1.5vw;
+    padding: .9vw;
+}
+
+/*TO DO : vérifier l'attribution de couleur*/
+/*pour les catégories*/
+.couleurQR {
+/*    color: yellow;*/
+    
+}
+h4 a.coulCategorie {
+    background: none;
+    font-weight: 700;
+    font-size: 1.5vw;
+    padding: .9vw; 
+}
+
+h4 a.coulCategorie:hover {
+    border:none;
+    box-shadow:none;
+    color:  rgba(229, 110, 86, 1);
+}
+h4 span {
+    color: white;
+    font-weight: 200;
+
+}
+
 #categories,
 #navPages,
 #navComment,
@@ -406,11 +452,13 @@ a.sansSoulign:link {
     background: rgba(147, 201, 23, 1);
     margin: 0 0 0 .4vw;
 }
+/*
  article div div h4 {
      font-size: 1.5vw;
      padding: .9vw;
      border-radius: 5px;
 }
+*/
 .couleurCR {
      background:  rgba(109, 168, 181, 1);
     
