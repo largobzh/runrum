@@ -256,7 +256,7 @@ li.mod2 {
 /*    border: solid 1px rgba(255, 255, 255, .9);*/
     border-radius: 5px;
     font-size: .7rem;
-    padding: .5vw 2vw;
+/*    padding: .5vw 2vw;*/
     margin: auto;
     justify-content: center;
 }
@@ -276,7 +276,7 @@ li.mod3 {
 
 
 li.infosPost1 a {
-    display: inline-flex;
+    display: flex;
     list-style-type: none;
 
     font-size: .7rem;
@@ -291,7 +291,7 @@ li.infosPost1 a {
 }
 
 li.infosPost2 a {
-    display: inline-flex;
+    display: flex;
     list-style-type: none;
 
     font-size: .7rem;
@@ -303,15 +303,20 @@ li.infosPost2 a {
     padding: .5vw 2vw;
     
     margin: auto;   
-
 }
 
+li.infosPost1 a:hover {
+    color: rgba(134, 184, 195, 1);
 
-
-
-
-
-
+    background: #434343;
+    border: solid 1px rgba(255, 255, 255, .9);
+/*
+    border-radius: 5px;
+    padding: .5vw 2vw;
+    
+    margin: auto;   
+*/
+}
 
 
 
@@ -333,6 +338,22 @@ ul {
     margin: 0 0 0 .4vw;
 }
 
+
+#navPages {
+    display: flex;
+    list-style-type: none;
+
+    min-height: 5vh;
+    padding-top: 5vh;
+}
+
+#navPages li {
+    border: solid 1px rgba(255, 255, 255, .9);
+    border-radius: 5px;
+    padding: .5vw 2vw;
+    
+    margin: auto;   
+}
 
 #navPages li:nth-child(2) {
     flex-grow: 4;
@@ -374,6 +395,7 @@ ul {
 }
 .couleurCR {
      background:  rgba(109, 168, 181, 1);
+    
 }
 .couleurNEWS {
      background:  rgba(91, 134, 144, 1);
