@@ -354,9 +354,29 @@ ul {
     margin: 0 .4vw;
     flex-basis: auto;
     align-content: center;
-/*    text-align: center;*/
-    
+/*    text-align: center;*/  
 }
+
+#navPages li a {
+    background: none;
+    font-size: .9rem;
+    padding:0;
+}
+
+#navPages li:hover {
+    background: rgba(147, 201, 23, 1);
+/*    font-size: 1rem;*/
+}
+a.sansSoulign:link {
+    text-decoration: none;
+}
+
+#navPages li a:hover {
+    border:none;
+    box-shadow:none;
+}
+
+
 
 #navComment li:nth-child(1) {
 
