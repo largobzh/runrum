@@ -132,10 +132,7 @@ section a:first-of-type:hover {
 
 section a:last-of-type:hover {
     border: solid .8vw rgb(229, 110, 86);
-
 }
-
-
 
 section article {
     display: column;
@@ -155,9 +152,9 @@ section article {
 #comment{
     display: flex;
     min-height: 50vh;
-    
 
 }
+
 #comment p:first-of-type{
 
     font-size: 11vh;
@@ -200,8 +197,6 @@ textarea {
 #thumbnail {
     display: flex;
     justify-content: flex-end;
-    
-
 /*
     min-height: 10vh;
     max-height: 20vh;
@@ -219,7 +214,7 @@ textarea {
 */
 /*    justify-content: flex-end;*/
 /*    align-content: flex-end;*/
-}
+
 
 #apercuPosts{
     display: column;
@@ -230,11 +225,6 @@ textarea {
     display: column;
     min-height: 100vh;
 }
-
-#textComment {
-    
-}
-
 
 
 li.mod1 {
@@ -341,23 +331,31 @@ ul {
 
 #navPages {
     display: flex;
+    flex:1;
     list-style-type: none;
 
     min-height: 5vh;
     padding-top: 5vh;
+    text-align: center;
+
+    
 }
 
 #navPages li {
     border: solid 1px rgba(255, 255, 255, .9);
     border-radius: 5px;
     padding: .5vw 2vw;
-    
+
     margin: auto;   
 }
 
 #navPages li:nth-child(2) {
     flex-grow: 4;
     margin: 0 .4vw;
+    flex-basis: auto;
+    align-content: center;
+/*    text-align: center;*/
+    
 }
 
 #navComment li:nth-child(1) {
