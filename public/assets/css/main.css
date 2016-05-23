@@ -158,12 +158,20 @@ h4.couleurNEWS {
     padding: .9vw;
 }
 
+h4.couleurSignal {
+/*    background: red;*/
+    border-radius: 5px;
+    font-size: 1.5vw;
+    padding: .9vw;
+}
+
 /*TO DO : vérifier l'attribution de couleur*/
 /*pour les catégories*/
 .couleurQR {
 /*    color: yellow;*/
     
 }
+
 h4 a.coulCategorie {
     background: none;
     font-weight: 700;
