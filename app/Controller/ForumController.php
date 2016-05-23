@@ -21,7 +21,6 @@ class ForumController extends Controller
 		$user = $this->getUser();
 		$manager = new PostManager();
 		$posts = $manager->getPosts('date_publication', 'DESC');
-		 print_r($posts);
 		$this->show('default/forumHome', ['posts' => $posts, 'user' => $user]);
 	}
 	public function forumPost($id)

@@ -1,15 +1,17 @@
-<?php $this->layout('layout', ['title' => 'Un carnet d’entrainement et un forum pour la course à pied']) ?>
+<?php $this->layout('layout', ['title' => 'Réinitialiser votre mot de passe']) ?>
 
 
 <?php $this->start('main_content') ?>
 
 
-<form name="flogin" class="form-horizontal" method="POST" action="reinitPassword">
+<form name="freinitPasswordForm" class="form-horizontal" method="POST" action="reinitPasswordForm">
   <div class="form-group">
+
     
   <input type="hidden" name="form[user_id]" value=<?php 
-           if(!empty($GET['user_id'])) { echo $_GET['user_id'] ;} ?>
+        if(!empty($user_id)) { echo $user_id;} ?>
   
+
   <div class="form-group">
     
     <label for="passwordId"  class="col-sm-2 control-label">Mot de passe : </label>
@@ -19,10 +21,15 @@
             { echo $_POST['form']['password'];} ?>  require placeholder ="Saisissez votre mot de passe">
     </div>
   <?php
-  foreach ($msg as $key => $value) {
-    if(is_array($value) && array_key_exists('password', $value))
-     {?><p><?= $value['password'] ?></p> <?php } ?>  
-  <?php } ?> 
+  if(!empty($msg))
+  {
+    foreach ($msg as $key => $value)
+    {
+      if(is_array($value) && array_key_exists('password', $value))
+       {?><p><?= $value['password'] ?></p> <?php } ?>    
+    }
+  
+  <?php }} ?> 
 
   </div>
 
@@ -37,17 +44,26 @@
             { echo $_POST['form']['confPassword'];} ?> require placeholder ="Ressaisissez votre mot de passe">
     </div>
   <?php
-  foreach ($msg as $key => $value) {
-    if(is_array($value) && array_key_exists('confPassword', $value))
-     {?><p><?= $value['confPassword'] ?></p> <?php } ?>  
-  <?php } ?> 
+   if(!empty($msg))
+  {
+    foreach ($msg as $key => $value) {
+      if(is_array($value) && array_key_exists('confPassword', $value))
+       {?><p><?= $value['confPassword'] ?></p> <?php } ?>  
+    <?php }}?> 
 
   </div>
 
 
-  
- <?php  if (array_key_exists('info', $msg)) { ?>
-    <p><?= $msg['info'] ?></p> <?php } ?>  
+ 
+ <?php
+if(!empty($msg))
+{
+  if (array_key_exists('info', $msg)) { ?>
+    <p><?= $msg['info'] ?></p> <?php }} ?>  
+
+
+
+ 
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">

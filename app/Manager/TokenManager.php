@@ -11,17 +11,19 @@ class TokenManager extends  \W\Manager\Manager
 
 	public function findToken($user_id, $token_id )
 	{
-			if (!is_numeric($user_id) || !is_numeric($token_id) ){
-				return false;
-			}
 
-			$sql = $dbh->prepare("SELECT *  FROM tokens WHERE id_utilisateur= :id and token= :token and date_validite > now()");
-			$sth->bindValue(':id',    $user_id,    PDO::PARAM_STR);
-			$sth->bindValue(':token', $token_id, PDO::PARAM_STR);
+		print_r("user_id" . $user_id);
+			print_r("token" . $token_id);
+		
+
+			$sql ="SELECT *  FROM tokens WHERE id_utilisateur= :id and token= :token and date_validite > now()";
+			$sth = $this->dbh->prepare($sql);
+			$sth->bindValue(':id',    $user_id);
+			$sth->bindValue(':token', $token_id);
 			$sth->execute();
 			return $sth->fetch();
-		
 	}
 
 }
 
+	
