@@ -363,6 +363,7 @@ li.infosPost1 a:hover {
 ul {
     padding-left: 0;
     }
+/*
 
 #nav404403 li:nth-child(1) {
 
@@ -377,6 +378,7 @@ ul {
     background: rgba(147, 201, 23, 1);
     margin: 0 0 0 .4vw;
 }
+*/
 
 
 #navPages {
@@ -447,13 +449,15 @@ a.sansSoulign:link {
     margin: auto;   
 }
 
+/*
 #navComment li:nth-child(2) {
     flex-grow: 4;
     margin: 0 .4vw;
     flex-basis: auto;
     align-content: center;
-/*    text-align: center;*/  
+    text-align: center;  
 }
+*/
 
 #navComment li a {
     background: none;
@@ -466,6 +470,7 @@ a.sansSoulign:link {
     margin: 0 .4vw;
     background: rgba(229, 110, 86, 1);
     margin: 0 .4vw 0 0;
+    width: 9vw;
 }
 
 #navComment li:nth-child(2) {
@@ -473,6 +478,8 @@ a.sansSoulign:link {
     margin: 0 .4vw;
     background: rgb(95, 199, 155);
     margin: 0 0 0 .4vw;
+    flex-basis: auto;
+    align-content: center;
 }
 
 #navComment li:hover {
@@ -489,6 +496,66 @@ a.sansSoulign:link {
 
 /*++++++++++++++++++++*/
 
+#bloc404403 {
+    display: flex;
+    flex:1;
+    list-style-type: none;
+
+    min-height: 25vh;
+    padding-top: 5vh;
+    text-align: center center;
+/*    margin: 0 auto;*/
+
+    
+}
+
+#bloc404403 p {
+    border: solid 1px rgba(255, 255, 255, .9);
+    border-radius: 5px;
+    padding: .5vw 2vw;
+
+    margin: auto;   
+}
+
+
+
+#bloc404403 p a {
+    background: none;
+    font-size: .9rem;
+    padding:0;
+}
+
+#bloc404403 p:nth-child(1) {
+
+    margin: 0 .4vw;
+/*    background: rgba(229, 110, 86, 1);*/
+    margin: 0 .4vw 0 0;
+        width: 9vw;
+}
+
+#bloc404403 p:nth-child(2) {
+    flex-grow: 1;
+    margin: 0 .4vw;
+/*    background: rgb(95, 199, 155);*/
+    margin: 0 0 0 .4vw;
+        align-content: center;
+/*    text-align: center;*/  
+    text-align: center;
+}
+/*
+
+#bloc404403 p:hover {
+    background: rgba(147, 201, 23, 1);
+}
+*/
+
+
+/*
+#bloc404403 li a:hover {
+    border:none;
+    box-shadow:none;
+}
+*/
 
 
 
@@ -559,6 +626,20 @@ p.text404403 {
     background: rgba(204, 234, 240, 0.4);
     padding: .9vw;
     border-radius: 5px;
+    text-align: center;
+    line-height:40vh;
+}
+
+p.text404403:first-of-type {
+    color: rgba(229, 110, 86, 1);
+    font-size: 5vw;
+    font-weight: 700;
+}
+
+p.text404403:last-of-type {
+    color: rgba(109, 168, 181, 1);
+    font-size: 4vw;
+    font-weight: 200;
 }
 
 /*---------------------------*/
