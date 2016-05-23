@@ -25,7 +25,6 @@ header {
     background: rgba(252, 246, 218, 0.2);
     color: #404E57;
     border-radius: 5px;
-/*    margin: auto;*/
     padding: .4rem;
     text-align: center;
 /*    justify-content: center;*/
@@ -38,7 +37,6 @@ h1 {
     
     color:#404E57;
     font-size: 2rem;
-/*    font-weight: 400;*/
     text-shadow:
         -0.4em 0 rgba( 229,110,86, 0.3),
         0.4em 0 rgba(134,184,195, 0.6);
@@ -48,7 +46,6 @@ h1 {
 
 h2 {
     font-size: 5rem;
-/*    font-weight: 400;*/
     text-shadow:
         -0.4em 0 rgba( 229,110,86, 0.3),
         0.4em 0 rgba(134,184,195, 0.6);
@@ -61,7 +58,6 @@ h2 span {
 
 h3 {
     font-size: 1.5rem;
-/*    font-weight: 400;*/
     text-shadow:
         -0.3em 0 rgba( 229,110,86, 0.3),
         0.3em 0 rgba(134,184,195, 0.6);
@@ -421,8 +417,41 @@ a.sansSoulign:link {
     border:none;
     box-shadow:none;
 }
+/*---------------------------------------*/
 
+#navComment {
+    display: flex;
+    flex:1;
+    list-style-type: none;
 
+    min-height: 5vh;
+    padding-top: 5vh;
+    text-align: center;
+
+    
+}
+
+#navComment li {
+    border: solid 1px rgba(255, 255, 255, .9);
+    border-radius: 5px;
+    padding: .5vw 2vw;
+
+    margin: auto;   
+}
+
+#navComment li:nth-child(2) {
+    flex-grow: 4;
+    margin: 0 .4vw;
+    flex-basis: auto;
+    align-content: center;
+/*    text-align: center;*/  
+}
+
+#navComment li a {
+    background: none;
+    font-size: .9rem;
+    padding:0;
+}
 
 #navComment li:nth-child(1) {
 
@@ -434,10 +463,28 @@ a.sansSoulign:link {
 #navComment li:nth-child(2) {
     flex-grow: 1;
     margin: 0 .4vw;
-    background: rgba(147, 201, 23, 1);
+    background: rgb(95, 199, 155);
     margin: 0 0 0 .4vw;
 }
 
+#navComment li:hover {
+    background: rgba(147, 201, 23, 1);
+}
+
+
+#navComment li a:hover {
+    border:none;
+    box-shadow:none;
+}
+
+
+
+/*++++++++++++++++++++*/
+
+
+
+
+/*---------------------------------*/
 
 #navPostComment li:nth-child(1) {
 
