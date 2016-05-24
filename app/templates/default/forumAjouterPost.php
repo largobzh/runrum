@@ -53,19 +53,21 @@
 </div>
 
 
-<label for="typepostId"  class="col-sm-2 control-label">Catégorie : </label>
+<label for="type_echange_id"  class="col-sm-2 control-label">Choisir une catégorie : </label>
 <div class="col-sm-4">
-   <select  name="form[type_echange_id]" id="typepostId" class="form-control">
-     <option selected>Question / Réponse</option>
-     <option >News</option>
- </select>
+   <select  name="form[type_echange_id]" id="type_echange_id" class="form-control">
+     <option disabled selected>Choisir</option>
+   <?php foreach ($type_echange as $value) { ?>
+    <option value="<?= $this->e($value['id']) ?>"> <?= $this->e($value['type_echange']) ?></option>
+    <?php } ?>
+    </select><br>
 </div>
 
 
 <?php
 foreach ($msg as $key => $value) {
-  if(is_array($value) && array_key_exists('typepost', $value))
-     {?><p><?= $value['typepost'] ?></p> <?php } ?>  
+  if(is_array($value) && array_key_exists('type_echange', $value))
+     {?><p><?= $value['type_echange'] ?></p> <?php } ?>  
  <?php } ?> 
 </div>
 

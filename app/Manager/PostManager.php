@@ -27,7 +27,9 @@ class PostManager extends \W\Manager\Manager
 		                break;
 		 }
 
+		 // coalesce(test5,0)
 
+		 print_r($sql);
 		if (!empty($orderBy))
 		{
 			//sécurisation des paramètres, pour éviter les injections SQL

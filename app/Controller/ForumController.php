@@ -4,9 +4,11 @@ namespace Controller;
 
 use \W\Controller\Controller;
 use \Manager\PostManager;
+use \Manager\Type_echangeManager;
 use \W\Manager\UserManager;
 use \W\Security\AuthentificationManager;
 use Outils\Outils;
+
 
 
 class ForumController extends Controller
@@ -16,12 +18,13 @@ class ForumController extends Controller
 	// ***************************************************
 	// Page d'accueil par défaut - les 20 premiers posts
 	// ***************************************************
-	public function forumHome()
+	public function forumListePosts()
 	{
 		$user = $this->getUser();
 		$manager = new PostManager();
 		$posts = $manager->getPosts('date_publication', 'DESC');
-		$this->show('default/forumHome', ['posts' => $posts, 'user' => $user]);
+		
+		$this->show('default/forumListePosts', ['posts' => $posts, 'user' => $user]);
 	}
 	public function forumPost($id)
 	{
@@ -31,27 +34,32 @@ class ForumController extends Controller
 	}
 
 
-	public function addPost()
+	public function forumAjouterPost()
 	{
 		$msg = array();
 
-		// $this->allowTo('admin');
-		// controle des champs obligatoires à la saisie(titre et catégorie)
+		// Afficher les données type-echange de la base de données dans le select
+		$n = new Type_echangeManager();
+
+		$n->setTable('Type_echange');
+		$type_echange = $n->findAll();
+		
+
 		if(isset($_POST['submit'])) 
 		{
 
 			print_r($_POST);
 			if(empty($_POST['form']['titre'])){
-				$msg['erreur']['titre'] = 'L\'email est obligatoire';
+				$msg['erreur']['titre'] = 'Le titre est obligatoire';
 			}
 			if(empty($_POST['form']['type_echange_id'])){
-				$msg['erreur']['type_echange_id'] = 'Le catégorie est obligatoire';
+				$msg['erreur']['type_echange_id'] = 'La catégorie est obligatoire';
 			}
 
 
 			if(!empty($msg['erreur']))
 			{
-				$this->show('default/forumAddPost',['msg' => $msg]);
+				$this->show('default/forumAjouterPost',['msg' => $msg, 'type_echange' => $type_echange]);
 			}
 			else
 			{
@@ -59,56 +67,67 @@ class ForumController extends Controller
 				$user = $this->getUser();
 				$tbNewPost = ['utilisateur_id'=>$user['id'] , 'nbvues'=>0, 'nbreponses'=>0];
 				$_POST['form']['date_publication']=date('Y-m-d') ;
-				$_POST['form']['type_echange_id']=1;
+				// $_POST['form']['type_echange']=1;
 						
 				$manager->insert(array_merge($_POST['form'],$tbNewPost));
-				$this->redirectToRoute('forumhome');
+				// $this->show('default/forumHome');
+				$this->redirectToRoute('forumListePosts');
+
 			}
 			
 		}
-		$this->show('default/forumAddPost',['msg' => $msg]);
+		$this->show('default/forumAjouterPost',['msg' => $msg, 'type_echange' => $type_echange]);
 		
 	}
 
 
 
-public function editPost($id)
+public function forumModifierPost($id)
 	{
-		// $this->allowTo('admin');
-		$manager = new PostManager();
-		// print_r($msg);
-
 		$msg = array();
-		if(isset($_POST['valider']))
+
+		// Afficher les données type-echange de la base de données dans le select
+		$n = new Type_echangeManager();
+		$n->setTable('Type_echange');
+		$type_echange = $n->findAll();
+
+		$manager = new PostManager();
+						
+		if(isset($_POST['submit']))
 		{
+			print_r($_POST);
 
 			if(empty($_POST['form']['titre'])){
-				$msg['erreur']['titre'] = 'L\'email est obligatoire';
+				$msg['erreur']['titre'] = 'Le titre est obligatoire';
 			}
-			if(empty($_POST['form']['type_echange_id'])){
-				$msg['erreur']['type_echange_id'] = 'Le catégorie est obligatoire';
+			if(empty($_POST['form']['type_echange'])){
+				$msg['erreur']['type_echange'] = 'La catégorie est obligatoire';
 			}
 
 
 			if(!empty($msg['erreur']))
 			{
-				$this->show('default/forumEditPost', ['post' => $post,'msg' => $msg]);
+				$this->show('default/forumModifierPost' , ['msg' => $msg, 'type_echange' => $type_echange, 'post'=>$post]);
 			}
 			else
 			{
 				$user = $this->getUser();
 				$tbNewPost = ['utilisateur_id'=>$user['id'] ];
-				$_POST['form']['type_echange_id']=1;
 				$manager->update(array_merge($_POST['form'],$tbNewPost),$post['id']);
-				$this->redirectToRoute('forumhome');
+				$this->redirectToRoute('forumListePosts');
 			}
 			// $manager->update($_POST['myform'], $id);
 			// $this->redirectToRoute('home');
 		}
 		$post = $manager->find($id);
-		echo '<pre>';
-		print_r($post);
-		echo '</pre>';
-		$this->show('default/forumEditPost', ['post' => $post,'msg' => $msg]);
+		if($post)
+		{
+			$this->show('default/forumModifierPost' , ['msg' => $msg, 'type_echange' => $type_echange, 'post'=>$post]);
+		}
+		else
+		{
+			$msg['infos'] = 'ce post n\'existe plus';
+			$this->redirectToRoute('forumListePosts');
+		}
 	}
 }

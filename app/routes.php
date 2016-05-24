@@ -8,15 +8,14 @@
 		['POST', '/reinitPasswordForm', 'AdminController#reinitPasswordForm', 'reinitPasswordForm'],
 		
 
-		['GET',      '/forumHome',        'ForumController#forumHome', ' forumHome'], // liste des posts sur la home
-		['GET|POST', '/addPost',          'ForumController#addPost',    'addPost'],
+		['GET',      '/forumListePosts',        'ForumController#forumListePosts', 'forumListePostes'], 
+		['GET|POST', '/forumAjouterPost',          'ForumController#forumAjouterPost',    'forumAjouterPost'],
 		
 	
 		['GET|POST', '/reinitPassword/[i:user_id]/[a:token_id]/', 'AdminController#reinitPassword', 'reinitPassword'],
 		['GET', '/activerCompte/[i:user_id]/[a:token_id]/', 'AdminController#activerCompte', 'activerCompte'],
 
-		['GET',      '/forumPost/[i:id]', 'ForumControllert#forumPost', 'forumPost'],
-		['GET|POST', '/editPost/[i:id]',  'ForumController#editPost',   'editPost'],
+		['GET|POST', '/forumModifierPost/[i:id]',  'ForumController#forumModifierPost',   'forumModifierPost'],
 	    
 	    // ['GET|POST', '/inscription', 'Default#inscription', 'inscription'],
 		// Attention à la gloutonnerie = ordre des routes
