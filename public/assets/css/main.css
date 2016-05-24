@@ -141,11 +141,115 @@ section article {
     flex:1;
     padding: 1.5vw;
 }
+/* =========partie formulaire carnet ========*/
 
-article form label {
-    color:blueviolet;
+form {
+    display: flex;   
 }
 
+form > div {
+    width: 50%;
+}
+form > div + div {
+    margin-left: 1em;
+}
+
+div + p {
+    display: flex;
+}
+
+form input:not([type=submit]) {
+    flex: 1;
+}
+
+/* TO DO  vérifier conséquences sur autres div*/
+
+div + div {
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    flex:1;
+}
+
+
+form p {
+    display: block;
+}
+label {
+    display: block;
+    text-align: left;
+    color:#404E57;
+}
+
+/* TO DO : voir pour 50% (plus haut) ou auto */
+form > div {
+    width: auto;
+}
+
+
+
+
+#submitFormCarnet {
+    font-family: 'Oxygen', Helvetica, sans-serif;
+    font-weight: 200; 
+    font-size: 1rem;
+    color: rgba(255, 255, 255, .9);
+    justify-content: center;
+/*    background: #434343;*/
+    background: #5fc79b;
+    border: solid 1px rgba(255, 255, 255, .9);
+    border-radius: 5px;
+    padding: .5vw 2vw;
+    
+    margin: auto;   
+}
+
+form textarea {
+    border: solid 1px #434343;
+    background: rgba(229,110,86,.2);
+    color: #1d2327;
+}
+
+form input {
+    width: 100%;
+
+    font-family: 'Oxygen', Helvetica, sans-serif;
+    font-weight: 200; 
+    font-size: .9rem;
+    color: #434343;
+    justify-content: left;
+/*    background: #434343;*/
+    background: rgba(229,110,86,.6);
+    border: solid 1px rgba(255, 255, 255, .9);
+    border-radius: 5px;
+    padding: .4vw .2vw;
+    
+    margin: auto;   
+}
+form label {
+    font-size: .9rem;
+    padding-bottom: .2em;
+}
+
+input::-webkit-input-placeholder {
+    color: #e56e56;
+}
+
+input:-moz-placeholder {
+    color: #e56e56;
+}
+
+textarea::-webkit-input-placeholder {
+    color: #434343;
+}
+textarea:-moz-placeholder {
+    color: #434343;
+}
+
+
+/* ========= FIN partie formulaire carnet ========*/
 
 /*
 #test {
@@ -830,6 +934,22 @@ aside h3 {
     nav {
         order: -1;
         align-items: center;
+    }
+    
+    form {
+        flex-direction: column;
+    }
+    form > div {
+    width: auto;
+    }
+
+    form > div + div {
+        margin-left: 0;
+        margin-bottom: 1em;
+        order:2;
+    }
+    form input {
+        width: 100%;
     }
 }
 
