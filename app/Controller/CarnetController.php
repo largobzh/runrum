@@ -59,7 +59,7 @@ class CarnetController extends Controller
 				}
 
 				else{
-					echo "OK";
+					
 					$m = new CarnetManager();
 				// temporaire
 					$_POST['form']['utilisateur_id'] = 1;
@@ -67,6 +67,12 @@ class CarnetController extends Controller
 					// afin de convertir les trois champs en secondes et les enregistrer dans le champ de la base de données
 					$_POST['form']['duree']= $_POST['heure']*60*60+$_POST['minute']*60+$_POST['secondes'];
 					$m->insert($_POST['form']);
+                    if($m){
+                        echo "marche";
+                    }
+                    else{
+                        echo "marche pas";
+                    }
 				}
 
 			}
@@ -77,6 +83,71 @@ class CarnetController extends Controller
 		$this->show('default/creationCarnet', ['epreuves'=> $epreuves, 'exercices'=> $exercices]);
 	}
 
+
+// afin d'executer la modification de la note du carnet
+//	public function modificationEnregistreCarnet(){
+//
+//		
+//
+//
+//		// Afin d'afficher les données Epreuves de la base de données dans le select
+//		$n = new EpreuveManager();
+//		$n->setTable('type_epreuve');
+//		$epreuves = $n->findAll();
+//
+//		// afin d'afficher les données Exercice de la base de données dans le select
+//		$h= new ExerciceManager();
+//		$h->setTable('type_exercice');
+//		$exercices = $h->findAll();
+//
+//		// Afin d'enregistrer les données entrer 
+//		if (isset($_POST['submit'])) {
+//			// var_dump($_POST['form']);
+//			// die();
+//			$erreur = False;
+//			if (empty($_POST['form']['datenote']) || empty($_POST['form']['heuredepart']) || empty($_POST['form']['distance']) || empty($_POST['heure'])  || empty($_POST['minute'])  || empty($_POST['secondes'])  || empty($_POST['form']['lieu']) || empty($_POST['form']['conditionmeteo']) || empty($_POST['form']['commentaire'])) {
+//				
+//				foreach($_POST['form'] as $key => $value){
+//					if ($key == "submit") {
+//						continue;
+//					}
+//					if(empty($value)){
+//						echo "le champs ".$key." est obligatoire ! </br>";
+//						$erreur = True;
+//
+//					}
+//				}
+//			} 
+//			else {
+//				if (!is_numeric($_POST['heure']) || !is_numeric($_POST['minute']) || !is_numeric($_POST['secondes']) || !is_numeric($_POST['form']['distance'])) {
+//
+//					if (!is_numeric($_POST['form']['heure']) || !is_numeric($_POST['form']['minute']) || !is_numeric($_POST['form']['secondes'])) {
+//						echo "Le champs 'durée' n'est ecrit sous forme de chiffre !<br> ";
+//
+//					} 
+//					if(!is_numeric($_POST['form']['distance'])){
+//						echo "Le champs 'distance effectué' n'est ecrit sous forme de chiffre ! ";
+//					}
+//				}
+//
+//				else{
+//					echo "OK";
+//					$m = new CarnetManager();
+//				// temporaire
+//					$_POST['form']['utilisateur_id'] = 1;
+//					$_POST['form']['moyenne'] = $_POST['form']['distance']/2;
+//					// afin de convertir les trois champs en secondes et les enregistrer dans le champ de la base de données
+//					$_POST['form']['duree']= $_POST['heure']*60*60+$_POST['minute']*60+$_POST['secondes'];
+//					$m->insert($_POST['form']);
+//				}
+//
+//			}
+//
+//		}
+//
+//
+//		$this->show('default/modificationCarnet', ['epreuves'=> $epreuves, 'exercices'=> $exercices]);
+//	}
 
 
 

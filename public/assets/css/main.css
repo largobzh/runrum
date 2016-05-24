@@ -2,7 +2,9 @@ html {
     @import url(https://fonts.googleapis.com/css?family=Oxygen:400,300,700);
     margin: 0 auto;
     background-image: url(../img/15-000_267.jpg);
+    background-attachment:fixed;
 }
+
 
 body {
     min-height:0vh;
@@ -36,7 +38,11 @@ header {
 h1 {
     
     color:#404E57;
+
+
     font-size: 2rem;
+
+
     text-shadow:
         -0.4em 0 rgba( 229,110,86, 0.3),
         0.4em 0 rgba(134,184,195, 0.6);
@@ -135,6 +141,17 @@ section article {
     flex:1;
     padding: 1.5vw;
 }
+
+article form label {
+    color:blueviolet;
+}
+
+
+/*
+#test {
+    color:yellow;
+}
+*/
 
 
 h4.couleurCR {

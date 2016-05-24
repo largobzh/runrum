@@ -4,9 +4,14 @@
 <head>
     <meta charset="UTF-8">
 <!-- TO DO : mettre le titre dynamique de la page   -->
-    <title>run|rum</title>
+    <title><?= $this->e($title) ?></title>
+    
+<!--    TO DO régler le problème de lien du favicon      -->
+<!--    <link rel="icon" type="image/png" href="<?= $this->assetUrl('../img/favicon_rnm.png') ?>">-->
+    
     <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="assets/css/main.css">
+<!--     <link rel="stylesheet" href="assets/css/main.css"> -->
+    <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/main.css') ?>">
 </head>
 
 <body>
@@ -19,7 +24,9 @@
 <!--   zone d'inclusion des templates alternatifs selon routes    -->
        
         <section class="content">
-
+			
+			<?= $this->section('main_content') ?>
+		
         </section>
         
 <!-- fin de zone d'inclusion des templates alternatifs selon routes -->
@@ -33,7 +40,7 @@
         <nav id="navigation">
            
       <!-- TO DO : mettre le titre dynamique de la page   --> 
-            <h1>Titre</h1>
+            <h1><?= $this->e($title) ?></h1>
             
             <a href="#maison">Retour accueil</a>             
             <a href="#">Connexion on/off</a>

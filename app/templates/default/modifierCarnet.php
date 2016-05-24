@@ -4,13 +4,8 @@
 
 <form method="POST" >
 	<label for="dateNoteID" id="labelDateNote">Date de l'activité</label>
-	<?php 
-
-	$date= $contenues['datenote'];
-	$result = date_format($date, 'd-m-Y H:i')
-
-	 ?>
-	<input type="datetime-local" name="form[datenote]" id="dateNoteID" tabindex="1" value="<?php echo $result; ?>" ><br>
+	
+	<input type="datetime-local" name="form[datenote]" id="dateNoteID" tabindex="1" value="<?= $contenues['datenote'] ?>" ><br>
 
 	<label for="HDepartID" id="labelHDepart">Heure de départ</label>
 	<input type="time" name="form[heuredepart]" id="HDepartID" tabindex="2" value="<?= $contenues['heuredepart'] ?>" ><br>
@@ -119,6 +114,6 @@
 		 <textarea name="form[commentaire]" placeholder="Commentaire concernant l'activité..." tabindex="11"><?= $contenues['commentaire'] ?></textarea><br>
 
 
-		 <input type="submit" name="submit" value="Enregistrer">
+		 <input type="submit" name="submit" value="Mettre A Jours">
 		</form>
 		<?php $this->stop('main_content') ?>

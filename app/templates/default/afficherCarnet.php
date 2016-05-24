@@ -1,13 +1,19 @@
-<?php $this->layout('layout', ['title' => 'Liste de vos notes dans le Carnet']) ?>
+<?php $this->layout('layout', ['title' => 'Mon Carnet']) ?>
 
 <?php $this->start('main_content') ?>
+<article>
+	
+
 
 <?php foreach ($listes as $value) { ?>
 
+<div id="apercuPosts">
+	<h4>Date de départ : <?= $value['datenote'] ?> </h4>
 
-	<h2>Date de départ : <?= $value['datenote'] ?> </h2>
+
 
 	<?php foreach ($exercices as $valu) {
+
 		if ($value['type_exercice_id'] == $valu['id']) { ?>
 			<p>Exercice : <?= $valu['exercice']?></p>
 			<?php }	} ?>
@@ -52,6 +58,8 @@
 
 
 	<?php } ?>
+	</div>
+	</article>
 	<?php $this->stop('main_content') ?>
 
 
