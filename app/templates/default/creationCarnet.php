@@ -88,7 +88,8 @@
 			<div>
 
 			<p>
-				<textarea name="form[commentaire]" placeholder="Commentaire" tabindex="11"></textarea>
+				<label for="commentText" id="labelCommentText">Commentaire</label>
+				<textarea name="form[commentaire]" id="commentText" placeholder="Zone de texte libre." tabindex="11"></textarea>
 			</p>
 
 			<p>

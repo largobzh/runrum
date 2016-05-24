@@ -234,21 +234,58 @@ form label {
 }
 
 input::-webkit-input-placeholder {
-    color: #e56e56;
+    color: #434343;
+    padding-left: 1rem;
 }
 
 input:-moz-placeholder {
-    color: #e56e56;
-}
-
-textarea::-webkit-input-placeholder {
     color: #434343;
+    padding-left: 1rem;
 }
-textarea:-moz-placeholder {
+
+form textarea::-webkit-input-placeholder {
     color: #434343;
+    padding-left: 1rem;
+}
+form textarea:-moz-placeholder {
+    color: #434343;
+    padding-left: 1rem;
 }
 
 
+
+input:focus {
+    outline: transparent;
+    background: rgba(255,255,255, .7);
+    border: solid 1px #434343;
+}
+/*input:focus, textarea:focus, keygen:focus, select:focus {
+    outline-offset: -2px;
+}*/
+
+select:focus {
+    outline:transparent;
+    background: rgba(255,255,255, .7);
+    border: solid 1px #434343;
+}
+
+
+select {
+    width: 103%;
+    border: solid 1px white;
+
+    font-family: 'Oxygen', Helvetica, sans-serif;
+    font-weight: 200; 
+    font-size: .9rem;
+    color: #434343;
+    background: rgba(229,110,86,.6);
+    border: solid 1px rgba(255, 255, 255, .9);
+    border-radius: 5px;
+}
+
+/*form input[type='submit'] {
+    margin-bottom: 2em;
+}*/
 /* ========= FIN partie formulaire carnet ========*/
 
 /*
@@ -950,6 +987,9 @@ aside h3 {
     }
     form input {
         width: 100%;
+    }
+    select {
+        width: 100.5%;
     }
 }
 
