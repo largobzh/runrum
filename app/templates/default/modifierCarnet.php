@@ -1,4 +1,4 @@
-<?php $this->layout('layout', ['title' => 'Modification de note']) ?>
+<?php $this->layout('layout', ['title' => 'Édition de note']) ?>
 
 <?php $this->start('main_content') ?>
 <article>

@@ -54,7 +54,7 @@
 					<!-- Afin de récuperer les valeurs de la durée et les convertires -->
 					<!-- <input type="hidden" name="form[duree]"> -->
 			<p>
-				<label for="distanceID" id="labelDistance">Distance</label>
+				<label for="distanceID" id="labelDistance">Distance (en km)</label>
 				<input type="text" name="form[distance]" id="distanceID" placeholder="10km, 20km, 42km..." tabindex="8" >
 			</p>
 
@@ -100,7 +100,7 @@
 <!-- 				<input type="submit" name="annulNote" value="Annuler" id="annulFormCarnet"> -->
 				<input type="submit" name="submit" value="Enregistrer" id="submitFormCarnet">
 			</p>
-			
+
 
 
 		</div>
