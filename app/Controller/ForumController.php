@@ -4,6 +4,7 @@ namespace Controller;
 
 use \W\Controller\Controller;
 use \Manager\PostManager;
+use \Manager\ReponseManager;
 use \Manager\Type_echangeManager;
 use \W\Manager\UserManager;
 use \W\Security\AuthentificationManager;
@@ -22,17 +23,75 @@ class ForumController extends Controller
 	{
 		$user = $this->getUser();
 		$manager = new PostManager();
-		$posts = $manager->getPosts('date_publication', 'DESC');
-		
-		$this->show('default/forumListePosts', ['posts' => $posts, 'user' => $user]);
+		$posts = $manager->getPosts("", 'date_publication', 'DESC');
+		$type_echange_short = $manager->getTypeEchange();
+		$this->show('default/forumListePosts', ['posts' => $posts, 'user' => $user, 'type_echange_short' => $type_echange_short]);
 	}
-	public function forumPost($id)
+	
+
+	// ***************************************************
+	// Afficher toutes les répones du poste sélectionné dans forumListePosts
+	// ***************************************************
+	public function forumListeReponses($id)
 	{
+		$msg = array();
 		$manager = new PostManager();
 		$post = $manager->find($id);
-		$this->show('default/forumPost', ['post' => $post]);
-	}
+		// ========================================
+		// on incrémente le nombre de vues
+		$post['nbvues']++; 
+		$manager->update($post,$id);
+		
+		// ========================================
 
+		if(isset($_POST['submit']))
+		{
+			if(empty($_POST['form']['reponse'])){
+				$msg['erreur']['reponse'] = 'La réponse doit etre renseignée';
+			}
+				
+			if(!empty($msg['erreur']))
+			{
+				// on réaffiche toutes les réponses  et le message d'erreur 
+				$manager = new PostManager();
+				$post = $manager->getPosts($id, 'date_publication', 'DESC');
+		
+				if($post)
+				{
+					$reponseManager = new ReponseManager();
+					$reponses = $reponseManager->getReponses($id, 'date_publication', 'DESC');
+				}
+
+				$this->show('default/forumListeReponses', ['post' => $post, 'reponses'=> $reponses, 'msg' => $msg]);
+			}
+			else
+				// on enregistre la réponse et on réaffcihe toutes les questions
+
+			{
+				$reponseManager = new ReponseManager();
+				$user = $this->getUser();
+				$tbNewPost = ['utilisateur_id'=>$user['id'] , 'post_id'=>$id];
+				$_POST['form']['date_publication']=date('Y-m-d') ;
+				$reponseManager->insert(array_merge($_POST['form'],$tbNewPost));
+				$this->redirectToRoute('forumListePosts');
+			}
+			
+		}
+		else
+		{
+			$manager = new PostManager();
+			$post = $manager->getPosts($id, 'date_publication', 'DESC');
+			if($post)
+			{
+				$reponseManager = new ReponseManager();
+				$reponses = $reponseManager->getReponses($id, 'date_publication', 'DESC');
+			}
+		
+		}
+		$this->show('default/forumListeReponses', ['post' => $post, 'reponses'=> $reponses, 'msg' => $msg]);
+	}
+	
+	
 
 	public function forumAjouterPost()
 	{
@@ -47,15 +106,12 @@ class ForumController extends Controller
 
 		if(isset($_POST['submit'])) 
 		{
-
-			print_r($_POST);
 			if(empty($_POST['form']['titre'])){
 				$msg['erreur']['titre'] = 'Le titre est obligatoire';
 			}
 			if(empty($_POST['form']['type_echange_id'])){
 				$msg['erreur']['type_echange_id'] = 'La catégorie est obligatoire';
 			}
-
 
 			if(!empty($msg['erreur']))
 			{
@@ -72,7 +128,6 @@ class ForumController extends Controller
 				$manager->insert(array_merge($_POST['form'],$tbNewPost));
 				// $this->show('default/forumHome');
 				$this->redirectToRoute('forumListePosts');
-
 			}
 			
 		}
@@ -92,16 +147,15 @@ public function forumModifierPost($id)
 		$type_echange = $n->findAll();
 
 		$manager = new PostManager();
-						
+
 		if(isset($_POST['submit']))
 		{
-			print_r($_POST);
-
+		
 			if(empty($_POST['form']['titre'])){
 				$msg['erreur']['titre'] = 'Le titre est obligatoire';
 			}
-			if(empty($_POST['form']['type_echange'])){
-				$msg['erreur']['type_echange'] = 'La catégorie est obligatoire';
+			if(empty($_POST['form']['type_echange_id'])){
+				$msg['erreur']['type_echange_id'] = 'La catégorie est obligatoire';
 			}
 
 
@@ -113,6 +167,7 @@ public function forumModifierPost($id)
 			{
 				$user = $this->getUser();
 				$tbNewPost = ['utilisateur_id'=>$user['id'] ];
+				$n->setTable('posts');
 				$manager->update(array_merge($_POST['form'],$tbNewPost),$post['id']);
 				$this->redirectToRoute('forumListePosts');
 			}

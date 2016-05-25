@@ -6,7 +6,7 @@
 <?php $this->start('main_content') ?>
 
 
-<form name="finscription" class="form-horizontal" method="POST" action="inscription">
+<form name="finscription" class="form-horizontal" method="POST" action="">
   <div class="form-group">
     <label for="emailId"   class="col-sm-2 control-label" >Email : </label>
     <div class="col-sm-4">

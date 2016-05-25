@@ -5,31 +5,32 @@ class PostManager extends \W\Manager\Manager
 {
 
 
-	public function getPosts($orderBy = "", $orderDir = "ASC", $type_echange = "")
+	public function getPosts($post_id = "", $orderBy = "", $orderDir = "ASC", $type_echange = "")
 	{
 
-		switch ($type_echange)
+	    $sql = "SELECT p.id , p.titre, p.post, p.date_publication, p.nbvues, u.pseudo, c.type_echange, c.type_echange_short, (SELECT COUNT(post_id) FROM `reponses` WHERE p.id=post_id) as nbreponses  FROM posts AS p INNER JOIN type_echange AS c on(p.type_echange_id = c.id) INNER JOIN utilisateurs as u on (p.utilisateur_id = u.id)" ;
+		
+	
+		// on cible le type d'écahnge 
+
+		if(!empty($type_echange))
 		{
-			case 'Questions / Réponses': 
-		        $sql = "SELECT p.id , p.titre, p.post, p.date_publication, p.nbvues, p.nbreponses, u.pseudo, c.type_echange, (SELECT DISTINCT post_id FROM `reponses` WHERE p.id=post_id) as nbreponses  FROM posts AS p INNER JOIN type_echange AS c on(p.type_echange_id = c.id) INNER JOIN utilisateurs as u on (p.utilisateur_id = u.id) WHERE c.type_echange like '%Questions / Réponses%' ";
-		                break;
+			$sqlId= " WHERE c.type_echange = $type_echange";
+			$sql .= $sqlId;
+		}
 
-			case 'Compte-Rendus': 
-		        $sql = "SELECT p.id , p.titre, p.post, p.date_publication, p.nbvues, p.nbreponses, u.pseudo, c.type_echange, (SELECT DISTINCT post_id FROM `reponses` WHERE p.id=post_id) as nbreponses  FROM posts AS p INNER JOIN type_echange AS c on(p.type_echange_id = c.id) INNER JOIN utilisateurs as u on (p.utilisateur_id = u.id)  WHERE c.type_echange like '%News%' ";
-		                break;
 
-		    case 'News': 
-		        $sql = "SELECT p.id , p.titre, p.post, p.date_publication, p.nbvues, p.nbreponses, u.pseudo, c.type_echange, (SELECT DISTINCT post_id FROM `reponses` WHERE p.id=post_id) as nbreponses  FROM posts AS p INNER JOIN type_echange AS c on(p.type_echange_id = c.id) INNER JOIN utilisateurs as u on (p.utilisateur_id = u.id) WHERE c.type_echange like '%Compte-Rendus%'";
-		                break;
 
-		    default:
-		         $sql = "SELECT p.id , p.titre, p.post, p.date_publication, p.nbvues, u.pseudo, c.type_echange, (SELECT DISTINCT post_id FROM `reponses` WHERE p.id=post_id) as nbreponses  FROM posts AS p INNER JOIN type_echange AS c on(p.type_echange_id = c.id) INNER JOIN utilisateurs as u on (p.utilisateur_id = u.id)" ;
-		                break;
-		 }
+		 // on cible un post ou tous les posts
+		if(!empty($post_id) && is_numeric($post_id))
+		{
+			$sqlId= " WHERE p.id = $post_id";
+			$sql .= $sqlId;
+		}
 
 		 // coalesce(test5,0)
 
-		 print_r($sql);
+		 // print_r($sql);
 		if (!empty($orderBy))
 		{
 			//sécurisation des paramètres, pour éviter les injections SQL
@@ -49,12 +50,32 @@ class PostManager extends \W\Manager\Manager
 		{
 			$sql .= " ORDER BY date_publication DESC";
 		}	
+ print_r($sql);
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		if(empty($sqlId))
+		{
+			return $sth->fetchAll();
+		}
+		else
+		{
+			return $sth->fetch();
+		}
 
+
+			
+	}
+		
+
+
+public function getTypeEchange()
+	{
+		$sql = "SELECT distinct(type_echange_short) FROM `type_echange` ";
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		return $sth->fetchAll();
-			
 	}
+		
 
 	
 }

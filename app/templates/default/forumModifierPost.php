@@ -10,13 +10,13 @@
   <div class="form-group">
     <label for="titreId"  class="col-sm-2 control-label">Titre : </label>
     <div class="col-sm-4">
-      <input  name="form[titre]" type="text" id="titreId" class="form-control"   value=<?php 
+      <input  name="form[titre]" type="text" id="titreId" class="form-control"   value="<?php 
       if(!empty($_POST['form']['titre']))
         { echo $_POST['form']['titre'];} 
         elseif(!empty($post['titre'])) 
           {echo $post['titre'] ;}
          
-          ?> >
+          ?> ">
     </div>
 
         <?php
@@ -53,15 +53,11 @@
 <label for="date_publicationId"  class="col-sm-2 control-label">date de publication : </label>
 <div class="col-sm-4">
    <input  name="form[date_publication]" type="text" id="date_publicationId" class="form-control"  disabled value=<?php 
-
-
-       if(!empty($_POST['form']['date_publication']))
-        { echo $_POST['form']['date_publication'];} 
-        elseif(!empty($post['date_publication'])) 
-          $datetmp= date($post['date_publication']);
-          { echo date("d/m/Y", strtotime($datetmp)) ;}
-                 
-          ?> >
+   if(!empty($_POST['form']['date_publication']))
+    { echo $_POST['form']['date_publication']; } 
+    elseif(!empty($post['date_publication']))
+    { echo date("d/m/Y", strtotime($post['date_publication'])) ;}
+     ?> >
 
 </div>
 
