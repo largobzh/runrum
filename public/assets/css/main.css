@@ -205,8 +205,9 @@ form > div {
     background: #5fc79b;
     border: solid 1px rgba(255, 255, 255, .9);
     border-radius: 5px;
-    padding: .5vw 2vw;
-    
+    padding: .5vh 1vw;
+    padding-top: 5px ;
+    line-height: 2rem;
     margin: auto;   
 }
 
