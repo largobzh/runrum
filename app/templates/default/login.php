@@ -4,7 +4,7 @@
 <?php $this->start('main_content') ?>
 
 
-<form name="flogin" class="form-horizontal" method="POST" action="login">
+<form class="form-horizontal" method="POST" action="login">
   <div class="form-group">
     
 
@@ -49,6 +49,8 @@
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
+
+  <a href="<?= $this->url('oubliPassword') ?>">Mot de passe oublé</a>
      <button name="submit" type="submit" class="btn btn-primary" >Valider</button>
     </div>
   </div>

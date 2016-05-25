@@ -93,6 +93,7 @@ foreach ($msg as $key => $value) {
 
 <div class="form-group">
   <div class="col-sm-offset-2 col-sm-10">
+  <a href="<?= $this->url('forumListePosts') ?>">Annuler</a>
      <button name="submit" type="submit" class="btn btn-primary" >Valider</button>
  </div>
 </div>

@@ -11,11 +11,6 @@ class TokenManager extends  \W\Manager\Manager
 
 	public function findToken($user_id, $token_id )
 	{
-
-		print_r("user_id" . $user_id);
-			print_r("token" . $token_id);
-		
-
 			$sql ="SELECT *  FROM tokens WHERE id_utilisateur= :id and token= :token and date_validite > now()";
 			$sth = $this->dbh->prepare($sql);
 			$sth->bindValue(':id',    $user_id);

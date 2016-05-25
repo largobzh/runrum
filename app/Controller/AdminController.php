@@ -148,7 +148,7 @@ class AdminController extends Controller
 			{
 
 				//***************************************************
-				//	Aucune msg dans le forumulaire	
+				//	Aucune erreur  dans le forumulaire	
 				//***************************************************
 
 				// on crée le nouvel utilisateur
@@ -164,18 +164,10 @@ class AdminController extends Controller
 					$tok->insert(['id_utilisateur'=>$id_utilisateur['id'], 'token'=>$token, 'date_validite'=>$date_validite]);
 					$lien = "<a href=\"runrum/login?&id=" . $id_utilisateur['id'] . "&token=" . $token . "\">Lien</a>";
 					$subject = 'Activer votre compte sur runrum';
-
-					$subject ="Inscription à runrum";
-					$body ="Bonjour, Valider votre inscription  : " .  $lien  ;
+					$body ="Bonjour, Vous êtes désormais inscrit sur le site runrum. Cliquer sur le lien afin de confirmer votre identification. " .  $lien  ;
 					if(Outils::envoiMail($lien, 'yvan.lebrigand@gmail.com', $_POST['form']['email'], $subject, $body))
 					{
-
-						$msg['info'] = "Vous êtes désormais inscrit sur le site. Pour activer votre compte, cliquer sur le lien dans le msg qui vous a été envoyé. ";
-												
-						// $this->show('default/home',['msg' => $msg]);
-					$this->redirectToRoute('activerCompte', ['user_id' => $id_utilisateur['id'],  'token_id' =>$token] );
-						
-				
+						$this->redirectToRoute('activerCompte', ['user_id' => $id_utilisateur['id'],  'token_id' =>$token] );
 					}
 
 				}
@@ -186,9 +178,8 @@ class AdminController extends Controller
 
 	} //public function inscription()
 
-//******************************************************************************************************************************************************************
-//******************************************************************************************************************************************************************
-//******************************************************************************************************************************************************************	
+
+//****************************************************************************************************************************	
 
 
 	public function oubliPassword()
@@ -254,8 +245,8 @@ class AdminController extends Controller
 				$lien = "<a href=\"runrum/initPassword?&id=" . $user['id'] . "&token=" . $token . "\">Lien</a>";
 
 
-				$subject ="changer votre mot de passe";
-				$body ="Bonjour, changer votre mot de passe : " .  $lien  ;
+				$subject ="changer votre mot de passe sur l'application runrum";
+				$body ="Bonjour, Pour changer votre mot de passe cliquer sur ce lien  : " .  $lien  ;
 				if(Outils::envoiMail($lien, 'yvan.lebrigand@gmail.com', $_POST['form']['email'], $subject, $body))
 				{
 					$msg['info']  = "Un mail vous a été envoyé avec un lien pour changer votre mot de passe";
@@ -279,193 +270,135 @@ class AdminController extends Controller
 // on arrive ici pour changer son mot de passe.
 //***************************************************************************************************************************************
 
-	public function reinitPassword($user_id, $token_id )
-	{
-			$tok    = new \Manager\tokenManager();
-			// on controle l'id du user et l'id du token
+	public function reinitPassword($user_id, $token_id ) {
+
+		// 1. vérifier que id et token_id sont ok sinon on redirect sur la home
+		// 1.1 si ok on affiche le formulaire (hidden: user_id et token_id)
+		$msg = array();
+
+
+		if(!isset($_POST['submit'])) 
+		{
 			if(!empty($user_id) && !empty($token_id))
 			{
+				$tok = new \Manager\tokenManager();
 				$tokenInfo=($tok->findToken($user_id, $token_id ));
+
 				if($tokenInfo)
 				{
-					 $this->show('default/reinitPasswordForm', ['user_id' => $user_id]);
-					// $this->redirectToRoute('reinitPasswordForm');
+					$this->show('default/reinitPassword', ['msg' => $msg , 'user_id' => $user_id, 'token_id' => $token_id]);
 				}
 				// aucun token récen de trouvé
 				else
 				{
-					$msg['erreur']['email']  = "Ce lien est périmé, veuillez reesayer";
-					$this->show('default/oubliPassword');
+					$msg['info']  = "Ce lien est périmé, veuillez reesayer";
+					$this->show('default/home');
 				}
 			}
-			$msg['erreur']['email']  = "Ce lien n'est pas valide";
-			$this->show('default/home');
 		}
-		
 
+		 // 2. on valide le formulaire
+		else
 
-
-//***************************************************************************************************************************************
-// après oubliPassword, un mail est envoyé.
-// on arrive ici pour changer son mot de passe.
-//***************************************************************************************************************************************
-
-	public function reinitPasswordForm()
-	{
-
-		if(isset($_POST['submit'])) 
 		{
+
 			$manager = new \Manager\UtilisateurManager();
 			$tok    = new \Manager\tokenManager();
-			$msg = array();
+
+			$password      = htmlentities(strip_tags(trim($_POST['form']['password'])));
+			$confPassword  = htmlentities(strip_tags(trim($_POST['form']['confPassword'])));
+			if(empty($_POST['form']['password'])){
+				$msg['erreur']['password'] = 'Le mot de passe est obligatoire';
+			}
+			if(empty($_POST['form']['confPassword'])){
+				$msg['erreur']['confPassword'] = 'Le mot de passe est obligatoire';
+			}
 			
-		
-				
-			//***************************************************************
-			// validation des champs du formulaire inscription
-			//***************************************************************
+			if($password !== $confPassword)
+			{
+				$msg['erreur']['password']     = 'Vos mots de passe sont différents';
+				$msg['erreur']['confPassword'] = 'Vos mots de passe sont différents';
+			}
+			if(!empty($msg['erreur']))
+			{
+				$this->show('default/reinitPassword', ['msg' => $msg , 'user_id' => $user_id, 'token_id' => $token_id]);
+			}
+			else
 
-			// controle de l'email
-				$password      = htmlentities(strip_tags(trim($_POST['form']['password'])));
-				$confPassword  = htmlentities(strip_tags(trim($_POST['form']['confPasswsord'])));
+			// 2.1 si ok on update
 
-
-				if(empty($_POST['form']['Password'])){
-					$msg['erreur']['password'] = 'Le mot de passe est obligatoire';
-				}
-				if(empty($_POST['form']['confPassword'])){
-					$msg['erreur']['confPassword'] = 'Le mot de passe est obligatoire';
-				}
-				
-				if($password !== $confPassword)
+			{
+				$manager->setTable('utilisateurs');
+				$user_id= intval($_POST['form']['user_id']);
+				if($manager->find($user_id))
 				{
-					$msg['erreur']['Password']     = 'Vos mots de passe sont différents';
-					$msg['erreur']['confPassword'] = 'Vos mots de passe sont différents';
-				}
-				
-									
-
-				if(!empty($msg['erreur']))
-				{
-					$this->show('default/reinitPasswordForm', ['msg' => $msg]);
-				}
-				else
-
-				// ****************************************
-				// mise à jour du mot de passe dans la table utilisateurs
-				// ****************************************
-				{
-					setTable('utilisateurs');
-					$user_id= intval($_POST['form']['user_id']);
-					if($manager->find($user_id))
+					$user = $manager->update(['password' => password_hash($password,PASSWORD_DEFAULT)], $user_id);
+					if($user)
 					{
-						$user = $manager->update(['password' => $password_hash($password,PASSWORD_DEFAULT)], $user_id);
-								
-						if($user)
+				// on supprime le token 
+						$manager->setTable('tokens');
+						$tokenInfo=($tok->findToken($user_id, $_POST['form']['token_id'] ));
+						if($tokenInfo)
 						{
-							// =============================
-							// on supprime le token correspondant 
-							// =============================
-							setTable('tokens');
-							$tokenInfo=($tok->findToken($user_id, $token_id ));
-							if($tokenInfo)
-							{
-								$manager->delete($tokenInfo['id']);
-								$msg['info']  = "Votre mot de passe a été changé avec succès";
+							$manager->delete($tokenInfo['id']);
+							$msg['info']  = "Votre mot de passe a été changé avec succès";
 
-								$_SESSION["user"]['id']     = $user['id'];
-								$_SESSION["user"]['email']  = $user['email'];
-								$_SESSION["user"]['pseudo'] = $user['pseudo'];
-								
-								$msg['info']  = "Vous êtes désormais connecté !";
-								$this->show('default/home', ['msg' => $msg]);
+							$_SESSION["user"]['id']     = $user['id'];
+							$_SESSION["user"]['email']  = $user['email'];
+							$_SESSION["user"]['pseudo'] = $user['pseudo'];
+							
+			// 2.2 sinon on réaffiche le form + erreur
 
-							}
-							// =============================
-
+							$msg['info']  = "Vous êtes désormais connecté !";
+							$this->redirectToRoute('home');
 						}
-						else
-						{
-							$msg['info'] = "Incident 1 !!  Un pobleme est survenut durant la mise à jour de votre mot de passe";
-							$this->show('default/reinitPasswordForm', ['msg' => $msg]);
-						}
+						// =============================
+
 					}
-					else // l'ID utilisateur est introuvable
-					{
-						$msg['info'] = "Incident 2 !!  Un pobleme est survenut durant la mise à jour de votre mot de passe";
-						$this->show('default/reinitPasswordForm', ['msg' => $msg]);
-					}	
 				}
-					
-
-			}//if(isset($_POST['submit'])) 
-
+			}
 			
-		$this->show('default/oubliPassword', ['msg' => $msg]);
-	} //oubliPassword
+		}
+	}
 
-
+	
 //***************************************************************************************************************************************
 // après une inscription au site , un mail est envoyé.
 // on arrive ici pour activer le compte (champ 'actif' de la table utilisateur à 1 ) 
 //***************************************************************************************************************************************
-
-
-
 	public function activerCompte($user_id, $token_id )
 	{
-		
 		$manager = new \Manager\UtilisateurManager();
 		$tok    = new \Manager\tokenManager();
 		$msg = array();
-
-
 	// on controle l'id du user et l'id du token
 		if(!empty($user_id) && !empty($token_id))
 		{
-		//***************************************************************
-		// on active le compte utilisateur
-		//***************************************************************
-
+			// on active le compte utilisateur
 			$manager->setTable('utilisateurs');
 			if($manager->find($user_id))
 			{
 				$user = $manager->update(['actif' => actif], $user_id);
 				if($user)
 				{
-					// =============================
 					// on supprime le token correspondant 
-					// =============================
 					$manager->setTable('tokens');
-
 					$tokenInfo=($tok->findToken($user_id, $token_id ));
 					if($tokenInfo)
 					{
 						$manager->delete($tokenInfo['id']);
-						$msg['info']  = "Votre compte a été activé  avec succès";
+						$msg['info']  = "Votre compte a été activé  avec succès. Vous etes connecté.";
 						$_SESSION["user"]['id']     = $user['id'];
 						$_SESSION["user"]['email']  = $user['email'];
 						$_SESSION["user"]['pseudo'] = $user['pseudo'];
 						$this->show('default/home', ['msg' => $msg]);
 					}
-					// =============================
-
-					else
-					{
-						$msg['info'] = "Incident 1 !! Un poblème est survenut durant l\'activation de votre compte.Merci de vous réinscrire";
-						$this->show('default/home', ['msg' => $msg]);
-					}
 				}
-				else // l'ID utilisateur est introuvable
-				{
-					$msg['info'] = "Incident 2 !! Un poblème est survenut durant l\'activation de votre compte.Merci de vous réinscrire";
-					$this->show('default/home', ['msg' => $msg]);
-				}	
 			}
-					
 		}
-
-			$this->show('default/home', ['msg' => $msg]);
+	
+		$msg['info']  = "Ce lien n'est n\'est plus valide. Esaayer de vous réinscrire !";
+		$this->show('default/home', ['msg' => $msg]);
 	} 
 
 }

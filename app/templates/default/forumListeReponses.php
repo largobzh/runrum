@@ -3,24 +3,33 @@
 
 <?php $this->start('main_content') ?>
 
+<?php print_r($posts) ?>
 <h2>Liste des reponses... </h2>
 
+<?php foreach ($posts as $post) { ?>
+		<span> <?= $this->e($post['type_echange_short']) ?></span> 
+		<span> <?= $this->e($post['titre']) ?></span> 
+
+        <p>
+           <?=$post['pseudo'] ?>  <?= date('j-M-Y', strtotime($post['date_publication']))  ?>  
+           vues :    <?= intval($post['nbvues']) ?>
+           Réponses : <?= intval($post['nbreponses'] )?>
+           
+        </p>
+        <!-- Corps de la question -->
+        <p >
+            <?=$post['post'] ?>
+        </p>
+       
+		
+	<?php } ?>
 
 
-
-<?= $this->e($post['titre']) ?>
-
-
-<?=$post['post'] ?>
 
 
 <!-- // todo : insérer les photos ici -->
 
 
-<p>
-	<?=$post['pseudo'] ?> le <?= date('j-M-Y', strtotime($post['date_publication']))  ?> 
-	vues :    <?= intval($post['nbvues']) ?>
-</p>
 
 <hr>
 <?php foreach ($reponses as $reponse) { ?>
@@ -30,9 +39,9 @@
 
 <p>
 	<?=$reponse['pseudo'] ?> le <?= date('j-M-Y', strtotime($post['date_publication']))  ?> 
-
-	<?php } ?>     
 <hr>
+	<?php } ?>     
+
 
 <form name="fAddReponse" class="form-horizontal" method="POST" action="">
 

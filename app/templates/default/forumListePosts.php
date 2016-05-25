@@ -3,28 +3,20 @@
 <?php $this->start('main_content') ?>
 
 	<h2>Liste des posts...<?= $user['pseudo'] ?></h2>
-	
-<?php print_r($type_echange_short); ?>
- <hr>
-<?php print_r($posts); ?>
-	<!-- on affiche les boutons correspondant au type echange pour filter les enregistrements  -->
-	<?for ($i=0; $i < length($type_echange_short); $i++) { ?>
-		<a href="<?= $this->url('forumListePosts', ['type_echange_short' => $type_echange_short[$i]]) ?>">
-				<?= $this->e($type_echange_short['type_echange_short']) ?>
+
+	<?php foreach ($type_echange_short as $techanges) { ?>
+		 <hr>
+		
+		<?php print_r($techanges['type_echange_short']); ?>
+		<a href="<?= $this->url('forumListePostsT', ['techange' => $techanges['type_echange_short']]) ?>">
+				<?= $this->e($techanges['type_echange_short']) ?>
 		</a>
 	<?php } ?> 
-	<!-- <?php foreach ($type_echange_short as $techanges) { ?>
-		 <hr>
-		<?php print_r($techanges) ?> 
-		<a href="<?= $this->url('forumListePosts', ['type_echange_short' => $type_echange_short['type_echange_short']]) ?>">
-				<?= $this->e($type_echange_short['type_echange_short']) ?>
-		</a>
-	<?php } ?> -->
 	
 
 	<?php foreach ($posts as $post) { ?>
 		<h3>
-			<?php print_r($post); ?>
+			<!-- <?php print_r($post); ?> -->
 		
 			<span> <?= $this->e($post['type_echange_short']) ?></span> 
 
@@ -39,12 +31,24 @@
            Réponses : <?= intval($post['nbreponses'] )?>
            
         </p>
-        <!-- Corps de la question -->
-        <p >
-            <?=$post['post'] ?>
+       <!-- on accepte ma modification de la question si l'auteur est l'utilisateur courant -->
+       <!-- on cré donc un lien vers la route , sinon on affcihe l coprs -->
+       <p>
+			<?php if($post['utilisateur_id'] == $user['id'])
+			{?>
+				<a href="<?= $this->url('forumModifierPost', ['id' => $post['id']]) ?>">
+					<?= $this->e($post['post']) ?>
+				</a>
+			<?php
+			}
+			else
+			{
+				$this->e($post['post']);
+			} 
+			?>
+			
         </p>
-        <hr>
-
+            
 		</h3>
 	<?php } ?>
 	<a href="<?= $this->url('forumAjouterPost') ?>">ajouter</a>

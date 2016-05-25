@@ -19,11 +19,14 @@ class ForumController extends Controller
 	// ***************************************************
 	// Page d'accueil par défaut - les 20 premiers posts
 	// ***************************************************
-	public function forumListePosts()
+	public function forumListePosts($techange="")
 	{
+
+
+		print_r($techange);
 		$user = $this->getUser();
 		$manager = new PostManager();
-		$posts = $manager->getPosts("", 'date_publication', 'DESC');
+		$posts = $manager->getPosts("", 'date_publication', 'DESC', $techange);
 		$type_echange_short = $manager->getTypeEchange();
 		$this->show('default/forumListePosts', ['posts' => $posts, 'user' => $user, 'type_echange_short' => $type_echange_short]);
 	}
@@ -54,15 +57,15 @@ class ForumController extends Controller
 			{
 				// on réaffiche toutes les réponses  et le message d'erreur 
 				$manager = new PostManager();
-				$post = $manager->getPosts($id, 'date_publication', 'DESC');
+				$posts = $manager->getPosts($id, 'date_publication', 'DESC');
 		
-				if($post)
+				if($posts)
 				{
 					$reponseManager = new ReponseManager();
 					$reponses = $reponseManager->getReponses($id, 'date_publication', 'DESC');
 				}
 
-				$this->show('default/forumListeReponses', ['post' => $post, 'reponses'=> $reponses, 'msg' => $msg]);
+				$this->show('default/forumListeReponses', ['posts' => $posts, 'reponses'=> $reponses, 'msg' => $msg]);
 			}
 			else
 				// on enregistre la réponse et on réaffcihe toutes les questions
@@ -80,15 +83,15 @@ class ForumController extends Controller
 		else
 		{
 			$manager = new PostManager();
-			$post = $manager->getPosts($id, 'date_publication', 'DESC');
-			if($post)
+			$posts = $manager->getPosts($id, 'date_publication', 'DESC');
+			if($posts)
 			{
 				$reponseManager = new ReponseManager();
 				$reponses = $reponseManager->getReponses($id, 'date_publication', 'DESC');
 			}
 		
 		}
-		$this->show('default/forumListeReponses', ['post' => $post, 'reponses'=> $reponses, 'msg' => $msg]);
+		$this->show('default/forumListeReponses', ['posts' => $posts, 'reponses'=> $reponses, 'msg' => $msg]);
 	}
 	
 	
