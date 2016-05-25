@@ -1,7 +1,12 @@
 <?php $this->layout('layout', ['title' => 'Accueil']) ?>
 
 <?php $this->start('main_content') ?>
-	<h2>Let's code.</h2>
-	<p>Vous avez atteint la page d'accueil. Bravo.</p>
-	<p>Et maintenant, RTFM dans <strong><a href="../docs/tuto/" title="Documentation de W">docs/tuto</a></strong>.</p>
+
+                <a class="styleBouton" href="carnet.php">run</a>
+                <a class="styleBouton" href="forum.php">rum</a>
+                <!--<p>run</p>-->
+                <!--<p>rum</p>-->
+
+            
+   
 <?php $this->stop('main_content') ?>

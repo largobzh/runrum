@@ -7,7 +7,10 @@
 		['GET|POST','/creationcarnet','Carnet#creationCarnet','creationCarnet'],
 		// route pour afficher la liste des carnets
 		['GET|POST','/listecarnet','Carnet#afficherCarnet','afficherCarnet'],
-		// route pour la modification des carnets
+		// route pour la modification une note du carnet
 		['GET|POST','/modifiercarnet/[i:id]','Carnet#modifierCarnet','modifierCarnet'],
+		// afin de supprimer une note du carnet
+		['GET|POST','/listecarnet/[i:id]','Carnet#supprimerCarnet','supprimerCarnet'],
+		
 
 	);
