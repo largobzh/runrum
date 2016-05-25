@@ -3,7 +3,7 @@
 
 <?php $this->start('main_content') ?>
 
-<?php print_r($posts) ?>
+
 <h2>Liste des reponses... </h2>
 
 <?php foreach ($posts as $post) { ?>

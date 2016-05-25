@@ -153,7 +153,7 @@ class AdminController extends Controller
 
 				// on crée le nouvel utilisateur
 
-				$id_utilisateur=$manager->insert(['email'=>$_POST['form']['email'], 'password'=>password_hash($_POST['form']['password'],PASSWORD_DEFAULT), 'pseudo'=> $_POST['form']['pseudo'], "actif"=> actif, 'role'=>'user']);
+				$id_utilisateur=$manager->insert(['email'=>$_POST['form']['email'], 'password'=>password_hash($_POST['form']['password'],PASSWORD_DEFAULT), 'pseudo'=> $_POST['form']['pseudo'], "actif"=> inactif, 'role'=>'user']);
 				
 				if($id_utilisateur)
 				{
@@ -162,12 +162,17 @@ class AdminController extends Controller
 					$token  = md5(uniqid(rand(), true));
 					$date_validite = date("Y-m-d H:i:s" , strtotime('+1 day'));
 					$tok->insert(['id_utilisateur'=>$id_utilisateur['id'], 'token'=>$token, 'date_validite'=>$date_validite]);
-					$lien = "<a href=\"runrum/login?&id=" . $id_utilisateur['id'] . "&token=" . $token . "\">Lien</a>";
+					// $lien = "<a href=\"runrum/activerCompte?&id=" . $id_utilisateur['id'] . "&token=" . $token . "\">Lien</a>";
+					$lien = "<a href=\"http://runrum/activerCompte?&id=" . $id_utilisateur['id'] . "&token=" . $token . "\">Lien</a>";
 					$subject = 'Activer votre compte sur runrum';
 					$body ="Bonjour, Vous êtes désormais inscrit sur le site runrum. Cliquer sur le lien afin de confirmer votre identification. " .  $lien  ;
 					if(Outils::envoiMail($lien, 'yvan.lebrigand@gmail.com', $_POST['form']['email'], $subject, $body))
 					{
-						$this->redirectToRoute('activerCompte', ['user_id' => $id_utilisateur['id'],  'token_id' =>$token] );
+						// pour les tests on route comme si on avait cliquer sur le lien
+						// $this->redirectToRoute('activerCompte', ['user_id' => $id_utilisateur['id'],  'token_id' =>$token] );
+
+						$msg['info']  = "Vérifier votre messagerie. cliqer sur le lien dans le message de confirmation envoyé à " . $_POST['form']['email'] ;
+						$this->show('default/home', ['msg' => $msg]);
 					}
 
 				}
@@ -232,8 +237,8 @@ class AdminController extends Controller
 				$this->show('default/oubliPassword', ['msg' => $msg]);
 			}
 			else
+				
 			{
-
 				//***************************************************
 				//	on envoie un email pour pouvoir changer son mot de passe
 				//***************************************************
@@ -242,13 +247,19 @@ class AdminController extends Controller
 				$token  = md5(uniqid(rand(), true));
 				$date_validite = date("Y-m-d H:i:s" , strtotime('+1 day'));
 				$tok->insert(['id_utilisateur'=>$user['id'], 'token'=>$token, 'date_validite'=>$date_validite]);
-				$lien = "<a href=\"runrum/initPassword?&id=" . $user['id'] . "&token=" . $token . "\">Lien</a>";
-
-
+				$lien = "<a href=\"http://www.runrum/initPassword?&id=" . $user['id'] . "&token=" . $token . "\">Lien</a>";
+				
 				$subject ="changer votre mot de passe sur l'application runrum";
 				$body ="Bonjour, Pour changer votre mot de passe cliquer sur ce lien  : " .  $lien  ;
 				if(Outils::envoiMail($lien, 'yvan.lebrigand@gmail.com', $_POST['form']['email'], $subject, $body))
 				{
+
+					// pour les tests on route comme si on avait cliquer sur le lien
+					// $this->redirectToRoute('activerCompte', ['user_id' => $id_utilisateur['id'],  'token_id' =>$token] );
+
+						$msg['info']  = "Vérifier votre messagerie. cliqer sur le lien dans le message de confirmation envoyé à " . $_POST['form']['email'] ;
+						$this->show('default/home', ['msg' => $msg]);
+
 					$msg['info']  = "Un mail vous a été envoyé avec un lien pour changer votre mot de passe";
 					// $this->show('default/home',['msg' => $msg]);
 
@@ -368,6 +379,7 @@ class AdminController extends Controller
 //***************************************************************************************************************************************
 	public function activerCompte($user_id, $token_id )
 	{
+		print_r($user_id);
 		$manager = new \Manager\UtilisateurManager();
 		$tok    = new \Manager\tokenManager();
 		$msg = array();
@@ -380,14 +392,13 @@ class AdminController extends Controller
 			{
 				$user = $manager->update(['actif' => actif], $user_id);
 				if($user)
-				{
-					// on supprime le token correspondant 
+				{	// on supprime le token correspondant 
 					$manager->setTable('tokens');
 					$tokenInfo=($tok->findToken($user_id, $token_id ));
 					if($tokenInfo)
 					{
 						$manager->delete($tokenInfo['id']);
-						$msg['info']  = "Votre compte a été activé  avec succès. Vous etes connecté.";
+						$msg['info']  = "Votre compte a été activé  avec succès. Vous êtes désormais connectés.";
 						$_SESSION["user"]['id']     = $user['id'];
 						$_SESSION["user"]['email']  = $user['email'];
 						$_SESSION["user"]['pseudo'] = $user['pseudo'];

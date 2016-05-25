@@ -140,52 +140,55 @@ class ForumController extends Controller
 
 
 
-public function forumModifierPost($id)
+	public function forumModifierPost($id)
 	{
 		$msg = array();
-
-		// Afficher les données type-echange de la base de données dans le select
-		$n = new Type_echangeManager();
-		$n->setTable('Type_echange');
-		$type_echange = $n->findAll();
-
-		$manager = new PostManager();
-
-		if(isset($_POST['submit']))
+		// 1. on vien de cliquer sur un post pour me modifier
+		if(!isset($_POST['submit'])) 
 		{
-		
+			if(!empty($id))
+			{
+				$manager = new PostManager();
+				$post = $manager->find($id);
+				if($post)
+				{
+					$n = new Type_echangeManager();
+					$n->setTable('Type_echange');  // tous les type d echange pour la liste
+					$type_echange = $n->findAll();
+					$this->show('default/forumModifierPost' , ['msg' => $msg, 'type_echange' => $type_echange, 'post'=>$post]);
+				}
+			}
+		}
+		// 2. on valide le formulaire
+		else
+		{				
 			if(empty($_POST['form']['titre'])){
 				$msg['erreur']['titre'] = 'Le titre est obligatoire';
 			}
 			if(empty($_POST['form']['type_echange_id'])){
 				$msg['erreur']['type_echange_id'] = 'La catégorie est obligatoire';
 			}
-
-
 			if(!empty($msg['erreur']))
 			{
-				$this->show('default/forumModifierPost' , ['msg' => $msg, 'type_echange' => $type_echange, 'post'=>$post]);
+				$this->show('default/forumModifierPost' , ['msg' => $msg, 'type_echange' => $type_echange]);
 			}
-			else
-			{
-				$user = $this->getUser();
-				$tbNewPost = ['utilisateur_id'=>$user['id'] ];
-				$n->setTable('posts');
-				$manager->update(array_merge($_POST['form'],$tbNewPost),$post['id']);
-				$this->redirectToRoute('forumListePosts');
-			}
-			// $manager->update($_POST['myform'], $id);
-			// $this->redirectToRoute('home');
-		}
-		$post = $manager->find($id);
-		if($post)
-		{
-			$this->show('default/forumModifierPost' , ['msg' => $msg, 'type_echange' => $type_echange, 'post'=>$post]);
-		}
-		else
-		{
-			$msg['infos'] = 'ce post n\'existe plus';
+			
+		// 3. on renregistre les modifications
+			
+			$manager = new PostManager();
+			$manager->setTable('posts');
+			$id =intval($_POST['form']['post_id']);
+
+			$post = $manager->find($id);
+			$post['titre'] =$_POST['form']['titre'];
+			$post['post'] =$_POST['form']['post'];
+			$post['type_echange_id'] =$_POST['form']['type_echange_id'];
+			$manager->update($post, $id);
 			$this->redirectToRoute('forumListePosts');
+			
 		}
+		
 	}
+		
+	
 }

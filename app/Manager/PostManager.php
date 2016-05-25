@@ -50,7 +50,7 @@ class PostManager extends \W\Manager\Manager
 		{
 			$sql .= " ORDER BY date_publication DESC";
 		}	
- print_r($sql);
+
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		return $sth->fetchAll();
