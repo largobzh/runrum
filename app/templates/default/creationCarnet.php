@@ -9,7 +9,7 @@
 
 			<p>
 				<label for="dateNoteID" id="labelDateNote">Date de l'activité</label>
-				<input type="datetime-local" name="form[datenote]" id="dateNoteID" tabindex="1" >
+				<input type="date" name="form[datenote]" id="dateNoteID" tabindex="1" >
 			</p>
 
 			<p>
@@ -97,8 +97,10 @@
 			</p>
 
 			<p>
+<!-- 				<input type="submit" name="annulNote" value="Annuler" id="annulFormCarnet"> -->
 				<input type="submit" name="submit" value="Enregistrer" id="submitFormCarnet">
 			</p>
+			
 
 
 		</div>
