@@ -5,7 +5,7 @@
 <form method="POST" >
 	<label for="dateNoteID" id="labelDateNote">Date de l'activité</label>
 	
-	<input type="datetime-local" name="form[datenote]" id="dateNoteID" tabindex="1" value="<?= $contenues['datenote'] ?>" ><br>
+	<input type="date" name="form[datenote]" id="dateNoteID" tabindex="1" value="<?= $contenues['datenote'] ?>" ><br>
 
 	<label for="HDepartID" id="labelHDepart">Heure de départ</label>
 	<input type="time" name="form[heuredepart]" id="HDepartID" tabindex="2" value="<?= $contenues['heuredepart'] ?>" ><br>
@@ -116,4 +116,4 @@
 
 		 <input type="submit" name="submit" value="Mettre A Jours">
 		</form>
-		<?php $this->stop('main_content') ?>
+<?php $this->stop('main_content') ?>
