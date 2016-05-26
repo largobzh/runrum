@@ -6,7 +6,7 @@
 <?php $this->start('main_content') ?>
 
 
-<form name="fAddPost" class="form-horizontal" method="POST" action="">
+<form name="fAddPost" enctype="multipart/form-data" class="form-horizontal" method="POST" action="">
 
 
   <div class="form-group">
@@ -62,6 +62,15 @@
     <?php } ?>
     </select><br>
 </div>
+
+
+<label for="photoId"  class="col-sm-2 control-label">Sélectionner une photo : </label>
+<div class="col-sm-4">
+   <input type="file" id="photoId" name="photo"accept =".png .jpg .jpeg" >
+</div>
+
+
+
 
 
 <?php

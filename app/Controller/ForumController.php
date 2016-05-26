@@ -8,9 +8,19 @@ use \Manager\ReponseManager;
 use \Manager\Type_echangeManager;
 use \W\Manager\UserManager;
 use \W\Security\AuthentificationManager;
+use \Eventviva\ImageResize;
 use Outils\Outils;
 
 
+
+// Constantes
+define('TARGET', 'img/runrum/');    // Repertoire cible pour les photos
+define('MAX_SIZE', 100000);    // Taille max en octets du fichier 
+define('WIDTH_MAX', 800);    // Largeur max de l'image en pixels
+define('HEIGHT_MAX', 800);    // Hauteur max de l'image en pixels
+ 
+// Tableaux de donnees
+$tabExt = array('jpg','gif','png','jpeg');    // Extensions autorisees
 
 class ForumController extends Controller
 {
@@ -116,6 +126,30 @@ class ForumController extends Controller
 				$msg['erreur']['type_echange_id'] = 'La catégorie est obligatoire';
 			}
 
+// ============  gestion de l'ajout de photo ======================
+			// if(!is_dir(TARGET))
+			// {echo "le répertoire n'existe pas";}
+
+
+   //        print_r($_FILES);
+   //          $tmp_name  = $_FILES['photo']['tmp_name'];
+   //          $extension = pathinfo($_FILES['photo']['name'])['extension'];
+   //          $hash      = md5_file($_FILES['photo']['tmp_name']) ;
+
+   //          $fichier = "$hash.$extension"; // extension avec le point
+   //          echo $fichier;
+   //          move_uploaded_file($tmp_name, "img/runrum/$fichier");
+
+   //          $image = new ImageResize("img/runrum/$fichier");
+   //          $image->resizeToBestFit(100, 100 );
+   //          $image->saveImage("img/runrum/$fichier");
+
+        
+        
+
+
+
+//========================================
 			if(!empty($msg['erreur']))
 			{
 				$this->show('default/forumAjouterPost',['msg' => $msg, 'type_echange' => $type_echange]);
@@ -189,6 +223,12 @@ class ForumController extends Controller
 		}
 		
 	}
+
+	public function check_extension($extension, $liste)
+	{
+    	return in_array(explode('/',$extension)[1], $liste);
+	}
+
 		
 	
 }
