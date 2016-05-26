@@ -1,40 +1,37 @@
-<?php $this->layout('layout', ['title' => 'Forum !']) ?>
+<?php $this->layout('layout', ['title' => 'rum : liste']) ?>
 
 <?php $this->start('main_content') ?>
-
-	<h2>Liste des posts...<?= $user['pseudo'] ?></h2>
-
-	<?php foreach ($type_echange_short as $techanges) { ?>
+<article>
+	<!-- <h4>Liste des posts...<?= $user['pseudo'] ?></h4>
+ -->
+	<div>
+		<ul id="categories">
+		<?php foreach ($type_echange_short as $techanges) { ?>
 		
-		<a href="<?= $this->url('forumListePostsT', ['techange' => $techanges['type_echange_short']]) ?>">
-				<?= $this->e($techanges['type_echange_short']) ?>
-		</a>
+			<li class="infosPost1 mod2 couleurCR"><a href="<?= $this->url('forumListePostsT', ['techange' => $techanges['type_echange_short']]) ?>">
+				<?= $this->e($techanges['type_echange_short']) ?></a>
+			</li>
+		<?php } ?> 
+		</ul>
+	</div>
 
-	<?php } ?> 
-	<hr>
+
+   <div id="apercuPosts">
+                 
+      	<div class="postListe">
 
 	<?php foreach ($posts as $post) { ?>
 		
 		<?php if(!empty($post)) 
 		{ ?>
 
-			<h3>
-		
-			<span> <?= $this->e($post['type_echange_short']) ?></span> 
 
-			<a href="<?= $this->url('forumListeReponses', ['id' => $post['id']]) ?>">
-				<?= $this->e($post['titre']) ?>
-			</a>
+			<h4 class="couleurCR">
+				<span>[<?= $this->e($post['type_echange_short']) ?>]</span><a id="lienTitrePost" href="<?= $this->url('forumListeReponses', ['id' => $post['id']]) ?>">
+				<?= $this->e($post['titre']) ?></a>
+			</h4>
 
-		
-        	<p>
-	           <?=$post['pseudo'] ?>  <?= date('j-M-Y', strtotime($post['date_publication']))  ?>  
-	           vues :    <?= intval($post['nbvues']) ?>
-	           Réponses : <?= intval($post['nbreponses'] )?>
-           
-        	</p>
-	       <!-- on accepte ma modification de la question si l'auteur est l'utilisateur courant -->
-	       <!-- on cré donc un lien vers la route , sinon on affcihe l coprs -->
+
 	       <p>
 				<?php if($post['utilisateur_id'] == $user['id'])
 				{?>
@@ -50,12 +47,42 @@
 				?>
 				
 	        </p>
+		
+           <div>
+                <ul id="renseignPost">
+                    <li class="infosPost1 mod2"><?=$post['pseudo'] ?></li>
+
+                    <li class="infosPost2 mod3">21 mai 2016</li>
+                    <li class="infosPost2 mod3">Vues : 42</li>
+                </ul>
+           </div>
+
+
+
+
+
+        	<p>
+	           <?=$post['pseudo'] ?>  <?= date('j-M-Y', strtotime($post['date_publication']))  ?>  
+	           vues :    <?= intval($post['nbvues']) ?>
+	           Réponses : <?= intval($post['nbreponses'] )?>
+           
+        	</p>
+	       <!-- on accepte ma modification de la question si l'auteur est l'utilisateur courant -->
+	       <!-- on cré donc un lien vers la route , sinon on affcihe l coprs -->
+
             
-			</h3>
-			<hr>
+
 	<?php }} ?>
-	
-	<p>
-	<a href="<?= $this->url('forumAjouterPost') ?>">ajouter</a>
-	</p>
+  </div>
+                  
+</div>
+	               <div>
+                    <ul id="navPages">
+                        <li><a href="pagePreced" class="sansSoulign">Page précédente</a></li>
+                        <li><a href="<?= $this->url('forumAjouterPost') ?>" class="sansSoulign" title="accès au formulaire de saisie d'un nouveau post.">Ajouter</a></li>
+                        <li><a href="pageSuiv" class="sansSoulign">Page suivante</a></li>
+                    </ul>
+               </div>
+
+</article>
 <?php $this->stop('main_content') ?>

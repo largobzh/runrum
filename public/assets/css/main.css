@@ -83,7 +83,27 @@ section {
     min-height: 100vh;
 }
 
+#lienTitrePost {
+    color: white;
+    font-family: 'Oxygen';
+    font-weight: 700;
+    font-size: 1.2rem;
+    background: none;
+/*    margin: 0 auto;*/
+    padding: .5em 0 .5em 1em;
+    border: 0px solid black;
+    padding: 10px 240px 10px 10px;
+    border-radius: 0;
+    box-shadow:none;
+}
 
+#lienTitrePost:link {
+    text-decoration: none;
+}
+
+#lienTitrePost:hover {
+    color: #e56e56;
+}
 
 /*=================== main content =================*/
 .content {
