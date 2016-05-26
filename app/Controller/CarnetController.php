@@ -72,29 +72,9 @@ class CarnetController extends Controller
 					// La partie Compteur 
 					if ($m) {
 						echo "Note enregistrer <br>";
-						// Partie Kilométrage
-						if ($_POST['form']['distance'] >= 10 && $_POST['form']['distance'] < 21) {
-							// mettre un controlle pour savoir si le badge à était obtenu
-							echo "Bravo vous obtenez un badge de 10 km ";
-						}
-						elseif ($_POST['form']['distance'] >= 21 && $_POST['form']['distance'] < 42.195) {
-							// mettre un controlle pour savoir si le badge à était obtenu
-							echo "Bravo vous obtenez un badge de 21 km ";
-						}
-						elseif ($_POST['form']['distance'] >= 42.195 && $_POST['form']['distance'] < 100) {
-							// mettre un controlle pour savoir si le badge à était obtenu
-							echo "Bravo vous obtenez un badge de 42.195 km ";
-						}
-						elseif ($_POST['form']['distance'] >= 100 && $_POST['form']['distance'] < 1000) {
-							// mettre un controlle pour savoir si le badge à était obtenu
-							echo "Bravo vous obtenez un badge de 100 km ";
-						}
-						elseif ($_POST['form']['distance'] == 1000) {
-							// mettre un controlle pour savoir si le badge à était obtenu
-							echo "Bravo vous obtenez un badge de 1000 km ";
-						}
-						else{
 
+						// Partie Kilométrage
+						
 							// ne pa oublier le controlle pour savoir si il à déja eu le badge
 
 							// Faire la somme des valeurs du champ "distance" dans la base de données
@@ -107,32 +87,32 @@ class CarnetController extends Controller
 
 							if ($listeCarnet >= 10 && $listeCarnet < 21) {
 								// mettre un controlle pour savoir si le badge à était obtenu
-							echo "Bravo vous obtenez un badge de 10 km au total de vos activités ";
-						}
-						elseif ($listeCarnet >= 21 && $listeCarnet < 42.195) {
+								echo "Bravo vous obtenez un badge de 10 km au total de vos activités ";
+							}
+							elseif ($listeCarnet >= 21 && $listeCarnet < 42.195) {
 							// mettre un controlle pour savoir si le badge à était obtenu
-							echo "Bravo vous obtenez un badge de 21 km au total de vos activités ";
-						}
-						elseif ($listeCarnet >= 42.195 && $listeCarnet < 100) {
+								echo "Bravo vous obtenez un badge de 21 km au total de vos activités ";
+							}
+							elseif ($listeCarnet >= 42.195 && $listeCarnet < 100) {
 							// mettre un controlle pour savoir si le badge à était obtenu
-							echo "Bravo vous obtenez un badge de 42.195 km au total de vos activités ";
-						}
-						elseif ($listeCarnet >= 100 && $listeCarnet < 1000) {
+								echo "Bravo vous obtenez un badge de 42.195 km au total de vos activités ";
+							}
+							elseif ($listeCarnet >= 100 && $listeCarnet < 1000) {
 							// mettre un controlle pour savoir si le badge à était obtenu
-							echo "Bravo vous obtenez un badge de 100 km au total de vos activités ";
-						}
-						elseif ($listeCarnet == 1000) {
+								echo "Bravo vous obtenez un badge de 100 km au total de vos activités ";
+							}
+							elseif ($listeCarnet == 1000) {
 							// mettre un controlle pour savoir si le badge à était obtenu
-							echo "Bravo vous obtenez un badge de 1000 km au total de vos activités ";
-						}
-						else{
-							echo "Encore un effort, pour obtenir le prochain badge ";
-						}
+								echo "Bravo vous obtenez un badge de 1000 km au total de vos activités ";
+							}
+							else{
+								echo "Encore un effort, pour obtenir le prochain badge ";
+							}
+
 
 
 
 						
-						}
 						// Partie durée (temps)
 
 					}
@@ -252,8 +232,6 @@ class CarnetController extends Controller
 
 	// afin de supprimer une note du carnet
 	public function supprimerCarnet($id){
-
-
 
 		$manager = new SupprimerCarnetManager();
 		$manager->setTable('carnets');

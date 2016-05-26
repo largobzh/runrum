@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <script src="<?= $this->assetUrl('css/dist/sweetalert.min.js')?>"></script> 
+    
     <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/dist/sweetalert.css') ?>">
 <!-- TO DO : mettre le titre dynamique de la page   -->
     <title><?= $this->e($title) ?></title>
@@ -62,6 +62,9 @@
             </div>
             
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="<?= $this->assetUrl('js/vendor/jquery-2.2.4.min.js')?>"><\/script>')</script>
+    <script src="<?= $this->assetUrl('css/dist/sweetalert.min.js')?>"></script> 
     <script src="<?= $this->assetUrl('js/main.js')?>"></script> 
 
 </body>

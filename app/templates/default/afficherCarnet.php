@@ -74,22 +74,20 @@
 	</div>
 		
 
-		
-
-		
-		
-
-
 		<div>
             <ul id="navComment">
-                <li><a class="sansSoulign" href="<?= $this->url('supprimerCarnet', ['id' => $value['id']]) ?>">Supprimer</a></li>
+            <!-- mettre la requête  -->
+            	<? //= $this->url('supprimerCarnet', ['id' => $value['id']]) ?>
+                <li><a class="sansSoulign" id="effet" >Supprimer</a></li>
+                
                 <li><a class="sansSoulign" href="<?= $this->url('modifierCarnet', ['id' => $value['id']]) ?>">Éditer</a></li>
+
             </ul>
 		</div>
 
 
 		<?php } ?>
-
+		
 	</div>
 </article>
 <?php $this->stop('main_content') ?>
