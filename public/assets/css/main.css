@@ -427,6 +427,44 @@ h4 span {
     flex:1;
     padding: 1.5vw; 
 }
+
+
+.reponses{
+    display: flex;
+    min-height: 15vh;
+ /*   color:red;*/
+}
+
+p.textReponse {
+        background: rgba(244,246,247,.3);
+        color: #434343;
+        padding: .9rem;
+        border-radius: 5px;
+        text-align: justify;
+}
+
+
+
+button {
+    background: none;
+    border: none;
+    color: white;
+    font-family: 'Oxygen';
+    font-size:1rem;
+}
+
+
+ul .couleurreponses li{
+    display: flex;
+    min-height: 2vh;
+    height: 1vh;
+}
+
+ul .couleurreponses{
+
+    height: 1vh;
+}
+
 textarea {
     background: rgba(244, 246, 247, 0.4);
     padding: .9vw;
@@ -438,6 +476,14 @@ textarea {
     border: none 1px rgba(255, 255, 255, .9);
     width:calc(100% - 1.7vw);
     height: 50vh;
+}
+
+.fondZoneComment {
+    background: rgba(134,184,195,.4);
+    height: 20vh;
+    border: 1px solid rgba(109, 168, 181, 1);
+/*    border: 1px solid rgba(229,110,86, 1);*/
+
 }
 
 #thumbnail {
@@ -464,7 +510,19 @@ textarea {
 
 #apercuPosts{
     display: column;
-    min-height: 90vh;
+    min-height: 70vh;
+    padding-left: 0vw;
+}
+
+
+#apercuReponses{
+    display: column;
+/*    min-height: 70vh;*/
+    padding: 0 0 0 10vw;
+/*    background: red;*/
+}
+.textReponse {
+    background: red;
 }
 
 #formPostComment{

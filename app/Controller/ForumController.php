@@ -33,7 +33,7 @@ class ForumController extends Controller
 	{
 
 
-		print_r($techange);
+		// print_r($techange);
 		$user = $this->getUser();
 		$manager = new PostManager();
 		$posts = $manager->getPosts("", 'date_publication', 'DESC', $techange);
