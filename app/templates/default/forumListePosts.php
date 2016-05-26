@@ -13,6 +13,7 @@
 	<?php } ?> 
 	<hr>
 
+<?php print_r($photos) ?>
 	<?php foreach ($posts as $post) { ?>
 		
 		<?php if(!empty($post)) 
@@ -50,6 +51,33 @@
 				?>
 				
 	        </p>
+
+		<!-- =========== ajout des photos -->
+
+			<?php foreach ($photos as $photo)
+			{ 
+				if($photo['id_post'] == $post['id'])
+				{ ?> 
+
+				 	<div> 
+				 	<?php 
+					 	$pos = strpos($photo['ref_image'], 'min_') ;
+					 	if ($pos !== false)
+					 	{
+					 		$lien = str_replace('min_', 'max_' , $photo['ref_image']);
+					 		// print_r($lien);
+					 		echo "toto";
+					 	?>
+							<a href=<?= $lien ?> <img src="<?= $photo['ref_image'] ?>"  alt="<?= $post['titre'] ?>">>
+							</a>
+					 		
+		                     <!--  <a href="www.coin.com"><img src="canard.jpg" alt="canard"/></a> -->
+
+		                <!--     <img src="<?= $photo['ref_image'] ?>"  alt="<?= $post['titre'] ?>"> -->
+		                <?php } ?>
+		            </div>
+
+			<?php }} ?>
             
 			</h3>
 			<hr>
