@@ -1,4 +1,4 @@
-<?php $this->layout('layout', ['title' => 'Listes des réponses !']) ?>
+<?php $this->layout('layout', ['title' => 'rum : détails du post']) ?>
 
 
 <?php $this->start('main_content') ?>

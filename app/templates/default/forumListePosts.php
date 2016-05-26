@@ -50,39 +50,25 @@
 		
            <div>
                 <ul id="renseignPost">
-                    <li class="infosPost1 mod2"><?=$post['pseudo'] ?></li>
+                    <li class="infosPost2 mod3">Auteur : <?=$post['pseudo'] ?></li>
 
-                    <li class="infosPost2 mod3">21 mai 2016</li>
-                    <li class="infosPost2 mod3">Vues : 42</li>
+                    <li class="infosPost2 mod3"><?= date('j-M-Y', strtotime($post['date_publication']))  ?></li>
+                    <li class="infosPost2 mod3">Nbre réponses : <?= intval($post['nbreponses'] )?></li>
+                    <li class="infosPost2 mod3">Vues : <?= intval($post['nbvues']) ?></li>
                 </ul>
-           </div>
-
-
-
-
-
-        	<p>
-	           <?=$post['pseudo'] ?>  <?= date('j-M-Y', strtotime($post['date_publication']))  ?>  
-	           vues :    <?= intval($post['nbvues']) ?>
-	           Réponses : <?= intval($post['nbreponses'] )?>
-           
-        	</p>
-	       <!-- on accepte ma modification de la question si l'auteur est l'utilisateur courant -->
-	       <!-- on cré donc un lien vers la route , sinon on affcihe l coprs -->
-
-            
+           </div>      
 
 	<?php }} ?>
-  </div>
+  	</div>
                   
-</div>
-	               <div>
-                    <ul id="navPages">
-                        <li><a href="pagePreced" class="sansSoulign">Page précédente</a></li>
-                        <li><a href="<?= $this->url('forumAjouterPost') ?>" class="sansSoulign" title="accès au formulaire de saisie d'un nouveau post.">Ajouter</a></li>
-                        <li><a href="pageSuiv" class="sansSoulign">Page suivante</a></li>
-                    </ul>
-               </div>
+	</div>
+	<div>
+        <ul id="navPages">
+            <li><a href="pagePreced" class="sansSoulign">Page précédente</a></li>
+            <li><a href="<?= $this->url('forumAjouterPost') ?>" class="sansSoulign" title="accès au formulaire de saisie d'un nouveau post.">Ajouter</a></li>
+            <li><a href="pageSuiv" class="sansSoulign">Page suivante</a></li>
+        </ul>
+   	</div>
 
 </article>
 <?php $this->stop('main_content') ?>
