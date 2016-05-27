@@ -38,7 +38,7 @@
                 <label for="emailId">email : </label>
                 <?php print_r($_POST['form']['email']) ?>
 
-                <input name="form[email]" type="text" id="emailId" class="form-control" value=<?php 
+                <input name="form[email]" type="text" id="emailId" class="boxLogin" value=<?php 
                 if(!empty($_POST['form']['email']))
                     { echo $_POST['form']['email'];} ?>>
 

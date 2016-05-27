@@ -6,9 +6,9 @@
   <h3>
     Accès membres
   </h3>
-    Connectez-vous pour pouvoir enregistrer entraînements et compétitions dans votre carnet et pour pouvoir participer à la vie de la communauté de <span>rum</span>, notre forum.
+   
   <p>
-  
+        Connectez-vous pour pouvoir enregistrer entraînements et compétitions dans votre carnet et pour pouvoir participer à la vie de la communauté de <span>rum</span>, notre forum.
   </p>
 <?php $this->stop('side_content') ?>
 
@@ -27,15 +27,13 @@
                 <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod odio ipsam id accusantium voluptatibus in ipsa iste ut optio suscipit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod.</small>
             </p>
 
- 
-
 
         </div>
 
         <div class="colonne1_3">
 
-  <p>
-                <label for="emailId"   id="labelDateNote">Email : </label>
+            <p>
+                <label for="emailId" id="labelDateNote">email : </label>
 
                 <input name="form[email]" type="text" tabindex="1"class="boxLogin"  placeholder="votre email" value=<?php 
                 if(!empty($_POST['form']['email']))

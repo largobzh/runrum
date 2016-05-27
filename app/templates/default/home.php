@@ -2,7 +2,7 @@
 
 <?php $this->start('main_content') ?>
 
-	<a class="styleBouton" href="runrum/forumListePosts">run</a>
+	<a class="styleBouton" href="/listecarnet">run</a>
 	<a class="styleBouton" href="/forumListePosts">rum</a>
 	<!--<p>run</p>-->
 	<!--<p>rum</p>-->

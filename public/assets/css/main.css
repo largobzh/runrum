@@ -193,16 +193,8 @@ div + div {
     flex-direction: column;
 }
 
-.colonne2_3 {
-    width:100%%;
-/*    background: red;*/
 
-}
-.colonne1_3 {
-    width:100%;
-/*    background: yellow;*/
 
-}
 
 .boxLogin {
     background: rgba(110, 101, 89, .4);
@@ -228,7 +220,7 @@ label {
 
 /* TO DO : voir pour 50% (plus haut) ou auto */
 form > div {
-    width: auto;
+    width: 100%;
 }
 
 
@@ -1048,7 +1040,16 @@ div a {
 }
 */
 
+div[id=colonne2_3] {
+    width:100%%;
+/*    background: red;*/
 
+}
+div[id=colonne1_3] {
+    width:100%;
+/*    background: yellow;*/
+
+}
 /*=================== fin main content =================*/
 
 
