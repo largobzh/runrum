@@ -20,7 +20,7 @@ use Outils\Outils;
 
 // Constantes
 define('TARGET', 'assets/img/runrum/');    // Repertoire cible pour les photos
-define('MAX_SIZE', 100000);    // Taille max en octets du fichier 
+define('MAX_SIZE', 200000);    // Taille max en octets du fichier 
 define('WIDTH_MAX', 800);    // Largeur max de l'image en pixels
 define('HEIGHT_MAX', 800);    // Hauteur max de l'image en pixels
  
@@ -130,10 +130,33 @@ class ForumController extends Controller
 			if(empty($_POST['form']['titre'])){
 				$msg['erreur']['titre'] = 'Le titre est obligatoire';
 			}
+
+
+
 			if(empty($_POST['form']['type_echange_id'])){
 				$msg['erreur']['type_echange_id'] = 'La catégorie est obligatoire';
 			}
- 
+ 		//========================================
+ 		// controle si on sélectionne un fichier
+		//========================================
+			if (is_uploaded_file($_FILES['photo']['tmp_name']))
+			{
+
+				$extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
+				$extension_upload = strtolower(  substr(strrchr($_FILES['photo']['name'], '.')  ,1)  );
+				if (!in_array($extension_upload,$extensions_valides) )
+				{
+					$msg['erreur']['photo'] = "L'extension est invalide. ( jpg - jpeg - gif - png)";
+				}
+
+
+				$image_sizes = getimagesize($_FILES['photo']['tmp_name']);
+				if ($image_sizes[0] > MAX_SIZE OR $image_sizes[1] > MAX_SIZE) 
+				{
+					$msg['erreur']['photo'] = "La taille de l'image est trop grande ";
+				}
+			}
+
 //========================================
 			if(!empty($msg['erreur']))
 			{

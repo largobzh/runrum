@@ -4,8 +4,9 @@
 <h3>explications pour la liste posts: </h3>
 <p>Reco : Se connecter pour ajouter une note</p>
 	
-
 <?php $this->stop('side_content') ?>
+
+
 <?php $this->start('main_content') ?>
 
 	<h2>Liste des posts...<?= $user['pseudo'] ?></h2>
@@ -63,6 +64,8 @@
 			<?php foreach ($photos as $photo)
 			{ 
 				if($photo['id_post'] == $post['id'])
+
+					
 				{ ?> 
 
 				 	<div> 
@@ -71,10 +74,9 @@
 					 	if ($pos !== false)
 					 	{
 					 		 $max_img =  str_replace('min_', 'max_' , $photo['ref_image']);
-					 	?>
+				 		?>
 							
-	<a id="single_image" href="<?= $max_img ?>"><img src="<?= $photo['ref_image']?>" alt=<?= $post['titre'] ?>></a>
-
+							<a id="single_image" href="http://runrum/<?= $max_img ?>"><img src="http://runrum/<?= $photo['ref_image']?>" alt=<?= $post['titre'] ?>></a>
 
 		                <?php } ?>
 		            </div>

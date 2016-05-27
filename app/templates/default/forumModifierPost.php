@@ -34,7 +34,7 @@ elseif(isset($post['id']))
      {?><p><?= $value['titre'] ?></p> <?php } ?>  
    <?php } ?> 
  </div>
-
+<!-- ============================================================= -->
 
 
  <div class="form-group">
@@ -58,7 +58,7 @@ foreach ($msg as $key => $value) {
 
 </div>
 
-
+<!-- ============================================================= -->
 <label for="date_publicationId"  class="col-sm-2 control-label">date de publication : </label>
 <div class="col-sm-4">
  <input  name="form[date_publication]" type="text" id="date_publicationId" class="form-control"  readonly="readonly" value=<?php 
@@ -70,7 +70,7 @@ elseif(isset($post['date_publication']))
 
 </div>
 
-
+<!-- ============================================================= -->
 <label for="type_echange_id"  class="col-sm-2 control-label">Choisir une catégorie : </label>
 <div class="col-sm-4">
  <select  name="form[type_echange_id]" id="type_echange_id" class="form-control">
@@ -90,6 +90,23 @@ elseif(isset($post['date_publication']))
   </select><br>
 </div>
 
+<!-- ============================================================= -->
+<div class="form-group">
+  <label for="photoId"  class="col-sm-2 control-label">Sélectionner une photo : </label>
+  <div class="col-sm-4">
+     <input type="file" id="photoId" name="photo"  >
+  </div>
+
+    <?php
+      foreach ($msg as $key => $value) {
+        if(is_array($value) && array_key_exists('photo', $value))
+           {?><p><?= $value['photo'] ?></p> <?php } ?>  
+       <?php } ?> 
+
+</div>
+<!-- ============================================================= -->
+
+
 
 <?php
 foreach ($msg as $key => $value) {
@@ -97,7 +114,6 @@ foreach ($msg as $key => $value) {
    {?><p><?= $value['type_echange'] ?></p> <?php } ?>  
  <?php } ?> 
 </div>
-
 
 
 

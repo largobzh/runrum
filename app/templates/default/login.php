@@ -51,6 +51,7 @@
     <div class="col-sm-offset-2 col-sm-10">
 
   <a href="<?= $this->url('oubliPassword') ?>">Mot de passe oublé</a>
+  <a href="<?= $this->url('inscription') ?>">Inscription</a>
      <button name="submit" type="submit" class="btn btn-primary" >Valider</button>
     </div>
   </div>

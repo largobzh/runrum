@@ -24,7 +24,7 @@
          <?php } ?> 
     </div>
 
-
+<!-- ============================================================= -->
 
 <div class="form-group">
     <label for="postId"  class="col-sm-2 control-label">votre question : </label>
@@ -43,6 +43,7 @@
 
 </div>
 
+<!-- ============================================================= -->
 
 <label for="date_publicationId"  class="col-sm-2 control-label">date de publication : </label>
 <div class="col-sm-4">
@@ -51,7 +52,7 @@
       { echo $_POST['form']['date_publication'];}
   else { echo date('d-m-Y') ;} ?>>
 </div>
-
+<!-- ============================================================= -->
 
 <label for="type_echange_id"  class="col-sm-2 control-label">Choisir une catégorie : </label>
 <div class="col-sm-4">
@@ -63,22 +64,30 @@
     </select><br>
 </div>
 
-
-<label for="photoId"  class="col-sm-2 control-label">Sélectionner une photo : </label>
-<div class="col-sm-4">
-   <input type="file" id="photoId" name="photo"accept =".png .jpg .jpeg" >
-</div>
-
-
-
-
-
 <?php
 foreach ($msg as $key => $value) {
-  if(is_array($value) && array_key_exists('type_echange', $value))
-     {?><p><?= $value['type_echange'] ?></p> <?php } ?>  
+  if(is_array($value) && array_key_exists('type_echange_id', $value))
+     {?><p><?= $value['type_echange_id'] ?></p> <?php } ?>  
  <?php } ?> 
 </div>
+
+
+
+<!-- ============================================================= -->
+<div class="form-group">
+  <label for="photoId"  class="col-sm-2 control-label">Sélectionner une photo : </label>
+  <div class="col-sm-4">
+     <input type="file" id="photoId" name="photo"  >
+  </div>
+
+    <?php
+      foreach ($msg as $key => $value) {
+        if(is_array($value) && array_key_exists('photo', $value))
+           {?><p><?= $value['photo'] ?></p> <?php } ?>  
+       <?php } ?> 
+
+</div>
+<!-- ============================================================= -->
 
 
 <?php  if (array_key_exists('info', $msg)) { ?>
