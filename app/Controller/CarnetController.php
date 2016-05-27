@@ -14,7 +14,7 @@ use \Manager\DistanceManager;
 class CarnetController extends Controller
 {
 	// afin d'afficher la page creation carnet
-	public function creationCarnet($id){
+	public function creationCarnet(){
 
 		
 
@@ -62,7 +62,7 @@ class CarnetController extends Controller
 				else{
 					
 					$m = new CarnetManager();
-				// temporaire
+				// temporaire pour l'utilisateur a modifier
 					$_POST['form']['utilisateur_id'] = 1;
 					$_POST['form']['moyenne'] = $_POST['form']['distance']/2;
 					// afin de convertir les trois champs en secondes et les enregistrer dans le champ de la base de données
@@ -147,7 +147,7 @@ class CarnetController extends Controller
 	// Afficher toute la liste des carnets enregistrer dans la base de données
 		$p = new AfficheCarnetManager();
 		$p->setTable('carnets');
-		$listes = $p->findAll();
+		$listes = $p->trouvAll();
 
 		$this->show('default/afficherCarnet', ['listes'=> $listes, 'epreuves'=> $epreuves, 'exercices'=> $exercices]);
 	}

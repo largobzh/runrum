@@ -1,5 +1,15 @@
 <?php $this->layout('layout', ['title' => 'Mon Carnet']) ?>
 
+<?php $this->start('side_content') ?>
+  <h3>
+    Notes
+  </h3>
+    
+  <p>
+   <a href="<?= $this->url('creationCarnet')?>">Créer une nouvelle note</a>
+  </p>
+<?php $this->stop('side_content') ?>
+
 <?php $this->start('main_content') ?>
 <article>
 	

@@ -22,7 +22,7 @@ $(function() {
 			if (isConfirm){
 				swal("Supprimer!", "Note supprimée !", "success");
 				console.log(url);
-				setTimeout(function(){ window.location.href = "http://localhost:8888"+url; }, 4000);
+				setTimeout(function(){ window.location.href = "http://localhost:8888"+url; }, 2000);
 				
 
 			} else {

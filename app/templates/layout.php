@@ -7,6 +7,9 @@
     <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/dist/sweetalert.css') ?>">
 <!-- TO DO : mettre le titre dynamique de la page   -->
     <title><?= $this->e($title) ?></title>
+    <!--    TO DO régler le problème de lien du favicon      -->
+<link rel="icon" type="image/png" href="<?= $this->assetUrl('img/favicon_rnm.png') ?>">
+    
     <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
 <!--     <link rel="stylesheet" href="assets/css/main.css"> -->
     <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/main.css') ?>">
@@ -31,8 +34,9 @@
        
        
         <aside>
-            <h3>texte explicatif</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore ratione quis, consequatur quas nemo numquam excepturi nihil veniam, dolor eum dignissimos. Ipsam, non consectetur voluptatem quasi odit eos dolore ex! </p>
+            
+            <?= $this->section('side_content') ?>
+            
         </aside>
 
         <nav id="navigation">
@@ -40,10 +44,10 @@
       <!-- TO DO : mettre le titre dynamique de la page   --> 
             <h1><?= $this->e($title) ?></h1>
             
-            <a href="#maison">Retour accueil</a>             
-            <a href="#">Connexion on/off</a>
-            <a href="#">Carnet</a>
-            <a href="#">forum</a>       
+            <a href="<?=$this->url('home') ?>">Retour accueil</a>             
+            <a href="<?=$this->url('login') ?>">Connexion on/off</a>
+            <a href="<?=$this->url('afficherCarnet') ?>">Carnet</a>
+            <a href="<?=$this->url('forumListePosts') ?>">forum</a>     
    
 
         </nav>

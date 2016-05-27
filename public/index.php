@@ -3,6 +3,9 @@
 	//autochargement des classes
 	require("../vendor/autoload.php");
 
+	//Mes outils...
+	require("../app/Outils/Outils.php");
+
 	//configuration
 	require("../app/config.php");
 
