@@ -78,7 +78,7 @@
             <ul id="navComment">
             <!-- mettre la requête  -->
             	<? //= $this->url('supprimerCarnet', ['id' => $value['id']]) ?>
-                <li><a class="sansSoulign" id="effet" >Supprimer</a></li>
+                <li><a href="#" data-id="<?= $this->url('supprimerCarnet', ['id' => $value['id']])?>" class="sansSoulign choix" >Supprimer</a></li>
                 
                 <li><a class="sansSoulign" href="<?= $this->url('modifierCarnet', ['id' => $value['id']]) ?>">Éditer</a></li>
 

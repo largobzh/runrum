@@ -10,7 +10,7 @@
 		// route pour la modification une note du carnet
 		['GET|POST','/modifiercarnet/[i:id]','Carnet#modifierCarnet','modifierCarnet'],
 		// afin de supprimer une note du carnet
-		['GET|POST','/listecarnet/[i:id]','Carnet#supprimerCarnet','supprimerCarnet'],
+		['GET|POST','/supprimercarnet/[i:id]','Carnet#supprimerCarnet','supprimerCarnet'],
 		
 
 	);

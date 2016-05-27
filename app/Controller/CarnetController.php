@@ -14,7 +14,7 @@ use \Manager\DistanceManager;
 class CarnetController extends Controller
 {
 	// afin d'afficher la page creation carnet
-	public function creationCarnet(){
+	public function creationCarnet($id){
 
 		
 
@@ -82,7 +82,7 @@ class CarnetController extends Controller
 							$k = new DistanceManager();
 							$k->setTable('carnets');
 							$listeCarnet = $k->getDistance($id);
-
+							echo $listeCarnet;
 							// en fonction de la base de données 
 
 							if ($listeCarnet >= 10 && $listeCarnet < 21) {
