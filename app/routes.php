@@ -2,6 +2,7 @@
 	
 
 	$w_routes = array(
+		['GET|POST', '/logout', 'AdminController#logout', 'logout'],
 		['GET', '/home', 'default#home', 'home'],
 		['GET|POST', '/login', 'AdminController#login', 'login'],
 		['GET|POST', '/inscription', 'AdminController#inscription', 'inscription'],

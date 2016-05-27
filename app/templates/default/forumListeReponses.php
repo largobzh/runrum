@@ -104,8 +104,15 @@
 
 		<p>
             <ul id="navComment">
-                <li><a class="sansSoulign" href="<?= $this->url('forumListePosts') ?>">Annuler</a></li>
-                <li><button name="submit" type="submit" class="sansSoulign">Commenter</button></li>
+                <li>
+                	<a class="sansSoulign" href="<?= $this->url('forumListePosts') ?>">Annuler</a>
+            	</li>
+
+                <li>
+                	<?php  if(isset($_SESSION["user"])){ ?>
+						<button name="submit" type="submit" class="sansSoulign" >Commenter</button>
+                	<?php  } ?>
+                </li>
             </ul>
 		</p>
 

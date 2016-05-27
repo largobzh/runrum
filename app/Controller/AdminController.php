@@ -15,6 +15,15 @@ define("inactif", 0);
 
 class AdminController extends Controller
 {
+	public function logout()
+		{
+			$manager = new AuthentificationManager();
+			$msg = array();
+			$manager->logUserOut();
+			$msg['info']  = "Vous êtes désormais déconnecté !";
+			$this->show('default/home',['msg' => $msg]);
+			// $this->redirectToRoute('home',['msg' => $msg]);
+		}
 
 	public function login()
 	{

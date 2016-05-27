@@ -65,8 +65,18 @@
 	<div>
         <ul id="navPages">
             <li><a href="pagePreced" class="sansSoulign">Page précédente</a></li>
-            <li><a href="<?= $this->url('forumAjouterPost') ?>" class="sansSoulign" title="accès au formulaire de saisie d'un nouveau post.">Ajouter</a></li>
-            <li><a href="pageSuiv" class="sansSoulign">Page suivante</a></li>
+
+
+            <li>
+				<?php  if(isset($_SESSION["user"])){ ?>
+					<a href="<?= $this->url('forumAjouterPost') ?>" class="sansSoulign" title="accès au formulaire de saisie d'un nouveau post.">Ajouter</a>
+				<?php } ?>
+			</li>
+
+            <li><a href="pageSuiv" class="sansSoulign">Page suivante</a>
+
+
+            </li>
         </ul>
    	</div>
 

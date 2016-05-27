@@ -1,11 +1,26 @@
-<?php $this->layout('layout', ['title' => 'Un carnet d’entrainement et un forum pour la course à pied']) ?>
+<?php $this->layout('layout', ['title' => 'Connexion']) ?>
 
+
+
+<?php $this->start('side_content') ?>
+  <h3>
+    Accès membres
+  </h3>
+    Connectez-vous pour pouvoir enregistrer entraînements et compétitions dans votre carnet et pour pouvoir participer à la vie de la communauté de <span>rum</span>, notre forum.
+  <p>
+  
+  </p>
+<?php $this->stop('side_content') ?>
+
+
+
+<!-- Un carnet d’entrainement et un forum pour la course à pied -->
 
 <?php $this->start('main_content') ?>
+<article>
 
-
-<form class="form-horizontal" method="POST" action="login">
-  <div class="form-group">
+<form method="POST" action="login">
+  <div>
     
 
      
@@ -56,5 +71,5 @@
   </div>
   
 </form>
-
+</article>
 <?php $this->stop('main_content') ?>
