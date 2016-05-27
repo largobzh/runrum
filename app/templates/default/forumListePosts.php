@@ -1,5 +1,11 @@
 <?php $this->layout('layout', ['title' => 'Forum !']) ?>
 
+<?php $this->start('side_content') ?>
+<h3>explications pour la liste posts: </h3>
+<p>Reco : Se connecter pour ajouter une note</p>
+	
+
+<?php $this->stop('side_content') ?>
 <?php $this->start('main_content') ?>
 
 	<h2>Liste des posts...<?= $user['pseudo'] ?></h2>
@@ -83,7 +89,7 @@
 			<hr>
 	<?php }} ?>
 	
-	<p>
-	<a href="<?= $this->url('forumAjouterPost') ?>">ajouter</a>
-	</p>
+	<?php  if(isset($_SESSION["user"])){ ?>
+	<a href="<?= $this->url('forumAjouterPost') ?>">ajouter</a>	
+	<?php } ?>
 <?php $this->stop('main_content') ?>

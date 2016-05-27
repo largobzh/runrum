@@ -259,11 +259,15 @@ class ForumController extends Controller
 		
 	}
 
-	public function check_extension($extension, $liste)
-	{
-    	return in_array(explode('/',$extension)[1], $liste);
+	// afin de supprimer un post du forum
+	public function forumSupprimerPost($id){
+		$manager = new PostManager();
+		$manager->setTable('posts');
+		$supprimer = $manager->delete($id);
+		// redirige vers la  liste des posts
+		$this->redirectToRoute('forumListePosts');
 	}
 
-		
+			
 	
 }

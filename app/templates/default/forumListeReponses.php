@@ -68,8 +68,16 @@
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
 			<a href="<?= $this->url('forumListePosts') ?>">Annuler</a>
-			<button name="submit" type="submit" class="btn btn-primary" >Commenter</button>
+
+			<?php  if(isset($_SESSION["user"]))
+			{ ?>
+				<button name="submit" type="submit" class="btn btn-primary" >Commenter</button>
+			<?php } ?>
+
 		</div>
 	</div>
+
+
+
 </form>
 <?php $this->stop('main_content') ?>

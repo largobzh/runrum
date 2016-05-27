@@ -111,6 +111,26 @@ foreach ($msg as $key => $value) {
   <div class="col-sm-offset-2 col-sm-10">
     <a href="<?= $this->url('forumListePosts') ?>">Annuler</a>
     <button name="submit" type="submit" class="btn btn-primary" >Valider</button>
+
+
+  <?php  if(isset($_SESSION["user"]))
+  {
+      // on stocke l'id du post courant
+      if(!empty($_POST['form']['post_id']))
+      {
+        $id = trim($_POST['form']['post_id']);
+      } 
+      elseif(isset($post['id'])) 
+      {
+        $id = trim($post['id']);
+      }
+
+   ?>
+    <a class="suppPost" href="#" data-id="<?= $this->url('forumSupprimerPost', ['id' => $id ])?>">Supprimer</a> 
+
+
+  <?php } ?>
+
   </div>
 </div>
 
