@@ -20,56 +20,81 @@
 <article>
 
 <form method="POST" action="login">
-  <div>
+        <div class="colonne2_3">
     
+            <p>
+                <label>En cas d'oubli :</label>
+                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod odio ipsam id accusantium voluptatibus in ipsa iste ut optio suscipit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod.</small>
+            </p>
 
-     
-    <label for="emailId"   class="col-sm-2 control-label" >Email : </label>
-    <div class="col-sm-4">
+ 
 
- <input name="form[email]" type="text" id="emailId" class="form-control" 
-         placeholder ="votre email" value=<?php 
-         if(!empty($_POST['form']['email']))
-            { echo $_POST['form']['email'];} ?>> 
 
-        
-    </div>
-  <?php
-    foreach ($msg as $key => $value) {
-      if(is_array($value) && array_key_exists('email', $value))
-       {?><p><?= $value['email'] ?></p> <?php } ?>  
-    <?php } ?> 
+        </div>
+
+        <div class="colonne1_3">
+
+  <p>
+                <label for="emailId"   id="labelDateNote">Email : </label>
+
+                <input name="form[email]" type="text" tabindex="1"class="boxLogin"  placeholder="votre email" value=<?php 
+                if(!empty($_POST['form']['email']))
+                    { echo $_POST['form']['email'];} ?>> 
+
+                <?php
+                    foreach ($msg as $key => $value) {
+                        if(is_array($value) && array_key_exists('email', $value))
+                    {?>
+                        <p><?= $value['email'] ?></p>
+                    <?php } ?>  
+                <?php } ?> 
+            </p>
+
+
+            <p>
+                <label for="passwordId">Mot de passe : </label>
+                <input  class="boxLogin" name="form[password]" type="password" id="passwordId" tabindex="1" value=<?php 
+                    if(!empty($_POST['form']['password']))
+                        { echo $_POST['form']['password'];} ?>  placeholder ="votre mot de passe">
+
+                <?php
+                foreach ($msg as $key => $value) {
+                    if(is_array($value) && array_key_exists('password', $value))
+                        {?><p><?= $value['password'] ?></p> <?php } ?>  
+                <?php } ?> 
+            </p>
+
+
+
+
   
-    </div>
+            <?php  if (array_key_exists('info', $msg)) { ?>
+            <p>
+                <?= $msg['info'] ?>
+            </p>
+            <?php } ?>  
 
+            <p>
+                <ul id="navComment">
+                    <li>
+                        <a class="sansSoulign" href="<?= $this->url('oubliPassword') ?>">Oubli</a>
+                    </li>
 
-  <div class="form-group">
-    
-    <label for="passwordId"  class="col-sm-2 control-label">Mot de passe : </label>
-    <div class="col-sm-4">
-       <input  name="form[password]" type="password" id="passwordId" class="form-control"  value=<?php 
-         if(!empty($_POST['form']['password']))
-            { echo $_POST['form']['password'];} ?>  placeholder ="votre mot de passe">
-    </div>
-  <?php
-  foreach ($msg as $key => $value) {
-    if(is_array($value) && array_key_exists('password', $value))
-     {?><p><?= $value['password'] ?></p> <?php } ?>  
-  <?php } ?> 
+                    <li>
+                        <button name="submit" type="submit" >Valider</button>
+                    </li>
+                </ul>
+            </p>
 
-  </div>
+        </div>
   
- <?php  if (array_key_exists('info', $msg)) { ?>
-    <p><?= $msg['info'] ?></p> <?php } ?>  
-
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-
-  <a href="<?= $this->url('oubliPassword') ?>">Mot de passe oublé</a>
-     <button name="submit" type="submit" class="btn btn-primary" >Valider</button>
-    </div>
-  </div>
-  
-</form>
+    </form>
 </article>
 <?php $this->stop('main_content') ?>
+
+
+
+
+
+
+

@@ -9,7 +9,7 @@
 		['GET|POST', '/oubliPassword', 'AdminController#oubliPassword', 'oubliPassword'],
 				
 
-		['GET|POST', '/forumAjouterPost',          'ForumController#forumAjouterPost',    'forumAjouterPost'],
+		['GET|POST', '/forumAjouterPost', 'ForumController#forumAjouterPost','forumAjouterPost'],
 
 		// route pour la creation des carnets
 		['GET|POST','/creationcarnet','Carnet#creationCarnet','creationCarnet'],
@@ -23,6 +23,7 @@
 	
 		['GET|POST', '/reinitPassword/[i:user_id]/[a:token_id]/', 'AdminController#reinitPassword', 'reinitPassword'],
 		['GET',      '/activerCompte/[i:user_id]/[a:token_id]/',  'AdminController#activerCompte', 'activerCompte'],
+		['GET|POST', '/forumSupprimerPost/[i:id]/', 'ForumController#forumSupprimerPost' , 'forumSupprimerPost'],
 
 		['GET|POST', '/forumModifierPost/[i:id]/',  'ForumController#forumModifierPost' , 'forumModifierPost'],
 		['GET|POST', '/forumListeReponses/[i:id]/',  'ForumController#forumListeReponses', 'forumListeReponses'], 

@@ -193,6 +193,25 @@ div + div {
     flex-direction: column;
 }
 
+.colonne2_3 {
+    width:100%%;
+/*    background: red;*/
+
+}
+.colonne1_3 {
+    width:100%;
+/*    background: yellow;*/
+
+}
+
+.boxLogin {
+    background: rgba(110, 101, 89, .4);
+}
+
+small {
+    text-align: justify;
+}
+
 textarea {
     flex:1;
 }
@@ -211,6 +230,8 @@ label {
 form > div {
     width: auto;
 }
+
+
 
 
 
