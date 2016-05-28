@@ -1,8 +1,9 @@
 <?php $this->layout('layout', ['title' => 'Accueil']) ?>
 
 <?php $this->start('main_content') ?>
+	<!-- Control utilisateur -->
+	<a class="styleBouton" href="<?if(isset($_SESSION['user'])){ echo "/listecarnet"; }else{ echo "/login"; }?>">run</a>
 
-	<a class="styleBouton" href="/listecarnet">run</a>
 	<a class="styleBouton" href="/forumListePosts">rum</a>
 	<!--<p>run</p>-->
 	<!--<p>rum</p>-->

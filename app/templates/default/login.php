@@ -6,9 +6,9 @@
   <h3>
     Accès membres
   </h3>
-   
+    
   <p>
-        Connectez-vous pour pouvoir enregistrer entraînements et compétitions dans votre carnet et pour pouvoir participer à la vie de la communauté de <span>rum</span>, notre forum.
+    Connectez-vous pour pouvoir enregistrer entraînements et compétitions dans votre carnet et pour pouvoir participer à la vie de la communauté de <span>rum</span>, notre forum.
   </p>
 <?php $this->stop('side_content') ?>
 
@@ -27,17 +27,19 @@
                 <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod odio ipsam id accusantium voluptatibus in ipsa iste ut optio suscipit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod.</small>
             </p>
 
+ 
+
 
         </div>
 
         <div class="colonne1_3">
 
-            <p>
-                <label for="emailId" id="labelDateNote">email : </label>
+  <p>
+                <label for="emailId"   id="labelDateNote">Email : </label>
 
-                <input name="form[email]" type="text" tabindex="1"class="boxLogin"  placeholder="votre email" value=<?php 
+                <input name="form[email]" type="text" tabindex="1" class="boxLogin"  placeholder="John.Doe@domain.com" value="<?php 
                 if(!empty($_POST['form']['email']))
-                    { echo $_POST['form']['email'];} ?>> 
+                    { echo $_POST['form']['email'];} ?>"> 
 
                 <?php
                     foreach ($msg as $key => $value) {
@@ -51,10 +53,10 @@
 
             <p>
                 <label for="passwordId">Mot de passe : </label>
-                <input  class="boxLogin" name="form[password]" type="password" id="passwordId" tabindex="1" value=<?php 
+                <input  class="boxLogin" name="form[password]" type="password" id="passwordId" tabindex="2" value="<?php 
                     if(!empty($_POST['form']['password']))
-                        { echo $_POST['form']['password'];} ?>  placeholder ="votre mot de passe">
-
+                        { echo $_POST['form']['password'];} ?>"  placeholder ="votre mot de passe">
+                    
                 <?php
                 foreach ($msg as $key => $value) {
                     if(is_array($value) && array_key_exists('password', $value))
@@ -74,13 +76,17 @@
 
             <p>
                 <ul id="navComment">
-                    <li>
-                        <a class="sansSoulign" href="<?= $this->url('oubliPassword') ?>">Oubli</a>
+                    
+                     <li>
+                        <a class="sansSoulign" href="<?= $this->url('inscription') ?>">Inscription</a>
                     </li>
-
                     <li>
                         <button name="submit" type="submit" >Valider</button>
                     </li>
+                    <li>
+                        <a class="sansSoulign" href="<?= $this->url('oubliPassword') ?>">Oubli</a>
+                    </li>
+                   
                 </ul>
             </p>
 

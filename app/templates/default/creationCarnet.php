@@ -1,5 +1,32 @@
 <?php $this->layout('layout', ['title' => 'Carnet : Nouvelle note']) ?>
 
+
+<!-- <?php $this->start('side_content') ?>
+	<h3>
+    	Notes
+	</h3> -->
+  <!-- ======================= début 160528 ======================= -->
+<!--   <p>
+   Une fois connecté, vous pouvez noter dans votre carnet personnel vos entraînements, épreuves ou compétitions.
+  </p> 
+
+	<div>
+        <ul id="navAside">
+			<li>
+				<a href="<?= $this->url('creationCarnet')?>" class="sansSoulign boutonSolo1" >Créer une note</a>
+			</li>
+        </ul>
+	</div> -->
+
+<?php $this->stop('side_content') ?>
+  <!-- ======================= fin 160528 ======================= -->
+
+
+
+
+
+
+
 <?php $this->start('main_content') ?> 
 <article>
 
@@ -55,7 +82,7 @@
 					<!-- <input type="hidden" name="form[duree]"> -->
 			<p>
 				<label for="distanceID" id="labelDistance">Distance (en km)</label>
-				<input type="text" name="form[distance]" id="distanceID" placeholder="10km, 20km, 42km..." tabindex="8" >
+				<input type="text" name="form[distance]" id="distanceID" placeholder="10, 20, 42..." tabindex="8" >
 			</p>
 
 					<!--  calculer la moyen  -->
@@ -100,7 +127,7 @@
 <!-- 				<input type="submit" name="annulNote" value="Annuler" id="annulFormCarnet"> -->
 				<input type="submit" name="submit" value="Enregistrer" id="submitFormCarnet">
 			</p>
-
+			
 
 
 		</div>

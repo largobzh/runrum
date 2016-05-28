@@ -406,6 +406,7 @@ h4 span {
 #nav404403{
     display: flex;
     min-height: 5vh;
+
 }
 
 #comment{
@@ -704,8 +705,12 @@ a.sansSoulign:link {
     list-style-type: none;
 
     min-height: 5vh;
-    padding-top: 5vh;
+
+    /*======================= début 160528 =======*/
+    padding-top: 2vh;
+    /*======================= fin 160528  =======*/
     text-align: center;
+    margin: 0 auto;
 
     
 }
@@ -1108,6 +1113,53 @@ nav a {
     padding-left: 1rem;
     margin-bottom: .2rem;
 }
+
+/* ====== début 160528 =============*/
+
+#navAside{
+
+    display: flex;
+    flex:1;
+    list-style-type: none;
+
+    min-height: 5vh;
+
+    /*======================= début 160528 =======*/
+    padding-top: 4vh;
+    /*======================= fin 160528  =======*/
+    text-align: center;
+/*    margin: 0 auto;*/
+
+}
+
+#navAside li {
+    border: solid 1px rgba(255, 255, 255, .9);
+    border-radius: 5px;
+    padding: .5vw 2vw;
+
+    margin: auto;   
+}
+
+#navAside li:nth-child(1) {
+    flex-grow: 1;
+    margin: 0 .4vw;
+    background: #e56e56;
+    margin: 0 0 0 .4vw;
+    flex-basis: auto;
+    align-content: center;
+}
+
+#navAside li:hover {
+    background: rgba(147, 201, 23, 1);
+}
+
+aside div a {
+    color: white;
+    font-weight: 400;
+}
+
+
+/* ====== fin 160528 =============*/
 
 nav a:first-of-type:hover {
     background: rgb(147, 201, 23);

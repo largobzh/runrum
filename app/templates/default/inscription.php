@@ -24,7 +24,7 @@
     <div id="colonne2_3">
         <p>
             <label for="emailId" >email : </label>
-            <input name="form[email]" type="text" id="emailId" class="boxLogin" placeholder ="Votre email" value=<?php 
+            <input name="form[email]" type="text" id="emailId" class="boxLogin" placeholder ="John.Doe@domain.com" value=<?php 
          
             if(!empty($_POST['form']['email']))
                 { echo $_POST['form']['email'];} ?>> 
@@ -44,9 +44,9 @@
     
         <p>
             <label for="passwordId" >Mot de passe : </label>
-            <input  name="form[password]" type="password" id="passwordId" class="boxLogin" value=<?php 
+            <input  name="form[password]" type="password" id="passwordId" class="boxLogin" value="<?php 
          if(!empty($_POST['form']['password']))
-            { echo $_POST['form']['password'];} ?>  placeholder ="Votre mot de passe">
+            { echo $_POST['form']['password'];} ?>"  placeholder ="Votre mot de passe">
         </p>
 
 
