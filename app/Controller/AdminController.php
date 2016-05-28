@@ -170,7 +170,7 @@ class AdminController extends Controller
 					$lien = "<a href=http://runrum/activerCompte?&id=" . $id_utilisateur['id'] . "&token=" . $token . "\">Activer votre compte</a>";
 					$subject = 'Activer votre compte sur runrum';
 					$body ="Bonjour, Vous êtes désormais inscrit sur le site runrum. Cliquer sur le lien afin de confirmer votre identification. " .  $lien  ;
-					if(Outils::envoiMail($lien, 'yvan.lebrigand@gmail.com', $_POST['form']['email'], $subject, $body))
+					if(Outils::envoiMail('yvan.lebrigand@gmail.com', $_POST['form']['email'], $subject, $body))
 					{						
 						$msg['info']  = "Vérifier votre messagerie. cliqer sur le lien dans le message de confirmation envoyé à " . $_POST['form']['email'] ;
 						$this->show('default/home', ['msg' => $msg]);
@@ -251,7 +251,7 @@ class AdminController extends Controller
 				$lien = "<a href=http://www.runrum/initPassword?&id=" . $user['id'] . "&token=" . $token . "\">Changer votre mot de passe</a>";
 				$subject ="changer votre mot de passe sur l'application runrum";
 				$body ="Bonjour, pour changer votre mot de passe cliquer sur ce lien  : " .  $lien  ;
-				if(Outils::envoiMail($lien, 'yvan.lebrigand@gmail.com', $_POST['form']['email'], $subject, $body))
+				if(Outils::envoiMail('yvan.lebrigand@gmail.com', $_POST['form']['email'], $subject, $body))
 				{
 
 					// pour les tests on route comme si on avait cliquer sur le lien

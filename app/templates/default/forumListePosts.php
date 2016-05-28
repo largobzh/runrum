@@ -1,11 +1,14 @@
-<?php $this->layout('layout', ['title' => 'Forum !']) ?>
+<!-- ==================================================================================== -->
+<!-- le 28/05/16 modif du titre  et site content-->
+<!-- ==================================================================================== -->
+<?php $this->layout('layout', ['title' => 'runrum-Forum - Liste des posts publiés!']) ?>
 
 <?php $this->start('side_content') ?>
-<h3>explications pour la liste posts: </h3>
-<p>Reco : Se connecter pour ajouter une note</p>
+<h3>Connectez-vous pour ajouter vos comptes-rendus, news ou vos questions et cliquez sur le boutton ajouter.   </h3>
 	
 <?php $this->stop('side_content') ?>
 
+<!-- ========================================================================================= -->
 
 <?php $this->start('main_content') ?>
 
@@ -33,9 +36,10 @@
 			<a href="<?= $this->url('forumListeReponses', ['id' => $post['id']]) ?>">
 				<?= $this->e($post['titre']) ?>
 			</a>
-<!-- ==================================================================================== -->
-<!-- le 28/05/16 ajout du bouton signaler pour le post et toute les réponses -->
-<!-- ==================================================================================== -->
+	<!-- ==================================================================================== -->
+	<!-- le 28/05/16 ajout du bouton signaler un post -->
+	<!-- en paramètre le type de post = question ou réponse (ici se sera pst ) -->
+	<!-- ==================================================================================== -->
 			<?php  if(isset($_SESSION["user"])){ ?>
 				<a href="<?= $this->url('forumSignalerPost', ['id' => $post['id']]) ?>">Signaler</a>	
 			<?php } ?>

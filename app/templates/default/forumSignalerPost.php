@@ -5,27 +5,39 @@
   <p>Merci de détailler la raison du  signalement </p>
   
 <?php $this->stop('side_content') ?>
-
+<!-- ============================================================= -->
 <?php $this->start('main_content') ?>
 
 
 <form name="fSignalerPost"  enctype="multipart/form-data" class="form-horizontal" method="POST" action="">
 
+ <!-- on stocke l'id du post pour réafficher toutes les réponses de ce post -->
+   <input type="hidden" name="form[post_id]" value=<?php 
+    if(!empty($_POST['form']['post_id']))
+        { echo trim($_POST['form']['post_id']);} 
+    elseif(isset($post)) 
+        {echo $post ;}
+    ?>>
+<!-- ============================================================= -->
 
-  <div class="form-group">
+<div class="form-group">
     <label for="raisonId"  class="col-sm-2 control-label">Raison : </label>
     <div class="col-sm-4">
-      <input  name="form[raison]" type="text" id="raisonId" class="form-control"  value=<?php 
+    <textarea name="form[raison]" type="text" id="raisonId" class="form-control"><?php 
       if(!empty($_POST['form']['raison']))
-        { echo $_POST['form']['raison'];} ?> >
-    </div>
+        { echo $_POST['form']['raison'];} ?>
+    </textarea>
+</div>
 
-        <?php
-        foreach ($msg as $key => $value) {
-          if(is_array($value) && array_key_exists('raison', $value))
-             {?><p><?= $value['raison'] ?></p> <?php } ?>  
-         <?php } ?> 
-    </div>
+<?php
+foreach ($msg as $key => $value) {
+  if(is_array($value) && array_key_exists('raison', $value))
+   {?><p><?= $value['raison'] ?></p> <?php } ?>  
+<?php } ?> 
+</div>
+
+
+
 
 
 <!-- ============================================================= -->

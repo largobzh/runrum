@@ -4,7 +4,7 @@ namespace Outils;
 class Outils
 {
 
-	static function envoiMail($lien,$from,$sentTo,$Subject,$body)
+	static function envoiMail($from,$sentTo,$Subject,$body)
 	{       
 		$mail = new \PHPMailer;
 
@@ -30,9 +30,6 @@ class Outils
 		// $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
 		// $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 		$mail->isHTML(true);                                  // Set email format to HTML
-
-		$mail->Subject = 'Activer votre compte sur runrum';
-		$mail->Body    = 'Bonjour, activer votre compte : ' .  $lien . '  >'; 
 		$mail->Subject = $Subject;
 		$mail->Body    = $body;
 

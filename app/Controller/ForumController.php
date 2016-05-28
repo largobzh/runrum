@@ -290,7 +290,7 @@ class ForumController extends Controller
 	}
 
 	// on envoie un mail aux modérateurs du forum ()
-	public function forumSignalerPost($id)
+	public function forumSignalerPost($post_id)
 	{
 		$msg = array();
 		if(isset($_POST['submit'])) 
@@ -301,22 +301,23 @@ class ForumController extends Controller
 			// la raison est obligatoire	 	
 			if(!empty($msg['erreur']))
 			{
-				$this->show('default/forumSignalerPost',['msg' => $msg]);
+				$this->show('default/forumSignalerPost',['msg' => $msg, 'post' =>$post_id]);
 			}
 			else
 			{
 				// on récupére les infos du post signalé
-				if(!empty($id))
+				if(!empty($_POST['form']['post_id']))
 				{
 					$manager = new PostManager();
-					$post = $manager->find($id);
+					$manager->setTable('posts');
+					$post = $manager->find($_POST['form']['post_id']);
 					if($post)
 					{
-						$subject ="Alerte sur le forum runrum émit par : " .  $_SESSION["user"]['pseudo'] . " pour le poste : " . $id ;
+						$subject ="Alerte sur le forum runrum émit par : " .  $_SESSION["user"]['pseudo'] . " pour le poste : " . $post['id'] ;
 						$body =   nl2br("Alerte sur le forum runrum !!  \n" );
 						$body .=  nl2br("Titre du post : " . $post['titre'] . "\n");
 						$body .=  nl2br("Raison du signalement  :" . $_POST['form']['raison']) . " \n";
-						if(Outils::envoiMail($lien, 'yvan.lebrigand@gmail.com', 'yvan.lebrigand@gmail.com', $subject, $body))
+						if(Outils::envoiMail('yvan.lebrigand@gmail.com', 'yvan.lebrigand@gmail.com', $subject, $body))
 						{
 							$msg['info']  = $_SESSION["user"]['pseudo']. ", Votre message d\'alerte a bien été envoyé aux modérateurs et sera étudié." ;
 							$this->redirectToRoute('forumListePosts', ['msg' => $msg]);
@@ -325,7 +326,61 @@ class ForumController extends Controller
 				}
 			}
 		}
-		$this->show('default/forumSignalerPost',['msg' => $msg]);
+		$this->show('default/forumSignalerPost',['msg' => $msg, 'post' =>$post_id]);
+	}
+	
+
+	// on envoie un mail aux modérateurs du forum ()
+	public function forumSignalerReponse($post_id, $reponse_id)
+	{
+		$msg = array();
+		if(isset($_POST['submit'])) 
+		{
+			// la raison est obligatoire	
+			if(empty($_POST['form']['raison'])){
+				$msg['erreur']['raison'] = 'La raison est obligatoire à la saisie';
+			}
+			if(!empty($msg['erreur']))
+			{
+				$this->show('default/forumSignalerReponse',['msg' => $msg, 'post' =>$post_id, 'reponse' =>$reponse_id]);
+			}
+			else
+			{
+				// on récupére les infos sur la réponse signalée et on envoi un mail
+				if(!empty($_POST['form']['reponse_id']))
+				{
+					$manager = new PostManager();
+					$manager->setTable('reponses');
+					$reponse = $manager->find($_POST['form']['reponse_id']);
+
+					if($reponse)
+					{
+						$subject ="Alerte sur le forum runrum émit par : " .  $_SESSION["user"]['pseudo'] . " sur la réponse : " . $reponse['id'] . " du poste : " . $_POST['form']['post_id']  ;
+						$body =   nl2br("Alerte sur le forum runrum !!  \n" );
+						$body .=  nl2br("Réponse : " . $reponse['reponse'] . "\n");
+						$body .=  nl2br("Raison du signalement  :" . $_POST['form']['raison']) . " \n";
+						if(Outils::envoiMail('yvan.lebrigand@gmail.com', 'yvan.lebrigand@gmail.com', $subject, $body))
+						{
+							$msg['info']  = $_SESSION["user"]['pseudo']. ", Votre message d'alerte a bien été envoyé aux modérateurs et sera étudié." ;
+					
+						// on réaffiche toutes les réponses du dernier post  et le message d'envoi de mail précédent 
+							$manager->setTable('posts');
+							$posts = $manager->getPosts($_POST['form']['post_id'], 'date_publication', 'DESC');
+							if($posts)
+							{
+								$reponseManager = new ReponseManager();
+								$reponses = $reponseManager->getReponses($_POST['form']['post_id'], 'date_publication', 'DESC');
+								$this->redirectToRoute('forumListeReponses', ['id' => $_POST['form']['post_id']]) ;
+							}
+						
+						}
+						
+						
+					}
+				}
+			}
+		}
+		$this->show('default/forumSignalerReponse',['msg' => $msg, 'post' =>$post_id, 'reponse' =>$reponse_id]);
 	}
 	
 }

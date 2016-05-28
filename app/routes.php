@@ -8,19 +8,18 @@
 		['GET|POST', '/inscription', 'AdminController#inscription', 'inscription'],
 		['GET|POST', '/oubliPassword', 'AdminController#oubliPassword', 'oubliPassword'],
 				
-
 		['GET|POST', '/forumAjouterPost',          'ForumController#forumAjouterPost',    'forumAjouterPost'],
 		
-	
 		['GET|POST', '/reinitPassword/[i:user_id]/[a:token_id]/', 'AdminController#reinitPassword', 'reinitPassword'],
 		['GET',      '/activerCompte/[i:user_id]/[a:token_id]/',  'AdminController#activerCompte', 'activerCompte'],
 
-		['GET|POST', '/forumModifierPost/[i:id]/',  'ForumController#forumModifierPost' , 'forumModifierPost'],
-		['GET|POST', '/forumSupprimerPost/[i:id]/',  'ForumController#forumSupprimerPost' , 'forumSupprimerPost'],
-		['GET|POST', '/forumSignalerPost/[i:id]/',          'ForumController#forumSignalerPost',    'forumSignalerPost'],
-		['GET|POST', '/forumListeReponses/[i:id]/',  'ForumController#forumListeReponses', 'forumListeReponses'], 
-		['GET',      '/forumListePosts',        'ForumController#forumListePosts', 'forumListePosts'], 
-	   	['GET',      '/forumListePostsT/[a:techange]/',        'ForumController#forumListePosts', 'forumListePostsT'], 
+		['GET|POST', '/forumModifierPost/[i:id]/',     'ForumController#forumModifierPost' , 'forumModifierPost'],
+		['GET|POST', '/forumSupprimerPost/[i:id]/[a:Post_Reponse]/',    'ForumController#forumSupprimerPost' , 'forumSupprimerPost'],
+		['GET|POST', '/forumSignalerPost/[i:id]/',  'ForumController#forumSignalerPost',    'forumSignalerPost'],
+		['GET|POST', '/forumSignalerReponse/[i:post_id]/[i:reponse_id]/',  'ForumController#forumSignalerReponse',    'forumSignalerReponse'],
+		['GET|POST', '/forumListeReponses/[i:id]/',     'ForumController#forumListeReponses', 'forumListeReponses'], 
+		['GET',      '/forumListePosts',                'ForumController#forumListePosts', 'forumListePosts'], 
+	   	['GET',      '/forumListePostsT/[a:techange]/', 'ForumController#forumListePosts', 'forumListePostsT'], 
 	    
 
 	);

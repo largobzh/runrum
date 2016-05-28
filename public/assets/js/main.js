@@ -13,7 +13,7 @@ $(document).ready(function() {
 // Ajouter un aperçu de l’image au moment de sa sélection
 
 $(function () {
-	console.log('titi');
+	// console.log('titi');
     // A chaque sélection de fichier
     // $('#photoId').find('input[name="photo"]').on('change', function (e) {
     $('#photoId').on('change', function (e) {
@@ -36,7 +36,7 @@ $(function () {
     // Bouton "Annuler" pour vider le champ d'upload
     $('#image_supp').on('click', function (e) {
         e.preventDefault();
- alert("toto");
+ // alert("toto");
  	    
         $('#photoId').find('input[name="photo"]').val(' ');
         $('#image_preview').find('.thumbnail').addClass('hidden');
