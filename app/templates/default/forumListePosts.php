@@ -43,7 +43,7 @@
 	       <p>
 				<?php if($post['utilisateur_id'] == $user['id'])
 				{?>
-					<a href="<?= $this->url('forumModifierPost', ['id' => $post['id']]) ?>">
+					<a class="fondCorpsPost" href="<?= $this->url('forumModifierPost', ['id' => $post['id']]) ?>">
 						<?= $this->e($post['post']) ?>
 					</a>
 				<?php

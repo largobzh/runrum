@@ -2,7 +2,7 @@
 
 <?php $this->start('main_content') ?>
 	<!-- Control utilisateur -->
-	<a class="styleBouton" href="<?if(isset($_SESSION['user'])){ echo "/listecarnet"; }else{ echo "/login"; }?>">run</a>
+	<a class="styleBouton" href="<?php if(isset($_SESSION['user'])){ echo "/listecarnet"; }else{ echo "/login"; }?>">run</a>
 
 	<a class="styleBouton" href="/forumListePosts">rum</a>
 	<!--<p>run</p>-->
