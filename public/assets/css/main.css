@@ -800,13 +800,37 @@ div.enLigne p {
     box-shadow:none;
 }
 
-
-.postListe p a{
-    color: red;
-    background: none;
-    font-size: 1rem;
-    
+/*++++++++++++++++++++*/
+.postListe p {
+    background: rgba(204,234,240,.2);
+    border-radius: 4px;
+    padding: 1rem;
 }
+
+    
+.postListe p a{
+    background: none;
+    padding: 0;
+    color: #1d2327;
+    font-family: 'Oxygen', Helvetica, sans-serif;
+    font-size: 1rem;
+    font-weight: 200;
+    text-align: justify;
+}
+
+.postListe p a:hover{
+/*    color: red;*/
+    background: none;
+    border: none;
+    box-shadow:none;
+
+}
+
+.postListe p a:link{
+    text-decoration: none;
+
+}
+
 /*++++++++++++++++++++*/
 
 #bloc404403 {
