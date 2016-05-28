@@ -1,7 +1,7 @@
 <!-- ==================================================================================== -->
 <!-- le 28/05/16 modif du titre  et site content-->
 <!-- ==================================================================================== -->
-<?php $this->layout('layout', ['title' => 'runrum-Forum - Liste des posts publiés!']) ?>
+<?php $this->layout('layout', ['title' => 'run|rum-Forum - Liste des posts publiés!']) ?>
 
 <?php $this->start('side_content') ?>
 <h3>Connectez-vous pour ajouter vos comptes-rendus, news ou vos questions et cliquez sur le boutton ajouter.   </h3>
@@ -50,14 +50,7 @@
 						<?= $this->e($post['post']) ?>
 					</a>
 
-				<!-- ==================================================================================== -->
-				<!-- le 28/05/16 ajout du bouton signaler un post -->
-				<!-- en paramètre le type de post = question ou réponse (ici se sera pst ) -->
-				<!-- ==================================================================================== -->
-						<?php  if(isset($_SESSION["user"])){ ?>
-							<a href="<?= $this->url('forumSignalerPost', ['id' => $post['id']]) ?>">Signaler</a>	
-						<?php } ?>
-				<!-- =========================fin de modif===================================================== -->
+
 				<?php
 				}
 				else
@@ -98,6 +91,11 @@
                     <li class="infosPost2 mod3"><?= date('j-M-Y', strtotime($post['date_publication']))  ?></li>
                     <li class="infosPost2 mod3">Nbre réponses : <?= intval($post['nbreponses'] )?></li>
                     <li class="infosPost2 mod3">Vues : <?= intval($post['nbvues']) ?></li>
+                    <li class="infosPost2 mod3">
+						<?php  if(isset($_SESSION["user"])){ ?>
+							<a class="sansSoulign" href="<?= $this->url('forumSignalerPost', ['id' => $post['id']]) ?>">Signaler</a>	
+						<?php } ?>
+					</li>
                 </ul>
            </div>      
 
