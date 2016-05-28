@@ -1,58 +1,45 @@
-<!-- ==================================================================================== -->
-<!-- le 28/05/16 modif du titre  et site content-->
-<!-- ==================================================================================== -->
-<?php $this->layout('layout', ['title' => 'runrum-Forum - Liste des posts publiés!']) ?>
+<?php $this->layout('layout', ['title' => 'rum : liste']) ?>
+
 
 <?php $this->start('side_content') ?>
-<h3>Connectez-vous pour ajouter vos comptes-rendus, news ou vos questions et cliquez sur le boutton ajouter.   </h3>
+<h3>explications pour la liste posts: </h3>
+<p>Reco : Se connecter pour ajouter une note</p>
 	
 <?php $this->stop('side_content') ?>
 
-<!-- ========================================================================================= -->
 
 <?php $this->start('main_content') ?>
-
-	<h2>Liste des posts...<?= $user['pseudo'] ?></h2>
-
-	<?php foreach ($type_echange_short as $techanges) { ?>
+<article>
+	<!-- <h4>Liste des posts...<?= $user['pseudo'] ?></h4>
+ -->
+	<div>
+		<ul id="categories">
+		<?php foreach ($type_echange_short as $techanges) { ?>
 		
-		<a href="<?= $this->url('forumListePostsT', ['techange' => $techanges['type_echange_short']]) ?>">
-				<?= $this->e($techanges['type_echange_short']) ?>
-		</a>
+			<li class="infosPost1 mod2 couleurCR"><a href="<?= $this->url('forumListePostsT', ['techange' => $techanges['type_echange_short']]) ?>">
+				<?= $this->e($techanges['type_echange_short']) ?></a>
+			</li>
+		<?php } ?> 
+		</ul>
+	</div>
 
-	<?php } ?> 
-	<hr>
 
+   <div id="apercuPosts">
+                 
+      	<div class="postListe">
 
 	<?php foreach ($posts as $post) { ?>
 		
 		<?php if(!empty($post)) 
 		{ ?>
 
-			<h3>
-		
-			<span> <?= $this->e($post['type_echange_short']) ?></span> 
 
-			<a href="<?= $this->url('forumListeReponses', ['id' => $post['id']]) ?>">
-				<?= $this->e($post['titre']) ?>
-			</a>
-	<!-- ==================================================================================== -->
-	<!-- le 28/05/16 ajout du bouton signaler un post -->
-	<!-- en paramètre le type de post = question ou réponse (ici se sera pst ) -->
-	<!-- ==================================================================================== -->
-			<?php  if(isset($_SESSION["user"])){ ?>
-				<a href="<?= $this->url('forumSignalerPost', ['id' => $post['id']]) ?>">Signaler</a>	
-			<?php } ?>
-<!-- =========================fin de modif===================================================== -->
-		
-        	<p>
-	           <?=$post['pseudo'] ?>  <?= date('j-M-Y', strtotime($post['date_publication']))  ?>  
-	           vues :    <?= intval($post['nbvues']) ?>
-	           Réponses : <?= intval($post['nbreponses'] )?>
-           
-        	</p>
-	       <!-- on accepte ma modification de la question si l'auteur est l'utilisateur courant -->
-	       <!-- on cré donc un lien vers la route , sinon on affcihe l coprs -->
+			<h4 class="couleurCR">
+				<span>[<?= $this->e($post['type_echange_short']) ?>]</span><a id="lienTitrePost" href="<?= $this->url('forumListeReponses', ['id' => $post['id']]) ?>">
+				<?= $this->e($post['titre']) ?></a>
+			</h4>
+
+
 	       <p>
 				<?php if($post['utilisateur_id'] == $user['id'])
 				{?>
@@ -68,10 +55,8 @@
 				?>
 				
 	        </p>
-
-		<!-- =========== ajout des photos -->
-
-			<?php foreach ($photos as $photo)
+	        <!-- =========== ajout des photos -->
+	        <?php foreach ($photos as $photo)
 			{ 
 				if($photo['id_post'] == $post['id'])
 
@@ -93,12 +78,36 @@
 
 
 			<?php }} ?>
-            
-			</h3>
-			<hr>
+		<!-- ======================== -->
+           <div>
+                <ul id="renseignPost">
+                    <li class="infosPost2 mod3">Auteur : <?=$post['pseudo'] ?></li>
+
+                    <li class="infosPost2 mod3"><?= date('j-M-Y', strtotime($post['date_publication']))  ?></li>
+                    <li class="infosPost2 mod3">Nbre réponses : <?= intval($post['nbreponses'] )?></li>
+                    <li class="infosPost2 mod3">Vues : <?= intval($post['nbvues']) ?></li>
+                </ul>
+           </div>      
+
 	<?php }} ?>
-	
-	<?php  if(isset($_SESSION["user"])){ ?>
-		<a href="<?= $this->url('forumAjouterPost') ?>">ajouter</a>	
-	<?php } ?>
+  	</div>
+                  
+	</div>
+	<div>
+        <ul id="navPages">
+            <li>
+            	<a href="pagePreced" class="sansSoulign">Page précédente</a></li>
+            <li>
+				<?php  if(isset($_SESSION["user"])){ ?>
+					<a href="<?= $this->url('forumAjouterPost') ?>" class="sansSoulign" title="accès au formulaire de saisie d'un nouveau post.">Ajouter</a>
+				<?php } ?>
+			</li>
+
+            <li>
+            	<a href="pageSuiv" class="sansSoulign">Page suivante</a>
+            </li>
+        </ul>
+   	</div>
+
+</article>
 <?php $this->stop('main_content') ?>

@@ -6,7 +6,7 @@
 <?php $this->start('main_content') ?>
 
 
-<form name="fAddPost" id="fAddPost" enctype="multipart/form-data" class="form-horizontal" method="POST" action="">
+<form name="fAddPost" enctype="multipart/form-data" class="form-horizontal" method="POST" action="">
 
 
   <div class="form-group">
@@ -77,7 +77,7 @@ foreach ($msg as $key => $value) {
 <div class="form-group">
   <label for="photoId"  class="col-sm-2 control-label">Sélectionner une photo : </label>
   <div class="col-sm-4">
-     <input type="file" id="photoId" name="photo" accept="image/*" >
+     <input type="file" id="photoId" name="photo"  >
   </div>
 
     <?php
@@ -87,24 +87,6 @@ foreach ($msg as $key => $value) {
        <?php } ?> 
 
 </div>
-
- <!-- on préaffiche les photos -->
-  <div class="form-group" style="margin-bottom: 0;">
-  <div id="image_preview" class="col-lg-10 col-lg-offset-2">
-      <div class="thumbnail hidden">
-          <img src="" alt="">
-          <div class="caption">
-              <h4></h4>
-              <p></p>
-              <p><button id="image_supp" type="button" class="btn btn-default btn-danger">Annuler</button></p>
-          </div>
-      </div>
-  </div>
-</div>
-
-
-
-
 <!-- ============================================================= -->
 
 

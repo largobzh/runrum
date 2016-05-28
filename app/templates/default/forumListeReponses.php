@@ -1,99 +1,134 @@
-<!-- ==================================================================================== -->
-<!-- le 28/05/16 modif du titre  et site content-->
-<!-- ==================================================================================== -->
-<?php $this->layout('layout', ['title' => 'runrum-Forum  - Liste des réponses publiés!']) ?>
+<?php $this->layout('layout', ['title' => 'rum : détails du post']) ?>
 
-<?php $this->start('side_content') ?>
-<h3>Ajoutez votre commentaire, news ou compte-rendu ou tout simplement partagez !! </h3>
-	
-<?php $this->stop('side_content') ?>
-<!-- ========================================================================================= -->
 
 <?php $this->start('main_content') ?>
+<article>
 
 
-<h2>Liste des reponses... </h2>
-<?php print_r( $posts) ?>
-<hr>
-<?php print_r( $reponses) ?>
-<hr>
-<?php foreach ($posts as $post) { ?>
-		<span> <?= $this->e($post['type_echange_short']) ?></span> 
-		<span> <?= $this->e($post['titre']) ?></span> 
 
-        <p>
-           <?=$post['pseudo'] ?>  <?= date('j-M-Y', strtotime($post['date_publication']))  ?>  
-           vues :    <?= intval($post['nbvues']) ?>
-           Réponses : <?= intval($post['nbreponses'] )?>
-           
-        </p>
-        <!-- Corps de la question -->
-        <p >
-            <?=$post['post'] ?>
-        </p>
+	<?php foreach ($posts as $post) { ?>
+
+
+	<div id="apercuPosts">
+                 
+  		<div class="postListe">
+
+
+			<h4 class="couleurCR">
+				<span>[<?= $this->e($post['type_echange_short']) ?>]</span><a id="lienTitrePost" ><?= $this->e($post['titre']) ?></a>
+			</h4>
+
+
+    		<!-- Corps de la question -->
+    		<p >
+        		<?=$post['post'] ?>
+    		</p>
        
+
+			<div>
+        		<ul id="renseignPost">
+            		<li class="infosPost2 mod3">Auteur : <?=$post['pseudo'] ?></li>
+
+	            	<li class="infosPost2 mod3"><?= date('j-M-Y', strtotime($post['date_publication']))  ?></li>
+    	        	<li class="infosPost2 mod3">Nbre réponses : <?= intval($post['nbreponses'] )?></li>
+        	    	<li class="infosPost2 mod3">Vues : <?= intval($post['nbvues']) ?></li>
+            	</ul>
+   			</div>
 		
 	<?php } ?>
+   		</div>
+
+	</div>
 
 
+<!-- // todo : insérer les photos ici -->
 
-<hr>
+
 <?php foreach ($reponses as $reponse) { ?>
-<p>
-	<?=$reponse['reponse'] ?>
-</p>
-
-<p>
-	<?=$reponse['pseudo'] ?> le <?= date('j-M-Y', strtotime($post['date_publication']))  ?> 
-
-	<!-- ==================================================================================== -->
-	<!-- le 28/05/16 ajout du bouton signaler une réponse pour un post -->
-	<!-- ==================================================================================== -->
-		
-			<?php  if(isset($_SESSION["user"])){ ?>
-				<a href="<?= $this->url('forumSignalerReponse', ['post_id' => $post['id'] , 'reponse_id' => $reponse['id']]) ?>">Signaler</a>	
-			<?php } ?>
-<!-- =========================fin de modif===================================================== -->
-<hr>
-	<?php } ?>     
+	<div id="apercuReponses"">
+		<p class="textReponse">
+			<?=$reponse['reponse'] ?>
+		</p>
 
 
+		<div class="reponses">
+    		<ul class="couleurreponses">
+        		<li class="infosPost2 mod3">Par : <?=$reponse['pseudo'] ?></li>
+
+            	<li class="infosPost2 mod3">Le : <?= date('j-M-Y', strtotime($post['date_publication']))  ?></li>
+        	</ul>
+		</div>
+	</div>
+<?php } ?> 
+
+
+
+
+
+    
+
+<div>
 <form name="fAddReponse" class="form-horizontal" method="POST" action="">
 
 
-<div class="form-group">
-	<label for="reponseId"  class="col-sm-2 control-label">réponse : </label>
-	<div class="col-sm-4">
-		<textarea  name="form[reponse]" type="text" id="reponseId" class="form-control"  > <?php 
-			if(!empty($_POST['form']['reponse']))
+	<div>
+		<p>
+			<label for="commentText" id="labelCommentText">Réponse :</label>
+			<textarea name="form[reponse]" type="text" id="commentText" tabindex="5" class="fondZoneComment">
+				<?php 
+				if(!empty($_POST['form']['reponse']))
 				{ echo $_POST['form']['reponse'];} ?> 
-		</textarea>
-	</div>
-	<?php
-	foreach ($msg as $key => $value) {
-		if(is_array($value) && array_key_exists('reponse', $value))
-			{?><p><?= $value['reponse'] ?></p> <?php } ?>  
+			</textarea>
+		</p>
+
+
+		<?php
+		foreach ($msg as $key => $value) {
+			if(is_array($value) && array_key_exists('reponse', $value))
+				{?><p><?= $value['reponse'] ?></p> <?php } ?>  
 		<?php } ?> 
+	
+
+		<p>
+		<?php  if (array_key_exists('info', $msg)) { ?>
+			<p><?= $msg['info'] ?></p>
+		<?php } ?>  
+		</p>
+	<div>
+
 	</div>
+		<p>
+			<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod odio ipsam id accusantium voluptatibus in ipsa iste ut optio suscipit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod.</small>
+		</p>
 
 
-	<?php  if (array_key_exists('info', $msg)) { ?>
-	<p><?= $msg['info'] ?></p> <?php } ?>  
+		<p>
+            <ul id="navComment">
+                <li>
+                	<a class="sansSoulign" href="<?= $this->url('forumListePosts') ?>">Annuler</a>
+            	</li>
 
-	<div class="form-group">
-		<div class="col-sm-offset-2 col-sm-10">
+                <li>
+                	<?php  if(isset($_SESSION["user"])){ ?>
+						<button name="submit" type="submit" class="sansSoulign" >Commenter</button>
+                	<?php  } ?>
+                </li>
+            </ul>
+		</p>
 
-			<a href="<?= $this->url('forumListePosts') ?>">Annuler</a>
 
-			<?php  if(isset($_SESSION["user"]))
-			{ ?>
-				<button name="submit" type="submit" class="btn btn-primary" >Commenter</button>
-			<?php } ?>
-
-		</div>
 	</div>
-
-
-
 </form>
+</div>
+
+</article>
 <?php $this->stop('main_content') ?>
+
+
+
+
+
+
+
+
+
