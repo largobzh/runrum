@@ -1,13 +1,24 @@
 <?php $this->layout('layout', ['title' => 'Mon Carnet']) ?>
 
 <?php $this->start('side_content') ?>
-  <h3>
-    Notes
-  </h3>
-    
+	<h3>
+    	Notes
+	</h3>
+  <!-- ======================= début 160528 ======================= -->
   <p>
-   <a href="<?= $this->url('creationCarnet')?>">Créer une nouvelle note</a>
-  </p>
+   Une fois connecté, vous pouvez noter dans votre carnet personnel vos entraînements, épreuves ou compétitions.
+  </p> 
+
+	<div>
+        <ul id="navAside">
+			<li>
+				<a href="<?= $this->url('creationCarnet')?>" class="sansSoulign boutonSolo1" >Créer une note</a>
+			</li>
+        </ul>
+	</div>
+  <!-- ======================= fin 160528 ======================= -->
+
+
 <?php $this->stop('side_content') ?>
 
 <?php $this->start('main_content') ?>
@@ -88,7 +99,7 @@
             <ul id="navComment">
             <!-- mettre la requête  -->
             	<? //= $this->url('supprimerCarnet', ['id' => $value['id']]) ?>
-                <li><a href="#" data-id="<?= $this->url('supprimerCarnet', ['id' => $value['id']])?>" class="sansSoulign choix" >Supprimer</a></li>
+                <li><a href="#" data-id="<?= $this->url('supprimerCarnet', ['id' => $value['id']])?>" class="sansSoulign" >Supprimer</a></li>
                 
                 <li><a class="sansSoulign" href="<?= $this->url('modifierCarnet', ['id' => $value['id']]) ?>">Éditer</a></li>
 

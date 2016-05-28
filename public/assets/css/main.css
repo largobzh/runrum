@@ -406,6 +406,7 @@ h4 span {
 #nav404403{
     display: flex;
     min-height: 5vh;
+
 }
 
 #comment{
@@ -704,8 +705,12 @@ a.sansSoulign:link {
     list-style-type: none;
 
     min-height: 5vh;
-    padding-top: 5vh;
+
+    /*======================= début 160528 =======*/
+    padding-top: 2vh;
+    /*======================= fin 160528  =======*/
     text-align: center;
+    margin: 0 auto;
 
     
 }
@@ -1108,6 +1113,22 @@ nav a {
     padding-left: 1rem;
     margin-bottom: .2rem;
 }
+
+/* ====== début 160528 =============*/
+
+aside div{
+    justify-content: center;
+}
+
+
+aside div a {
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+
+/* ====== fin 160528 =============*/
 
 nav a:first-of-type:hover {
     background: rgb(147, 201, 23);

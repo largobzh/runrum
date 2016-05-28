@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     
-    <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/dist/sweetalert.css') ?>">
+ <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/dist/sweetalert.css') ?>"> 
 <!-- TO DO : mettre le titre dynamique de la page   -->
     <title><?= $this->e($title) ?></title>
     <!--    TO DO régler le problème de lien du favicon      -->
@@ -14,7 +14,7 @@
 <!--     <link rel="stylesheet" href="assets/css/main.css"> -->
     <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('css/main.css') ?>">
 <!-- utile pour le forum , affiche les photos en modale -->
-    <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('newerton/fancy-box/source/jquery.fancybox.css') ?>">
+   <link rel="stylesheet" type="text/css" href="<?= $this->assetUrl('newerton/fancy-box/source/jquery.fancybox.css') ?>"> 
 </head>
 
 <body>
