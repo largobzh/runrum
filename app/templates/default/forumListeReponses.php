@@ -1,5 +1,13 @@
-<?php $this->layout('layout', ['title' => 'rum : détails du post']) ?>
+<!-- ==================================================================================== -->
+<!-- le 28/05/16 modif du titre  et site content-->
+<!-- ==================================================================================== -->
+<?php $this->layout('layout', ['title' => 'runrum-Forum  - Liste des réponses publiées!']) ?>
 
+<?php $this->start('side_content') ?>
+<h3>Ajoutez votre commentaire, news ou compte-rendu ou tout simplement partagez !! </h3>
+	
+<?php $this->stop('side_content') ?>
+<!-- ========================================================================================= -->
 
 <?php $this->start('main_content') ?>
 <article>
@@ -45,7 +53,7 @@
 
 
 <?php foreach ($reponses as $reponse) { ?>
-	<div id="apercuReponses"">
+	<div id="apercuReponses">
 		<p class="textReponse">
 			<?=$reponse['reponse'] ?>
 		</p>
@@ -56,6 +64,15 @@
         		<li class="infosPost2 mod3">Par : <?=$reponse['pseudo'] ?></li>
 
             	<li class="infosPost2 mod3">Le : <?= date('j-M-Y', strtotime($post['date_publication']))  ?></li>
+
+            <!-- ==================================================================================== -->
+			<!-- le 28/05/16 ajout du bouton signaler une réponse pour un post -->
+			<!-- ==================================================================================== -->
+		
+			<?php  if(isset($_SESSION["user"])){ ?>
+				<a href="<?= $this->url('forumSignalerReponse', ['post_id' => $post['id'] , 'reponse_id' => $reponse['id']]) ?>">Signaler</a>	
+			<?php } ?>
+			<!-- =========================fin de modif===================================================== -->
         	</ul>
 		</div>
 	</div>
