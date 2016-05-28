@@ -84,11 +84,9 @@
 	<div>
 		<p>
 			<label for="commentText" id="labelCommentText">Réponse :</label>
-			<textarea name="form[reponse]" type="text" id="commentText" tabindex="5" class="fondZoneComment">
-				<?php 
+			<textarea name="form[reponse]" type="text" id="commentText" tabindex="5" class="fondZoneComment"><?php 
 				if(!empty($_POST['form']['reponse']))
-				{ echo $_POST['form']['reponse'];} ?> 
-			</textarea>
+				{ echo $_POST['form']['reponse'];} ?></textarea>
 		</p>
 
 

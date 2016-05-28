@@ -40,13 +40,11 @@ elseif(isset($post['id']))
  <div class="form-group">
   <label for="posteId"  class="col-sm-2 control-label">votre question : </label>
   <div class="col-sm-4">
-    <textarea  name="form[post]" id="postId" class="form-control"> <?php 
+    <textarea  name="form[post]" id="postId" class="form-control"><?php 
      if(!empty($_POST['form']['post']))
       { echo trim($_POST['form']['post']);} 
     elseif(isset($post['post'])) 
-      {echo trim($post['post']) ;}
-
-    ?> 
+      {echo trim($post['post']) ;}?> 
   </textarea>
 </div>
 
