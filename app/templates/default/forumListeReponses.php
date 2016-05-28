@@ -65,14 +65,7 @@
 
             	<li class="infosPost2 mod3">Le : <?= date('j-M-Y', strtotime($post['date_publication']))  ?></li>
 
-            <!-- ==================================================================================== -->
-			<!-- le 28/05/16 ajout du bouton signaler une réponse pour un post -->
-			<!-- ==================================================================================== -->
-		
-			<?php  if(isset($_SESSION["user"])){ ?>
-				<a href="<?= $this->url('forumSignalerReponse', ['post_id' => $post['id'] , 'reponse_id' => $reponse['id']]) ?>">Signaler</a>	
-			<?php } ?>
-			<!-- =========================fin de modif===================================================== -->
+
         	</ul>
 		</div>
 	</div>

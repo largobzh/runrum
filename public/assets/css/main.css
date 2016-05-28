@@ -816,7 +816,12 @@ div.enLigne p {
     font-size: 1rem;
     font-weight: 200;
     text-align: justify;
+/*    color: red;*/
 }
+
+
+
+
 
 .postListe p a:hover{
 /*    color: red;*/
@@ -830,6 +835,38 @@ div.enLigne p {
     text-decoration: none;
 
 }
+
+ul[id=renseignPost] li:nth-child(5) {
+    color:red;
+    background: orange;
+    border:none;
+    margin-bottom:5px;
+    padding: 0;
+
+}
+
+ul[id=renseignPost] li:nth-child(5) {
+
+    background: none;
+    border:none;
+    margin-bottom:5px;
+    padding: 0;
+}
+
+ul[id=renseignPost] li:nth-child(5) a:hover {
+    color:orange;
+    background: #434343;
+    border:1px solid orange;
+        box-shadow:
+        .0em
+        .0em
+        .9em
+        .4em
+    orange;
+
+/*    padding: 0;*/
+}
+
 
 /*++++++++++++++++++++*/
 
@@ -1116,6 +1153,19 @@ div[id=colonne2_3] {
 div[id=colonne1_3] {
     width:100%;
 /*    background: yellow;*/
+
+}
+
+/*
+section article p a + a {
+    color:red;
+}*/
+
+
+
+#btnSignaler {
+    background: none;
+    color: red;
 
 }
 /*=================== fin main content =================*/
