@@ -17,6 +17,7 @@
 
 		['GET|POST', '/forumModifierPost/[i:id]/',  'ForumController#forumModifierPost' , 'forumModifierPost'],
 		['GET|POST', '/forumSupprimerPost/[i:id]/',  'ForumController#forumSupprimerPost' , 'forumSupprimerPost'],
+		['GET|POST', '/forumSignalerPost/[i:id]/',          'ForumController#forumSignalerPost',    'forumSignalerPost'],
 		['GET|POST', '/forumListeReponses/[i:id]/',  'ForumController#forumListeReponses', 'forumListeReponses'], 
 		['GET',      '/forumListePosts',        'ForumController#forumListePosts', 'forumListePosts'], 
 	   	['GET',      '/forumListePostsT/[a:techange]/',        'ForumController#forumListePosts', 'forumListePostsT'], 

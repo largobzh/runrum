@@ -33,7 +33,13 @@
 			<a href="<?= $this->url('forumListeReponses', ['id' => $post['id']]) ?>">
 				<?= $this->e($post['titre']) ?>
 			</a>
-
+<!-- ==================================================================================== -->
+<!-- le 28/05/16 ajout du bouton signaler pour le post et toute les réponses -->
+<!-- ==================================================================================== -->
+			<?php  if(isset($_SESSION["user"])){ ?>
+				<a href="<?= $this->url('forumSignalerPost', ['id' => $post['id']]) ?>">Signaler</a>	
+			<?php } ?>
+<!-- =========================fin de modif===================================================== -->
 		
         	<p>
 	           <?=$post['pseudo'] ?>  <?= date('j-M-Y', strtotime($post['date_publication']))  ?>  
@@ -89,6 +95,6 @@
 	<?php }} ?>
 	
 	<?php  if(isset($_SESSION["user"])){ ?>
-	<a href="<?= $this->url('forumAjouterPost') ?>">ajouter</a>	
+		<a href="<?= $this->url('forumAjouterPost') ?>">ajouter</a>	
 	<?php } ?>
 <?php $this->stop('main_content') ?>

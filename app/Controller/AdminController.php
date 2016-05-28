@@ -61,14 +61,12 @@ class AdminController extends Controller
 						$msg['erreur']['email']  = "Cet email n'existe pas";
 					}
 					else
-						
-					// on controle que le compte est bien actif
+						//on controle que le compte est bien actif
 						if(!$user['actif'])
 						{
 							$msg['erreur']['email']  = "Votre compte n'a pas été activé ou a été désactivé. Merci de vous inscrire sous un autre email" ;
 						}
 						else
-
 						{
 						// on vérifit les mots de passe
 							$mdp = htmlspecialchars(trim($_POST['form']['password']));
@@ -76,17 +74,12 @@ class AdminController extends Controller
 							{
 								$msg['erreur']['password']  = "Le mot de passse est incorrect !";
 							}
-							elseif(!$user['actif'])
-							{
-						// on controle que le compte est bien actif
-								$$msg['erreur']['email']  = "Votre compte n'a pas été activé ou a été désactivé. Merci de vous inscrire sous un autre email";
-							}
 							else
 							{
 								$_SESSION["user"]['id'] = $user['id'];
 								$_SESSION["user"]['email'] = $user['email'];
 								$_SESSION["user"]['pseudo'] = $user['pseudo'];
-								$msg['info']  = "Vous êtes désormais connecté !";	
+								$msg['info']  = "Bonjour " . $user['pseudo'] . "vous êtes désormais connectés sur runrum !";	
 								$this->show('default/home',['msg' => $msg]);
 								$this->redirectToRoute('home');
 
@@ -102,8 +95,7 @@ class AdminController extends Controller
 	}
 
 //******************************************************************************************************************************************************************
-//******************************************************************************************************************************************************************
-//******************************************************************************************************************************************************************	
+	
 
 	public function inscription()
 	{
@@ -175,14 +167,11 @@ class AdminController extends Controller
 					$date_validite = date("Y-m-d H:i:s" , strtotime('+1 day'));
 					$tok->insert(['id_utilisateur'=>$id_utilisateur['id'], 'token'=>$token, 'date_validite'=>$date_validite]);
 					// $lien = "<a href=\"runrum/activerCompte?&id=" . $id_utilisateur['id'] . "&token=" . $token . "\">Lien</a>";
-					$lien = "<a href=\"http://runrum/activerCompte?&id=" . $id_utilisateur['id'] . "&token=" . $token . "\">Lien</a>";
+					$lien = "<a href=http://runrum/activerCompte?&id=" . $id_utilisateur['id'] . "&token=" . $token . "\">Activer votre compte</a>";
 					$subject = 'Activer votre compte sur runrum';
 					$body ="Bonjour, Vous êtes désormais inscrit sur le site runrum. Cliquer sur le lien afin de confirmer votre identification. " .  $lien  ;
 					if(Outils::envoiMail($lien, 'yvan.lebrigand@gmail.com', $_POST['form']['email'], $subject, $body))
-					{
-						// pour les tests on route comme si on avait cliquer sur le lien
-						// $this->redirectToRoute('activerCompte', ['user_id' => $id_utilisateur['id'],  'token_id' =>$token] );
-
+					{						
 						$msg['info']  = "Vérifier votre messagerie. cliqer sur le lien dans le message de confirmation envoyé à " . $_POST['form']['email'] ;
 						$this->show('default/home', ['msg' => $msg]);
 					}
@@ -259,10 +248,9 @@ class AdminController extends Controller
 				$token  = md5(uniqid(rand(), true));
 				$date_validite = date("Y-m-d H:i:s" , strtotime('+1 day'));
 				$tok->insert(['id_utilisateur'=>$user['id'], 'token'=>$token, 'date_validite'=>$date_validite]);
-				$lien = "<a href=\"http://www.runrum/initPassword?&id=" . $user['id'] . "&token=" . $token . "\">Lien</a>";
-				
+				$lien = "<a href=http://www.runrum/initPassword?&id=" . $user['id'] . "&token=" . $token . "\">Changer votre mot de passe</a>";
 				$subject ="changer votre mot de passe sur l'application runrum";
-				$body ="Bonjour, Pour changer votre mot de passe cliquer sur ce lien  : " .  $lien  ;
+				$body ="Bonjour, pour changer votre mot de passe cliquer sur ce lien  : " .  $lien  ;
 				if(Outils::envoiMail($lien, 'yvan.lebrigand@gmail.com', $_POST['form']['email'], $subject, $body))
 				{
 

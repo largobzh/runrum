@@ -24,8 +24,6 @@ define('MAX_SIZE', 200000);    // Taille max en octets du fichier
 define('WIDTH_MAX', 800);    // Largeur max de l'image en pixels
 define('HEIGHT_MAX', 800);    // Hauteur max de l'image en pixels
  
-// Tableaux de donnees
-$tabExt = array('jpg','gif','png','jpeg');    // Extensions autorisees
 
 class ForumController extends Controller
 {
@@ -291,6 +289,43 @@ class ForumController extends Controller
 		$this->redirectToRoute('forumListePosts');
 	}
 
-			
+	// on envoie un mail aux modérateurs du forum ()
+	public function forumSignalerPost($id)
+	{
+		$msg = array();
+		if(isset($_POST['submit'])) 
+		{
+			if(empty($_POST['form']['raison'])){
+				$msg['erreur']['raison'] = 'La raison est obligatoire à la saisie';
+			}
+			// la raison est obligatoire	 	
+			if(!empty($msg['erreur']))
+			{
+				$this->show('default/forumSignalerPost',['msg' => $msg]);
+			}
+			else
+			{
+				// on récupére les infos du post signalé
+				if(!empty($id))
+				{
+					$manager = new PostManager();
+					$post = $manager->find($id);
+					if($post)
+					{
+						$subject ="Alerte sur le forum runrum émit par : " .  $_SESSION["user"]['pseudo'] . " pour le poste : " . $id ;
+						$body =   nl2br("Alerte sur le forum runrum !!  \n" );
+						$body .=  nl2br("Titre du post : " . $post['titre'] . "\n");
+						$body .=  nl2br("Raison du signalement  :" . $_POST['form']['raison']) . " \n";
+						if(Outils::envoiMail($lien, 'yvan.lebrigand@gmail.com', 'yvan.lebrigand@gmail.com', $subject, $body))
+						{
+							$msg['info']  = $_SESSION["user"]['pseudo']. ", Votre message d\'alerte a bien été envoyé aux modérateurs et sera étudié." ;
+							$this->redirectToRoute('forumListePosts', ['msg' => $msg]);
+						}
+					}
+				}
+			}
+		}
+		$this->show('default/forumSignalerPost',['msg' => $msg]);
+	}
 	
 }
