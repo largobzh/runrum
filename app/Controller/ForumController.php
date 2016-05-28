@@ -25,6 +25,7 @@ define('WIDTH_MAX', 800);    // Largeur max de l'image en pixels
 define('HEIGHT_MAX', 800);    // Hauteur max de l'image en pixels
  
 
+define('NBPOSTSPARPAGE', 5);    // nb de posts par page pour la pagination
 class ForumController extends Controller
 {
 
@@ -32,7 +33,7 @@ class ForumController extends Controller
 	// ***************************************************
 	// Page d'accueil par défaut - les 20 premiers posts
 	// ***************************************************
-	public function forumListePosts($techange="")
+	public function forumListePosts($techange="" , $page=0)
 	{
 
 
@@ -43,9 +44,25 @@ class ForumController extends Controller
 		$photos = $manager->getPhotos();
 		$posts = $manager->getPosts("", 'date_publication', 'DESC', $techange);
 		
-		// nombre d'enregistrement retournés
+		// 1. nombre d'enregistrement retournés
 		$totalNbPosts= count($posts);
-		
+		// 2. Nombre de pages 
+		$NbPage = ceil($totalNbPosts / NBPOSTSPARPAGE) ;
+		// 3. on calcul les n° de page
+		for ($i= 1 ; $i <= $NbPage ; $i++)
+        {
+            $TbNumeroPage[] = $i;
+        }
+        
+        if ($page ==0 )
+        {
+            $page = 1;    
+        }
+        
+
+        // 4. On calcule le numéro du premier post  qu'on prend pour le LIMIT de MySQL
+        $premier = ($page - 1) * NBPOSTSPARPAGE;
+        $posts = $manager->getPosts("", 'date_publication', 'DESC', $techange, $premier, NBPOSTSPARPAGE);
 
 		$type_echange_short = $manager->getTypeEchange();
 		$this->show('default/forumListePosts', ['posts' => $posts, 'user' => $user, 'type_echange_short' => $type_echange_short, 'photos' =>$photos]);
@@ -204,7 +221,7 @@ class ForumController extends Controller
 	        	// ajout d'un post
 				$manager = new PostManager();
 				$user = $this->getUser();
-				print_r($user);
+				
 				$tbNewPost = ['utilisateur_id'=>$user['id'] , 'nbvues'=>0, 'nbreponses'=>0];
 				$_POST['form']['date_publication']=date('Y-m-d') ;
 				$lastUserId = $manager->insert(array_merge($_POST['form'],$tbNewPost));
@@ -322,7 +339,7 @@ class ForumController extends Controller
 						$body =   nl2br("Alerte sur le forum runrum !!  \n" );
 						$body .=  nl2br("Titre du post : " . $post['titre'] . "\n");
 						$body .=  nl2br("Raison du signalement  :" . $_POST['form']['raison']) . " \n";
-						if(Outils::envoiMail('yvan.lebrigand@gmail.com', 'yvan.lebrigand@gmail.com', $subject, $body))
+						if(Outils::envoiMail('yvan.lebrigand@gmail.com', $_SESSION["user"]['email'], $subject, $body))
 						{
 							$msg['info']  = $_SESSION["user"]['pseudo']. ", Votre message d\'alerte a bien été envoyé aux modérateurs et sera étudié." ;
 							$this->redirectToRoute('forumListePosts', ['msg' => $msg]);
@@ -364,7 +381,7 @@ class ForumController extends Controller
 						$body =   nl2br("Alerte sur le forum runrum !!  \n" );
 						$body .=  nl2br("Réponse : " . $reponse['reponse'] . "\n");
 						$body .=  nl2br("Raison du signalement  :" . $_POST['form']['raison']) . " \n";
-						if(Outils::envoiMail('yvan.lebrigand@gmail.com', 'yvan.lebrigand@gmail.com', $subject, $body))
+						if(Outils::envoiMail('yvan.lebrigand@gmail.com', $_SESSION["user"]['email'], $subject, $body))
 						{
 							$msg['info']  = $_SESSION["user"]['pseudo']. ", Votre message d'alerte a bien été envoyé aux modérateurs et sera étudié." ;
 					
