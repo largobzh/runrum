@@ -297,6 +297,12 @@ input:focus {
     background: rgba(255,255,255, .7);
     border: solid 1px #434343;
 }
+
+textarea:focus {
+    outline: transparent;
+    background: rgba(255,255,255, .7);
+    border: solid 1px #434343;
+}
 /*input:focus, textarea:focus, keygen:focus, select:focus {
     outline-offset: -2px;
 }*/
@@ -497,7 +503,12 @@ textarea {
     height: 20vh;
     border: 1px solid rgba(109, 168, 181, 1);
 /*    border: 1px solid rgba(229,110,86, 1);*/
+}
 
+.fondForum {
+    background: rgba(134,184,195,.4);
+    border: 1px solid rgba(109, 168, 181, 1);
+/*    border: 1px solid rgba(229,110,86, 1);*/
 }
 
 #thumbnail {
@@ -739,6 +750,14 @@ a.sansSoulign:link {
     padding:0;
 }
 
+#navComment input {
+    border:none;
+    background: none;
+    font-size: .9rem;
+    padding:0;
+    color: white;
+}
+
 #navComment li:nth-child(1) {
 
     margin: 0 .4vw;
@@ -756,6 +775,21 @@ a.sansSoulign:link {
     align-content: center;
 }
 
+/*===============================*/
+
+
+
+
+div ul li {
+    color: blue;
+}
+div.enLigne p {
+    display: inline-block;
+    width: 50%;
+    color: blue;
+}
+/*============================*/
+
 #navComment li:hover {
     background: rgba(147, 201, 23, 1);
 }
@@ -767,7 +801,12 @@ a.sansSoulign:link {
 }
 
 
-
+.postListe p a{
+    color: red;
+    background: none;
+    font-size: 1rem;
+    
+}
 /*++++++++++++++++++++*/
 
 #bloc404403 {
@@ -1116,16 +1155,51 @@ nav a {
 
 /* ====== début 160528 =============*/
 
-aside div{
-    justify-content: center;
+#navAside{
+
+    display: flex;
+    flex:1;
+    list-style-type: none;
+
+    min-height: 5vh;
+
+    /*======================= début 160528 =======*/
+    padding-top: 4vh;
+    /*======================= fin 160528  =======*/
+    text-align: center;
+/*    margin: 0 auto;*/
+
 }
 
+#navAside li {
+    border: solid 1px rgba(255, 255, 255, .9);
+    border-radius: 5px;
+    padding: .5vw 2vw;
+
+    margin: auto;   
+}
+
+#navAside li:nth-child(1) {
+    flex-grow: 1;
+    margin: 0 .4vw;
+    background: #e56e56;
+    margin: 0 0 0 .4vw;
+    flex-basis: auto;
+    align-content: center;
+}
+
+#navAside li:hover {
+    background: rgba(147, 201, 23, 1);
+}
 
 aside div a {
     color: white;
-    text-decoration: none;
-    border-radius: 3px;
+    font-weight: 400;
 }
+
+
+
+
 
 
 /* ====== fin 160528 =============*/
