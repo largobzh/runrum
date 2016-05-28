@@ -30,7 +30,7 @@
         <div>
             <p>
                 <label for="titreId">Titre : </label>
-                <input  name="form[titre]" type="text" id="titreId"  placeholder ="Le titre du post" value=<?php 
+                <input  name="form[titre]" type="text" id="titreId"  class="fondForum"placeholder ="Titre du post" value=<?php 
                     if(!empty($_POST['form']['titre']))
                     { echo $_POST['form']['titre'];} ?> >
 
@@ -47,8 +47,8 @@
 <!-- ============================================================= -->
 
             <p>
-                <label for="postId" >votre question : </label>
-                <textarea  name="form[post]" id="postId" placeholder ="le détail ..." > <?php 
+                <label for="postId" >Votre question : </label>
+                <textarea  name="form[post]" class="fondForum" id="postId" > <?php 
                     if(!empty($_POST['form']['post']))
                     { echo $_POST['form']['post'];} ?>
                 </textarea>
@@ -63,9 +63,12 @@
 
 
 <!-- ============================================================= -->
+
+            <div class="enLigne">
+
             <p>     
-                <label for="date_publicationId"  >date de publication : </label>
-                <input  name="form[date_publication]" type="text" id="date_publicationId" class="form-control"  disabled value=<?php 
+                <label for="date_publicationId"  >Date de publication : </label>
+                <input  name="form[date_publication]" type="text" class="fondForum" id="date_publicationId"  disabled value=<?php 
                     if(!empty($_POST['form']['date_publication']))
                         { echo $_POST['form']['date_publication'];}
                     else { echo date('d-m-Y') ;} ?>>
@@ -74,7 +77,7 @@
 <!-- ============================================================= -->
             <p>
                 <label for="type_echange_id" >Choisir une catégorie : </label>
-                    <select  name="form[type_echange_id]" id="type_echange_id" >
+                    <select  name="form[type_echange_id]" class="fondForum" id="type_echange_id" >
                         <option disabled selected>Choisir</option>
                         <?php foreach ($type_echange as $value) { ?>
                         <option value="<?= $this->e($value['id']) ?>"> <?= $this->e($value['type_echange']) ?></option>
@@ -88,38 +91,63 @@
             </p>
 
 
+            </div>
 
 
-
-
+            <div class="enLigne">
 <!-- ============================================================= -->
-<p>
-  <label for="photoId"  class="col-sm-2 control-label">Sélectionner une photo : </label>
-  <div class="col-sm-4">
-     <input type="file" id="photoId" name="photo"  >
-  </div>
+                <p>
+                    <label for="photoId">Sélectionner une photo : </label>
+                    <input type="file" id="photoId" name="photo" class="fondForum">
 
-    <?php
-      foreach ($msg as $key => $value) {
-        if(is_array($value) && array_key_exists('photo', $value))
-           {?><p><?= $value['photo'] ?></p> <?php } ?>  
-       <?php } ?> 
-
-</p>
+                    <?php
+                        foreach ($msg as $key => $value) {
+                            if(is_array($value) && array_key_exists('photo', $value))
+                    {?><p><?= $value['photo'] ?></p> <?php } ?>  
+                    <?php } ?> 
+                </p>
 <!-- ============================================================= -->
 
 
-<?php  if (array_key_exists('info', $msg)) { ?>
-<p><?= $msg['info'] ?></p> <?php } ?>  
+                    <?php  if (array_key_exists('info', $msg)) { ?>
+                <p>
+                    <?= $msg['info'] ?>
+                </p>
+                    <?php } ?>  
 
-<div class="form-group">
-  <div class="col-sm-offset-2 col-sm-10">
-    <a href="<?= $this->url('forumListePosts') ?>">Annuler</a>
-     <button name="submit" type="submit" class="btn btn-primary" >Valider</button>
- </div>
-</div>
-</form>
+
+
+            </div>
+<!--                 <p>
+                    <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod odio ipsam id accusantium voluptatibus in ipsa iste ut optio suscipit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod.</small>
+                </p> -->
+
+            <div>
+                <ul id="navComment">
+
+                    <li>
+                        <a href="<?= $this->url('forumListePosts') ?>" class="sansSoulign">Annuler</a>
+                    </li>
+                    <li>
+                        <input type="submit" name="submit" value="Valider">
+                    </li>
+                </ul>
+            </div>
+
+
+
+        </div>
+
+    </form>
   
     
 </article>
 <?php $this->stop('main_content') ?>
+
+
+
+
+
+
+
+
