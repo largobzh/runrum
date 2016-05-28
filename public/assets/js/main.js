@@ -45,7 +45,9 @@ $(function () {
 
 // function MOMMAR
 
-$('.choix').on('click', function() {
+$(function() {
+
+	$('.choix').on('click', function() {
 		// data afin de recupere le contenu de "data-id" dans le lien "a"
 		url = $(this).data('id');
 		// affiche la route dans le na
@@ -75,7 +77,7 @@ $('.choix').on('click', function() {
 			}	
 		})
 	})
-
+})
 
 // function Yvan : suppression d'un post
 
