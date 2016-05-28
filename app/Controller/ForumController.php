@@ -42,6 +42,11 @@ class ForumController extends Controller
 		$manager = new PostManager();
 		$photos = $manager->getPhotos();
 		$posts = $manager->getPosts("", 'date_publication', 'DESC', $techange);
+		
+		// nombre d'enregistrement retournés
+		$totalNbPosts= count($posts);
+		
+
 		$type_echange_short = $manager->getTypeEchange();
 		$this->show('default/forumListePosts', ['posts' => $posts, 'user' => $user, 'type_echange_short' => $type_echange_short, 'photos' =>$photos]);
 	}
