@@ -546,9 +546,12 @@ a#single_image {
     padding: 0;
     max-height: 100px;
     margin-right: 0;
-        max-height: 90px;
+    max-height: 90px;
+
+    filter: grayscale(50%);
     
 }
+
 a#single_image:hover {
     border: 2px solid rgba(134,184,195,1);
     
@@ -628,7 +631,7 @@ li.mod3 {
     color: rgba(255, 255, 255, .9);
     border: solid 1px rgba(255, 255, 255, .9);
     border-radius: 5px;
-    font-size: .7rem; 
+    font-size: .8rem; 
     padding: .5vw 2vw;
     margin: auto;
     justify-content: center;
@@ -744,6 +747,7 @@ ul {
 }
 a.sansSoulign:link {
     text-decoration: none;
+    font-size: .8rem;
 }
 
 #navPages li a:hover {
