@@ -31,7 +31,7 @@
         <div>
             <p>
                 <label for="titreId">Titre : </label>
-                <input  name="form[titre]" type="text" id="titreId"  class="fondForum"placeholder ="Titre du post" value=<?php 
+                <input  name="form[titre]" type="text" id="titreId"  class="fondForum" placeholder ="Titre du post" value=<?php 
                     if(!empty($_POST['form']['titre']))
                     { echo $_POST['form']['titre'];} ?> >
 
