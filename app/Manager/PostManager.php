@@ -56,14 +56,15 @@ class PostManager extends \W\Manager\Manager
 
 
 		// on cible les enregistrement selon la pagination
-		if($premier)
+		if(is_numeric($premier))
 		{
 			$sql .= " LIMIT $premier";
-			if($nbBilletParPage){
-				$sql .= " ,  . $nbBilletParPage";
+			if(is_numeric($nbBilletParPage)){
+				$sql .= " , $nbBilletParPage";
 			}
 		}
-
+		
+ // print_r($sql);
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		return $sth->fetchAll();
