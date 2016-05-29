@@ -23,6 +23,7 @@ class AdminController extends Controller
 		$manager = new AuthentificationManager();
 		$msg = array();
 		$manager->logUserOut();
+		session_destroy();
 		$msg['info']  = "Vous êtes désormais déconnecté !";	
 		$this->show('default/home',['msg' => $msg]);
 		// $this->redirectToRoute('home',['msg' => $msg]);
@@ -79,9 +80,9 @@ class AdminController extends Controller
 								$_SESSION["user"]['id'] = $user['id'];
 								$_SESSION["user"]['email'] = $user['email'];
 								$_SESSION["user"]['pseudo'] = $user['pseudo'];
-								$msg['info']  = "Bonjour " . $user['pseudo'] . "vous êtes désormais connectés sur runrum !";	
+								$msg['info']  = "Bonjour " . ucfirst($user['pseudo']) . ", vous êtes désormais connectés sur runrum !";	
 								$this->show('default/home',['msg' => $msg]);
-								$this->redirectToRoute('home');
+								// $this->redirectToRoute('home');
 
 							}
 						} 
@@ -173,7 +174,9 @@ class AdminController extends Controller
 					if(Outils::envoiMail('yvan.lebrigand@gmail.com', $_POST['form']['email'], $subject, $body))
 					{						
 						$msg['info']  = "Vérifier votre messagerie. cliqer sur le lien dans le message de confirmation envoyé à " . $_POST['form']['email'] ;
-						$this->show('default/home', ['msg' => $msg]);
+
+						$this->redirectToRoute('activerCompte', ['user_id' =>$id_utilisateur['id'],  'token_id' =>$token, 'msg' => $msg]);
+						// $this->show('default/home', ['msg' => $msg]);
 					}
 
 				}
@@ -248,22 +251,17 @@ class AdminController extends Controller
 				$token  = md5(uniqid(rand(), true));
 				$date_validite = date("Y-m-d H:i:s" , strtotime('+1 day'));
 				$tok->insert(['id_utilisateur'=>$user['id'], 'token'=>$token, 'date_validite'=>$date_validite]);
-				$lien = "<a href=http://www.runrum/initPassword?&id=" . $user['id'] . "&token=" . $token . "\">Changer votre mot de passe</a>";
-				$subject ="changer votre mot de passe sur l'application runrum";
+				$lien = "<a href=http://runrum/reinitPassword?&id=" . $user['id'] . "&token=" . $token . "\">Changer son mot de passe</a>";
+				
+				$subject ="changer son mot de passe sur l'application runrum";
 				$body ="Bonjour, pour changer votre mot de passe cliquer sur ce lien  : " .  $lien  ;
 				if(Outils::envoiMail('yvan.lebrigand@gmail.com', $_POST['form']['email'], $subject, $body))
 				{
-
 					// pour les tests on route comme si on avait cliquer sur le lien
-					// $this->redirectToRoute('activerCompte', ['user_id' => $id_utilisateur['id'],  'token_id' =>$token] );
-
-						$msg['info']  = "Vérifier votre messagerie. cliqer sur le lien dans le message de confirmation envoyé à " . $_POST['form']['email'] ;
-						$this->show('default/home', ['msg' => $msg]);
-
-					$msg['info']  = "Un mail vous a été envoyé avec un lien pour changer votre mot de passe";
-					// $this->show('default/home',['msg' => $msg]);
-
-					$this->redirectToRoute('reinitPassword', ['user_id' => $user['id'],  'token_id' =>$token] );
+				$msg['info']  = "Vérifier votre messagerie. cliqer sur le lien dans le message de confirmation envoyé à " . $_POST['form']['email'] ;
+				$this->redirectToRoute('reinitPassword', ['user_id' => $user['id'],  'token_id' =>$token, 'msg' => $msg]);
+				/*$this->show('default/reinitPassword', ['user_id' => $user['id'],  'token_id' =>$token, 'msg' => $msg]);*/
+				
 
 				}
 
@@ -357,14 +355,10 @@ class AdminController extends Controller
 							$_SESSION["user"]['id']     = $user['id'];
 							$_SESSION["user"]['email']  = $user['email'];
 							$_SESSION["user"]['pseudo'] = $user['pseudo'];
-							
-			// 2.2 sinon on réaffiche le form + erreur
-
-							$msg['info']  = "Vous êtes désormais connecté !";
-							$this->redirectToRoute('home');
+							// $this->redirectToRoute('home', ['msg' => $msg]);
+							$this->show('default/home', ['msg' => $msg]);
 						}
-						// =============================
-
+					
 					}
 				}
 			}
@@ -398,10 +392,10 @@ class AdminController extends Controller
 					if($tokenInfo)
 					{
 						$manager->delete($tokenInfo['id']);
-						$msg['info']  = "Votre compte a été activé  avec succès. Vous êtes désormais connectés.";
 						$_SESSION["user"]['id']     = $user['id'];
 						$_SESSION["user"]['email']  = $user['email'];
 						$_SESSION["user"]['pseudo'] = $user['pseudo'];
+						$msg['info']  = "Bonjour " . ucfirst($user['pseudo']) . ", votre compte a été activé avec succès et vous êtes désormais connectés.";
 						$this->show('default/home', ['msg' => $msg]);
 					}
 				}

@@ -45,9 +45,24 @@
            
       <!-- TO DO : mettre le titre dynamique de la page   --> 
             <h1><?= $this->e($title) ?></h1>
+           
             
-            <a href="<?=$this->url('home') ?>">Retour accueil</a>             
-            <a href="<?=$this->url('login') ?>">Connexion on/off</a>
+            <a href="<?=$this->url('home') ?>">Retour accueil</a>   
+
+          
+            <?php if(!empty($_SESSION['user'])) {
+            ?>
+                <a href="<?=$this->url('logout') ?>">Déconnexion on/off</a>
+            <?php }
+            else
+            {?>
+                <a href="<?=$this->url('login') ?>">Connexion on/off</a>
+            <?php
+            }?>
+            
+                
+                    
+           
             <a href="<?=$this->url('afficherCarnet') ?>">Carnet</a>
             <a href="<?=$this->url('forumListePosts') ?>">forum</a>     
    

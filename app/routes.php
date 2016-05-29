@@ -23,7 +23,7 @@
         
 		
 		['GET|POST', '/reinitPassword/[i:user_id]/[a:token_id]/', 'AdminController#reinitPassword', 'reinitPassword'],
-		['GET',      '/activerCompte/[i:user_id]/[a:token_id]/',  'AdminController#activerCompte', 'activerCompte'],
+		['GET',       '/activerCompte/[i:user_id]/[a:token_id]/',  'AdminController#activerCompte', 'activerCompte'],
 
 		['GET|POST', '/forumModifierPost/[i:id]/',     'ForumController#forumModifierPost' , 'forumModifierPost'],
 		['GET|POST', '/forumSupprimerPost/[i:id]/[a:Post_Reponse]/',    'ForumController#forumSupprimerPost' , 'forumSupprimerPost'],

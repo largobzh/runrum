@@ -1,11 +1,11 @@
 <!-- ==================================================================================== -->
 <!-- le 28/05/16 modif du titre  et site content-->
 <!-- ==================================================================================== -->
-<?php $this->layout('layout', ['title' => 'run|rum-Forum - Liste des posts publiés!']) ?>
+<?php $this->layout('layout', ['title' => 'Forum - Liste des posts']) ?>
 
 <?php $this->start('side_content') ?>
-<h3>Connectez-vous pour ajouter vos comptes-rendus, news ou vos questions et cliquez sur le boutton ajouter.   </h3>
-	
+<h3>Connectez-vous, </h3>
+<p>et ajoutez vos comptes-rendus, news ou vos questions en cliquant sur le boutton ajouter.   </p>
 <?php $this->stop('side_content') ?>
 
 <!-- ========================================================================================= -->
