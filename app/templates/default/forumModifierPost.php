@@ -42,12 +42,9 @@ elseif(isset($post['id']))
   <div class="col-sm-4">
     <textarea  name="form[post]" id="postId" class="form-control"> <?php 
      if(!empty($_POST['form']['post']))
-      { echo trim($_POST['form']['post']);} 
-    elseif(isset($post['post'])) 
-      {echo trim($post['post']) ;}
-
-    ?> 
-  </textarea>
+      { echo trim($_POST['form']['post']);}
+    elseif(isset($post['post']))
+      {echo trim($post['post']) ;} ?></textarea>
 </div>
 
 <?php

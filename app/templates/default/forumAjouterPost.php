@@ -48,10 +48,9 @@
 
             <p>
                 <label for="postId" >Votre question : </label>
-                <textarea  name="form[post]" class="fondForum" id="postId" > <?php 
+                <textarea  name="form[post]" class="fondForum" id="postId" ><?php 
                     if(!empty($_POST['form']['post']))
-                    { echo $_POST['form']['post'];} ?>
-                </textarea>
+                    { echo $_POST['form']['post'];} ?></textarea>
 
 
                 <?php
