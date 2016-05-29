@@ -1,10 +1,11 @@
 <!-- ==================================================================================== -->
 <!-- le 28/05/16 modif du titre  et site content-->
 <!-- ==================================================================================== -->
+
 <?php $this->layout('layout', ['title' => 'Forum  - Liste des réponses']) ?>
 
 <?php $this->start('side_content') ?>
-<h3>Ajoutez votre commentaire, news ou compte-rendu ou tout simplement partagez !! </h3>
+	<h3>Ajoutez votre commentaire, news ou compte-rendu ou tout simplement partagez !! </h3>
 	
 <?php $this->stop('side_content') ?>
 <!-- ========================================================================================= -->
@@ -84,11 +85,9 @@
 	<div>
 		<p>
 			<label for="commentText" id="labelCommentText">Réponse :</label>
-			<textarea name="form[reponse]" type="text" id="commentText" tabindex="5" class="fondZoneComment">
-				<?php 
+			<textarea name="form[reponse]" type="text" id="commentText" tabindex="5" class="fondZoneComment"><?php 
 				if(!empty($_POST['form']['reponse']))
-				{ echo $_POST['form']['reponse'];} ?> 
-			</textarea>
+				{ echo $_POST['form']['reponse'];} ?></textarea>
 		</p>
 
 

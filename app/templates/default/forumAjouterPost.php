@@ -3,19 +3,20 @@
 
   <!-- ======================= début 160528 ======================= -->
 <?php $this->start('side_content') ?>
-  <h3>
-      Notes
-  </h3>
+    <h3>
+        Notes
+    </h3>
 
-  <p>
-   Une fois connecté, vous pouvez publier un Compte-Rendu (entraînement, sortie OFF ou course), une NEWS (info sur une course à venir, bon plan matériel, etc.) ou poser une question à la communauté.
-  </p> 
+    
+    <p>
+        Une fois connecté, vous pouvez publier un Compte-Rendu (entraînement, sortie OFF ou course), une NEWS (info sur une course à venir, bon plan matériel, etc.) ou poser une question à la communauté.
+    </p> 
 
 <?php $this->stop('side_content') ?>
   <!-- ======================= fin 160528 ======================= -->
 
 
-
+    
 
 
 <!-- 'erreur'=>$erreur]); -->
@@ -92,9 +93,9 @@
 
             </div>
 
-
-            <div class="enLigne">
 <!-- ============================================================= -->
+            <div class="enLigne">
+
                 <p>
                     <label for="photoId">Sélectionner une photo : </label>
                     <input type="file" id="photoId" name="photo" class="fondForum">
@@ -102,7 +103,11 @@
                     <?php
                         foreach ($msg as $key => $value) {
                             if(is_array($value) && array_key_exists('photo', $value))
-                    {?><p><?= $value['photo'] ?></p> <?php } ?>  
+                    {?>
+                        <p>
+                            <?= $value['photo'] ?>
+                        </p>
+                        <?php } ?>  
                     <?php } ?> 
                 </p>
 <!-- ============================================================= -->
