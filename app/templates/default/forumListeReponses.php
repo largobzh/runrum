@@ -65,8 +65,8 @@
         		<li class="infosPost2 mod3">Par : <?=$reponse['pseudo'] ?></li>
 
             	<li class="infosPost2 mod3">Le : <?= date('j-M-Y', strtotime($post['date_publication']))  ?></li>
-            	<li class="infosPost2 mod3">&nbsp;</li>
-            	<li class="infosPost2 mod3">&nbsp;</li>
+            	<li class="infosPost2 mod3">&thinsp;</li>
+            	<li class="infosPost2 mod3">&thinsp;</li>
             	<li class="infosPost2 mod3">
 						<?php  if(isset($_SESSION["user"])){ ?>
 							<a class="sansSoulign" href="<?= $this->url('forumSignalerReponse', ['post_id' => $post['id'] , 'reponse_id' => $reponse['id']]) ?>">Signaler</a>
