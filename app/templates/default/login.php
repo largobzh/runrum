@@ -76,16 +76,17 @@
 
             <p>
                 <ul id="navComment">
-                    
-                     <li>
-                        <a class="sansSoulign" href="<?= $this->url('inscription') ?>">Inscription</a>
-                    </li>
-                    <li>
-                        <button name="submit" type="submit" >Valider</button>
-                    </li>
-                    <li>
+                    <li class="mod4">
                         <a class="sansSoulign" href="<?= $this->url('oubliPassword') ?>">Oubli</a>
                     </li>
+                    
+                     <li class="mod3">
+                        <a class="sansSoulign" href="<?= $this->url('inscription') ?>">Inscription</a>
+                    </li>
+                    <li class="mod1">
+                        <button class="sansSoulign" name="submit" type="submit" >Valider</button>
+                    </li>
+
                    
                 </ul>
             </p>

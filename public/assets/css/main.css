@@ -604,6 +604,7 @@ a>img.vignette100:hover {
 li.mod1 {
     display: inline-flex;
     list-style-type: none;
+    background: #434343;
     color: rgba(255, 255, 255, .9);
     border: solid 1px rgba(255, 255, 255, .9);
     border-radius: 5px;
@@ -628,6 +629,19 @@ li.mod2 {
 li.mod3 {
     display: inline-flex;
     list-style-type: none;
+    color: rgba(255, 255, 255, .9);
+    border: solid 1px rgba(255, 255, 255, .9);
+    border-radius: 5px;
+    font-size: .8rem; 
+    padding: .5vw 2vw;
+    margin: auto;
+    justify-content: center;
+}
+
+li.mod4 {
+    display: inline-flex;
+    list-style-type: none;
+    background: orange;
     color: rgba(255, 255, 255, .9);
     border: solid 1px rgba(255, 255, 255, .9);
     border-radius: 5px;
@@ -728,8 +742,9 @@ ul {
 }
 
 #navPages li:nth-child(2) {
-    flex-grow: 4;
+    flex-grow: 2;
     margin: 0 .4vw;
+    background: black;
     flex-basis: auto;
     align-content: center;
 /*    text-align: center;*/  
@@ -760,7 +775,8 @@ a.sansSoulign:link {
     display: flex;
     flex:1;
     list-style-type: none;
-
+    /*marge droite dans Chrome, pas dans Safari : */
+    margin-right: -10px;
     min-height: 5vh;
 
     /*======================= début 160528 =======*/
@@ -768,6 +784,7 @@ a.sansSoulign:link {
     /*======================= fin 160528  =======*/
     text-align: center;
     margin: 0 auto;
+    padding-right: -2px;
 
     
 }
@@ -796,6 +813,7 @@ a.sansSoulign:link {
     padding:0;
 }
 
+
 #navComment input {
     border:none;
     background: none;
@@ -813,6 +831,15 @@ a.sansSoulign:link {
 }
 
 #navComment li:nth-child(2) {
+    flex-grow: 1;
+    margin: 0 .4vw;
+    background: rgb(95, 199, 155);
+    margin: 0 0 0 .4vw;
+    flex-basis: auto;
+    align-content: center;
+}
+
+#navComment li:nth-child(3) {
     flex-grow: 1;
     margin: 0 .4vw;
     background: rgb(95, 199, 155);
