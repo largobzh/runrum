@@ -5,11 +5,14 @@ class PostManager extends \W\Manager\Manager
 {
 
 
-	public function getPosts($post_id = "", $orderBy = "", $orderDir = "ASC", $type_echange = "")
+	public function getPosts($post_id = "", $orderBy = "", $orderDir = "ASC", $type_echange = "", $premier = null , $nbBilletParPage  =null)
 	{
 
 	    $sql = "SELECT p.id , p.titre, p.post, p.date_publication, p.nbvues, p.utilisateur_id, u.pseudo, c.type_echange, c.type_echange_short, (SELECT COUNT(post_id) FROM `reponses` WHERE p.id=post_id) as nbreponses  FROM posts AS p INNER JOIN type_echange AS c on(p.type_echange_id = c.id) INNER JOIN utilisateurs as u on (p.utilisateur_id = u.id)" ;
 		
+
+ // $sql = "SELECT p.id , p.titre, p.post, p.date_publication, p.nbvues, p.utilisateur_id, u.pseudo, c.type_echange, c.type_echange_short, (SELECT COUNT(post_id) FROM `reponses` WHERE p.id=post_id) as nbreponses  FROM posts AS p INNER JOIN type_echange AS c on(p.type_echange_id = c.id) INNER JOIN utilisateurs as u on (p.utilisateur_id = u.id)" ;
+
 	
 		// on cible le type d'écahnge 
 
@@ -48,14 +51,26 @@ class PostManager extends \W\Manager\Manager
 		}
 		else
 		{
-			$sql .= " ORDER BY date_publication DESC";
+			$sql .= " ORDER BY date_publication DESC" ;
 		}	
+
+
+		// on cible les enregistrement selon la pagination
+		if($premier)
+		{
+			$sql .= " LIMIT $premier";
+			if($nbBilletParPage){
+				$sql .= " ,  . $nbBilletParPage";
+			}
+		}
 
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		return $sth->fetchAll();
 				
 	}
+
+		
 		
 
 
