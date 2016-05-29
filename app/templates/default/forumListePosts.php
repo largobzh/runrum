@@ -90,7 +90,7 @@
 					
 				{ ?> 
 
-				 	<div> 
+				 	<div id="thumbnail">
 				 	<?php 
 					 	$pos = strpos($photo['ref_image'], 'min_') ;
 					 	if ($pos !== false)
@@ -98,7 +98,7 @@
 					 		 $max_img =  str_replace('min_', 'max_' , $photo['ref_image']);
 				 		?>
 							
-							<a id="single_image" href="http://runrum/<?= $max_img ?>"><img src="http://runrum/<?= $photo['ref_image']?>" alt=<?= $post['titre'] ?>></a>
+							<a id="single_image" href="http://runrum/<?= $max_img ?>"><img src="http://runrum/<?= $photo['ref_image']?>" class="vignette100" alt=<?= $post['titre'] ?> max-height=90px ></a>
 
 		                <?php } ?>
 		            </div>

@@ -400,6 +400,10 @@ h4 span {
     font-weight: 200;
 
 }
+/*en cas de coupure de net*/
+h4 a#lienTitrePost {
+    font-family: 'Oxygen', Helvetica, sans-serif;
+}
 
 #categories li a:link {
     text-decoration: none;
@@ -511,9 +515,18 @@ textarea {
 /*    border: 1px solid rgba(229,110,86, 1);*/
 }
 
+
+
+
+/*============ début vignettes ============== */
+
 #thumbnail {
     display: flex;
     justify-content: flex-end;
+    max-height: 90px;
+
+    margin: 4vh auto;
+
 /*
     min-height: 10vh;
     max-height: 20vh;
@@ -521,21 +534,53 @@ textarea {
     
 }
 #thumbnail img {
-    margin-left: 1.65vw;
+    margin-right: 0;
 }
 
-/*
-#renseignPost {
-    color:red;
-    display: flex;
-*/
-/*    justify-content: flex-end;*/
-/*    align-content: flex-end;*/
+#thumbnail img:hover {
+    margin-right: 0;
+}
+
+a#single_image {
+    background: none;
+    padding: 0;
+    max-height: 100px;
+    margin-right: 0;
+    max-height: 90px;
+
+    filter: grayscale(50%);
+    
+}
+
+a#single_image:hover {
+    border: 2px solid rgba(134,184,195,1);
+    
+
+    border-radius: 10px;
+    box-shadow:none;
+    margin-right: 0;
+    max-height: 90px;
+}
+
+a>img.vignette100 {
+    box-shadow:none;
+    border:none;
+}
+a>img.vignette100:hover {
+    box-shadow:
+        .0em
+        .0em
+        .9em
+        .4em
+    rgba(255,255,255, .4);
+}
+
+/*====== fin vignettes ===============*/
 
 
 #apercuPosts{
     display: column;
-    min-height: 70vh;
+    min-height: 40vh;
     padding-left: 0vw;
 }
 
@@ -586,7 +631,7 @@ li.mod3 {
     color: rgba(255, 255, 255, .9);
     border: solid 1px rgba(255, 255, 255, .9);
     border-radius: 5px;
-    font-size: .7rem; 
+    font-size: .8rem; 
     padding: .5vw 2vw;
     margin: auto;
     justify-content: center;
@@ -702,6 +747,7 @@ ul {
 }
 a.sansSoulign:link {
     text-decoration: none;
+    font-size: .8rem;
 }
 
 #navPages li a:hover {
@@ -835,6 +881,15 @@ div.enLigne p {
     text-decoration: none;
 
 }
+
+/*ul[id=renseignPost] li:nth-child(3) {
+    color:red;
+    background: orange;
+    border:none;
+    margin-bottom:5px;
+    padding: 0;
+
+}*/
 
 ul[id=renseignPost] li:nth-child(5) {
     color:red;
@@ -1302,6 +1357,7 @@ aside {
 }
 aside h3 {
     padding-top: .5vw;
+    line-height: 1.6rem;
 }
 
 
