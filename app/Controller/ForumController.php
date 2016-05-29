@@ -31,15 +31,17 @@ class ForumController extends Controller
 
 
 	// ***************************************************
-	// Page d'accueil par défaut - les 20 premiers posts
+	// Page d'accueil par défaut - les 5 premiers posts
 	// ***************************************************
 	public function forumListePosts($techange="" , $page=0)
 	{
-
-
-		
+		$tbNumeroPage =array();
 		$user = $this->getUser();
-
+		if($techange =='suiv' || $techange =='prec'){
+			if($techange == 'suiv') {++$page;}else{--$page;} 
+			$techange="";
+		}
+				
 		$manager = new PostManager();
 		$photos = $manager->getPhotos();
 		$posts = $manager->getPosts("", 'date_publication', 'DESC', $techange);
@@ -47,25 +49,21 @@ class ForumController extends Controller
 		// 1. nombre d'enregistrement retournés
 		$totalNbPosts= count($posts);
 		// 2. Nombre de pages 
-		$NbPage = ceil($totalNbPosts / NBPOSTSPARPAGE) ;
+		$nbPage = ceil($totalNbPosts / NBPOSTSPARPAGE) ;
 		// 3. on calcul les n° de page
-		for ($i= 1 ; $i <= $NbPage ; $i++)
+		for ($i= 1 ; $i <= $nbPage ; $i++)
         {
-            $TbNumeroPage[] = $i;
+            $tbNumeroPage[] = $i;
         }
-        
-        if ($page ==0 )
-        {
-            $page = 1;    
-        }
-        
-
+       
+        if ($page ==0 ){$page = 1;}
         // 4. On calcule le numéro du premier post  qu'on prend pour le LIMIT de MySQL
         $premier = ($page - 1) * NBPOSTSPARPAGE;
+	
         $posts = $manager->getPosts("", 'date_publication', 'DESC', $techange, $premier, NBPOSTSPARPAGE);
-
+		$nbPostsAffiche= count($posts);
 		$type_echange_short = $manager->getTypeEchange();
-		$this->show('default/forumListePosts', ['posts' => $posts, 'user' => $user, 'type_echange_short' => $type_echange_short, 'photos' =>$photos]);
+		$this->show('default/forumListePosts', ['posts' => $posts, 'user' => $user, 'type_echange_short' => $type_echange_short, 'photos' =>$photos, 'tbNumeroPage'=>$tbNumeroPage, 'page'=>$page,'nbPage'=>$nbPage, 'totalNbPosts' =>$totalNbPosts, 'nbPostsAffiche' => $nbPostsAffiche, 'techange'=>$techange]);
 	}
 	
 

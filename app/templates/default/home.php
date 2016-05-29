@@ -3,11 +3,10 @@
 <?php $this->start('main_content') ?>
 	<!-- Control utilisateur -->
 	<a class="styleBouton" href="<?php if(isset($_SESSION['user'])){ echo "/listecarnet"; }else{ echo "/login"; }?>">run</a>
-
-	<a class="styleBouton" href="/forumListePosts">rum</a>
+    <a class="styleBouton" href="<?= $this->url('forumListePosts')?>">rum</a>
+    
 	<!--<p>run</p>-->
 	<!--<p>rum</p>-->
-
 
 
 <?php $this->stop('main_content') ?>

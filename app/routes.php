@@ -8,6 +8,8 @@
 		['GET|POST', '/inscription', 'AdminController#inscription', 'inscription'],
 		['GET|POST', '/oubliPassword', 'AdminController#oubliPassword', 'oubliPassword'],
 				
+
+		['GET',      '/forumListePosts','ForumController#forumListePosts', 'forumListePosts'], 
 		['GET|POST', '/forumAjouterPost',          'ForumController#forumAjouterPost',    'forumAjouterPost'],
         
         // route pour la creation des carnets
@@ -30,7 +32,9 @@
 		['GET|POST', '/forumSignalerPost/[i:id]/',  'ForumController#forumSignalerPost',    'forumSignalerPost'],
 		['GET|POST', '/forumSignalerReponse/[i:post_id]/[i:reponse_id]/',  'ForumController#forumSignalerReponse',    'forumSignalerReponse'],
 		['GET|POST', '/forumListeReponses/[i:id]/',     'ForumController#forumListeReponses', 'forumListeReponses'], 
-		['GET',      '/forumListePosts',                'ForumController#forumListePosts', 'forumListePosts'], 
+
+		['GET',      '/forumListePostsN/[a:techange]/[i:page]/','ForumController#forumListePosts', 'forumListePostsN'], 
+		
 	   	['GET',      '/forumListePostsT/[a:techange]/', 'ForumController#forumListePosts', 'forumListePostsT'], 
 	    
 

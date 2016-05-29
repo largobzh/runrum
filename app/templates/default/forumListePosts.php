@@ -12,6 +12,20 @@
 		Se connecter pour ajouter comptes-rendus, news ou questions puis cliquer sur le boutton ajouter.
 
         Pour modifier un post que vous avez publié, cliquez sur le texte de ce post., la fenêtre d'édition s'ouvrira.
+
+
+    </p> 
+    <p>
+    	<?php if(isset($totalNbPosts) && isset($nbPostsAffiche))
+		{
+			echo $nbPostsAffiche  . " Post sont affichés.";
+			if($totalNbPosts > $nbPostsAffiche)
+			{
+			 echo ". Utilisez les boutons de navigation pour afficher les posts suivants"; 
+			}
+		?><p>N° de page :<?php echo $page ?></p>
+		<?php }?>
+        
     </p> 
 	
 <?php $this->stop('side_content') ?>
@@ -23,7 +37,7 @@
 <article>
 	<!-- <h4>Liste des posts...<?= $user['pseudo'] ?></h4>
  -->
-	<div>
+ 	<div>
 		<ul id="categories">
 		<?php foreach ($type_echange_short as $techanges) { ?>
 		
@@ -114,7 +128,17 @@
 	<div>
         <ul id="navPages">
             <li>
-            	<a href="pagePreced" class="sansSoulign">Page précédente</a></li>
+            <!-- modif yvan 29/05/16 pagination -->
+            <!-- si le n° de la page courante est < au nombre de page total on affiche le bouton nav droit -->
+	            <?php  if(isset($page) && isset($nbPage) && $page>1)
+	            { ?>
+            <!-- ============================================= -->
+            	<a  href="<?= $this->url('forumListePostsN', ['techange' => "prec", 'page' => $page]) ?>" class="sansSoulign"  >Page précédente</a>
+
+            	<?php } ?>
+            </li>
+            <!-- ============================================= -->
+
             <li>
 				<?php  if(isset($_SESSION["user"])){ ?>
 					<a href="<?= $this->url('forumAjouterPost') ?>" class="sansSoulign" title="accès au formulaire de saisie d'un nouveau post.">Ajouter</a>
@@ -122,7 +146,16 @@
 			</li>
 
             <li>
-            	<a href="pageSuiv" class="sansSoulign">Page suivante</a>
+			<!-- modif yvan 29/05/16 pagination -->
+		   	<!-- si le n° de la page courante est < au nombre de page total on affiche le bouton nav droit -->
+		  
+            <?php  if(isset($page) && isset($nbPage) && $page < $nbPage)
+            {?>	
+            
+				<a  href="<?= $this->url('forumListePostsN', ['techange' => "suiv", 'page' => $page]) ?>" class="sansSoulign" id="PostSuiv">Page suivante</a>
+            <?php } ?>
+             <!-- ============================================= -->
+				
             </li>
         </ul>
    	</div>
