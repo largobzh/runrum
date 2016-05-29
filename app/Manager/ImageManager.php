@@ -5,19 +5,13 @@ namespace Manager;
 class imageManager extends  \W\Manager\Manager 
 {
 
-// // ****************************************
-// // getToken
-// // ****************************************
-
-// 	public function findToken($user_id, $token_id )
-// 	{
-// 			$sql ="SELECT *  FROM tokens WHERE id_utilisateur= :id and token= :token and date_validite > now()";
-// 			$sth = $this->dbh->prepare($sql);
-// 			$sth->bindValue(':id',    $user_id);
-// 			$sth->bindValue(':token', $token_id);
-// 			$sth->execute();
-// 			return $sth->fetch();
-// 	}
+	public function getPhotos()
+	{
+		$sql = "SELECT p.id_image , p.id_post, i.ref_image FROM echanges_images AS p INNER JOIN images AS i on(p.id_image = i.id)";
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+		return $sth->fetchAll();
+	}
 
 }
 

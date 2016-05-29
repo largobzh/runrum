@@ -88,7 +88,7 @@ $(function() {
 		console.log(url);
 		swal({
 			title: "Êtes-vous sûr ?",
-			text: "Suppression définitive",
+			text: "Suppression définitive, attention toutes les réponses et photos correspondantes seront supprimées !!",
 			type: "warning",
 			font:'Oxygen',
 			showCancelButton: true,

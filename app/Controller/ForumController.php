@@ -26,6 +26,7 @@ define('HEIGHT_MAX', 800);    // Hauteur max de l'image en pixels
  
 
 define('NBPOSTSPARPAGE', 5);    // nb de posts par page pour la pagination
+
 class ForumController extends Controller
 {
 
@@ -42,8 +43,9 @@ class ForumController extends Controller
 			$techange="";
 		}
 				
-		$manager = new PostManager();
+		$manager = new imageManager();
 		$photos = $manager->getPhotos();
+		$manager = new postManager();
 		$posts = $manager->getPosts("", 'date_publication', 'DESC', $techange);
 		
 		// 1. nombre d'enregistrement retournés
@@ -62,7 +64,8 @@ class ForumController extends Controller
 	
         $posts = $manager->getPosts("", 'date_publication', 'DESC', $techange, $premier, NBPOSTSPARPAGE);
 		$nbPostsAffiche= count($posts);
-		$type_echange_short = $manager->getTypeEchange();
+		$type_echangeManager = new Type_echangeManager();
+		$type_echange_short = $type_echangeManager->getTypeEchange();
 		$this->show('default/forumListePosts', ['posts' => $posts, 'user' => $user, 'type_echange_short' => $type_echange_short, 'photos' =>$photos, 'tbNumeroPage'=>$tbNumeroPage, 'page'=>$page,'nbPage'=>$nbPage, 'totalNbPosts' =>$totalNbPosts, 'nbPostsAffiche' => $nbPostsAffiche, 'techange'=>$techange]);
 	}
 	
@@ -301,11 +304,36 @@ class ForumController extends Controller
 	}
 
 	// afin de supprimer un post du forum
-	public function forumSupprimerPost($id){
-		$manager = new PostManager();
-		$manager->setTable('posts');
-		$supprimer = $manager->delete($id);
-		// redirige vers la  liste des posts
+	public function forumSupprimerPost($id)
+	{
+		$manager = new echanges_imageManager();
+		$manager->setTable('echange_images');
+
+		// 1. on va supprimer toutes les photos du serveur
+		$images=$manager->getPhotosByPostId($id);
+		
+		$manager->setTable('images');
+		foreach($images as $key => $filename)
+		{
+			if(file_exists($filename['ref_image']))
+			{
+				unlink($filename['ref_image']);
+				$manager->delete($filename['id']);
+			}
+		}
+
+
+		// 2. on va supprimer toutes les reponses correspndantes
+	    $ReponseManager = new ReponseManager();
+		$supprimer = $ReponseManager->deleteReponses($id);
+		// 3. on va supprimer le post
+		$manager->setTable('posts');	
+		$supprimer = $manager->delete($id);		
+		// 4. on va supprimer les enreg de ecjanges-images
+	    $echanges_images = new echanges_imageManager();
+		$supprimer = $echanges_images->deleteEchanges_Images($id);	
+		// rediriger vers la  liste des posts
+		$msg['info']  = "Vous venez de supprimer le post : "  . $id ;
 		$this->redirectToRoute('forumListePosts');
 	}
 
