@@ -1,7 +1,7 @@
 <!-- ==================================================================================== -->
 <!-- le 28/05/16 modif du titre  et site content-->
 <!-- ==================================================================================== -->
-<?php $this->layout('layout', ['title' => 'run|rum-Forum - Liste des posts publiés!']) ?>
+<?php $this->layout('layout', ['title' => 'Forum - Liste des posts']) ?>
 
 <?php $this->start('side_content') ?>
 	<h3>

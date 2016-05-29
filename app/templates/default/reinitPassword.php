@@ -1,5 +1,20 @@
+<!-- ==================================================================================== -->
+<!-- le 28/05/16 modif du titre  et site content-->
+<!-- ==================================================================================== -->
 <?php $this->layout('layout', ['title' => 'Réinitialiser votre mot de passe']) ?>
 
+<?php $this->start('side_content') ?>
+
+ <?php
+    if(!empty($msg))
+    {
+        if (array_key_exists('info', $msg)) { ?>
+        <p><?= $msg['info'] ?></p>
+    <?php }} ?>  
+
+<?php $this->stop('side_content') ?>
+
+<!-- ==================================================================================== -->
 
 <?php $this->start('main_content') ?>
 
@@ -58,16 +73,7 @@
     </div>
 
 
-
-    <?php
-    if(!empty($msg))
-    {
-        if (array_key_exists('info', $msg)) { ?>
-        <p><?= $msg['info'] ?></p>
-    <?php }} ?>  
-
-
-
+   
 
 
     <div class="form-group">

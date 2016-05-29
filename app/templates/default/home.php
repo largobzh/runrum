@@ -14,12 +14,7 @@
 
 
 
-
-
-
-
 <?php $this->start('side_content') ?>
-
 
 
 <?php if(isset($msg) && array_key_exists('info', $msg))
