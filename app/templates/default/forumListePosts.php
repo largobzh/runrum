@@ -4,7 +4,15 @@
 <?php $this->layout('layout', ['title' => 'run|rum-Forum - Liste des posts publiés!']) ?>
 
 <?php $this->start('side_content') ?>
-<h3>Connectez-vous pour ajouter vos comptes-rendus, news ou vos questions et cliquez sur le boutton ajouter.   </h3>
+	<h3>
+		Comment ajouter et modifier des posts :
+	</h3>
+
+    <p>
+		Se connecter pour ajouter comptes-rendus, news ou questions puis cliquer sur le boutton ajouter.
+
+        Pour modifier un post que vous avez publié, cliquez sur le texte de ce post., la fenêtre d'édition s'ouvrira.
+    </p> 
 	
 <?php $this->stop('side_content') ?>
 

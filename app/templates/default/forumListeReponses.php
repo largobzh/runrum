@@ -1,10 +1,10 @@
 <!-- ==================================================================================== -->
 <!-- le 28/05/16 modif du titre  et site content-->
 <!-- ==================================================================================== -->
-<?php $this->layout('layout', ['title' => 'runrum-Forum  - Liste des réponses publiées!']) ?>
+<?php $this->layout('layout', ['title' => 'rum : Liste des réponses']) ?>
 
 <?php $this->start('side_content') ?>
-<h3>Ajoutez votre commentaire, news ou compte-rendu ou tout simplement partagez !! </h3>
+	<h3>Ajoutez votre commentaire, news ou compte-rendu ou tout simplement partagez !! </h3>
 	
 <?php $this->stop('side_content') ?>
 <!-- ========================================================================================= -->
