@@ -26,7 +26,7 @@ define('HEIGHT_MAX', 800);    // Hauteur max de l'image en pixels
  
 
 define('NBPOSTSPARPAGE', 5);    // nb de posts par page pour la pagination
-
+define('NBREPONSESPARPAGE', 5);    // nb de posts par page pour la pagination
 class ForumController extends Controller
 {
 
@@ -73,7 +73,7 @@ class ForumController extends Controller
 	// ***************************************************
 	// Afficher toutes les répones du poste sélectionné dans forumListePosts
 	// ***************************************************
-	public function forumListeReponses($id)
+	public function forumListeReponses($id, $sens="", $page=0)
 	{
 		$msg = array();
 		$manager = new PostManager();
@@ -126,10 +126,31 @@ class ForumController extends Controller
 			{
 				$reponseManager = new ReponseManager();
 				$reponses = $reponseManager->getReponses($id, 'date_publication', 'DESC');
+
+				// 1. nombre d'enregistrement retournés
+					$totalNbReponses= count($reponses);
+					// 2. Nombre de pages 
+					$nbPage = ceil($totalNbReponses / NBREPONSESPARPAGE) ;
+					// 3. on calcul les n° de page
+					for ($i= 1 ; $i <= $nbPage ; $i++)
+			        {
+			            $tbNumeroPage[] = $i;
+			        }
+			       
+			        if ($page ==0 ){$page = 1;}
+			        // 4. On calcule le numéro du premier post  qu'on prend pour le LIMIT de MySQL
+			        $premier = ($page - 1) * NBREPONSESPARPAGE;
+
+
+
+
+
+				$reponseManager = new ReponseManager();
+				$reponses = $reponseManager->getReponses($id, 'date_publication', 'DESC' ,$premier, NBREPONSESPARPAGE);
 			}
 		
 		}
-		$this->show('default/forumListeReponses', ['posts' => $posts, 'reponses'=> $reponses, 'msg' => $msg]);
+		$this->show('default/forumListeReponses', ['posts' => $posts, 'reponses'=> $reponses, 'msg' => $msg, 'page'=>$page,'nbPage'=>$nbPage,]);
 	}
 	
 	
@@ -222,7 +243,7 @@ class ForumController extends Controller
 	        	// ajout d'un post
 				$manager = new PostManager();
 				$user = $this->getUser();
-				
+				print_r($user);
 				$tbNewPost = ['utilisateur_id'=>$user['id'] , 'nbvues'=>0, 'nbreponses'=>0];
 				$_POST['form']['date_publication']=date('Y-m-d') ;
 				$lastUserId = $manager->insert(array_merge($_POST['form'],$tbNewPost));

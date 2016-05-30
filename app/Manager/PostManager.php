@@ -5,7 +5,7 @@ class PostManager extends \W\Manager\Manager
 {
 
 
-	public function getPosts($post_id = "", $orderBy = "", $orderDir = "ASC", $type_echange = "", $premier = null , $nbBilletParPage  =null)
+	public function getPosts($post_id = "", $orderBy = "", $orderDir = "ASC", $type_echange = "", $premier = null , $nbPostParPage  =null)
 	{
 
 	    $sql = "SELECT p.id , p.titre, p.post, p.date_publication, p.nbvues, p.utilisateur_id, u.pseudo, c.type_echange, c.type_echange_short, (SELECT COUNT(post_id) FROM `reponses` WHERE p.id=post_id) as nbreponses  FROM posts AS p INNER JOIN type_echange AS c on(p.type_echange_id = c.id) INNER JOIN utilisateurs as u on (p.utilisateur_id = u.id)" ;
@@ -59,8 +59,8 @@ class PostManager extends \W\Manager\Manager
 		if(is_numeric($premier))
 		{
 			$sql .= " LIMIT $premier";
-			if(is_numeric($nbBilletParPage)){
-				$sql .= " , $nbBilletParPage";
+			if(is_numeric($nbPostParPage)){
+				$sql .= " , $nbPostParPage";
 			}
 		}
 		

@@ -5,7 +5,7 @@ namespace Manager;
 class ReponseManager extends  \W\Manager\Manager 
 {
 	
-	public function getReponses($post_id, $orderBy = "", $orderDir = "ASC")
+	public function getReponses($post_id, $orderBy = "", $orderDir = "ASC",$premier = null , $nbReponseParPage  =null)
 	{
 		if (!is_numeric($post_id)){return false;
 	}
@@ -36,6 +36,18 @@ class ReponseManager extends  \W\Manager\Manager
 			$sql .= " ORDER BY date_publication DESC";
 		}	
  
+
+		// on cible les enregistrement selon la pagination
+		if(is_numeric($premier))
+		{
+			$sql .= " LIMIT $premier";
+			if(is_numeric($nbReponseParPage)){
+				$sql .= " , $nbReponseParPage";
+			}
+		}
+
+
+
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 		return $sth->fetchAll();

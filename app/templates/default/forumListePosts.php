@@ -135,14 +135,26 @@
             <!-- ============================================= -->
             	<a  href="<?= $this->url('forumListePostsN', ['techange' => "prec", 'page' => $page]) ?>" class="sansSoulign"  >Page précédente</a>
 
-            	<?php } ?>
+            	<?php } 
+            	else
+				{?>
+					<a> &nbsp;</a>
+				<?php
+				}?>
             </li>
             <!-- ============================================= -->
 
             <li>
-				<?php  if(isset($_SESSION["user"])){ ?>
+				<?php  if(isset($_SESSION["user"]))
+				{ ?>
 					<a href="<?= $this->url('forumAjouterPost') ?>"class="sansSoulign" title="accès au formulaire de saisie d'un nouveau post.">Ajouter</a>
-				<?php } ?>
+				<?php } 
+				else
+				{?>
+					<a> &nbsp;</a>
+				<?php
+				}?>
+
 			</li>
 
             <li>
@@ -156,7 +168,12 @@
             {?>	
             
 				<a  href="<?= $this->url('forumListePostsN', ['techange' => "suiv", 'page' => $page]) ?>" class="sansSoulign" id="PostSuiv">Page suivante</a>
-            <?php } ?>
+            <?php }
+            else
+				{?>
+					<a> &nbsp;</a>
+				<?php
+				}?>
              <!-- ============================================= -->
 				
             </li>
