@@ -169,11 +169,11 @@ class AdminController extends Controller
 					$tok->insert(['id_utilisateur'=>$id_utilisateur['id'], 'token'=>$token, 'date_validite'=>$date_validite]);
 					// $lien = "<a href=\"runrum/activerCompte?&id=" . $id_utilisateur['id'] . "&token=" . $token . "\">Lien</a>";
 					$lien = "<a href=http://runrum/activerCompte?&id=" . $id_utilisateur['id'] . "&token=" . $token . "\">Activer votre compte</a>";
-					$subject = 'Activer votre compte sur runrum';
-					$body ="Bonjour, Vous êtes désormais inscrit sur le site runrum. Cliquer sur le lien afin de confirmer votre identification. " .  $lien  ;
+					$subject = 'Activer votre compte sur run|rum';
+					$body ="Bonjour, Vous êtes désormais inscrit sur le site run|rum. Cliquer sur le lien afin de confirmer votre identification." .  $lien  ;
 					if(Outils::envoiMail('yvan.lebrigand@gmail.com', $_POST['form']['email'], $subject, $body))
 					{						
-						$msg['info']  = "Vérifier votre messagerie. cliqer sur le lien dans le message de confirmation envoyé à " . $_POST['form']['email'] ;
+						$msg['info']  = "Vérifier votre messagerie. cliquer sur le lien dans le message de confirmation envoyé à " . $_POST['form']['email'] ;
 
 						$this->redirectToRoute('activerCompte', ['user_id' =>$id_utilisateur['id'],  'token_id' =>$token, 'msg' => $msg]);
 						// $this->show('default/home', ['msg' => $msg]);
@@ -223,7 +223,7 @@ class AdminController extends Controller
 					$user = $manager->getUserByUsernameOrEmail($email);
 					if(!$user)
 					{
-						$msg['erreur']['email']  = "Cet email n'existe pas";
+						$msg['erreur']['email']  = "Cet email n'existe pas.";
 					}
 					else
 					{		
@@ -253,12 +253,12 @@ class AdminController extends Controller
 				$tok->insert(['id_utilisateur'=>$user['id'], 'token'=>$token, 'date_validite'=>$date_validite]);
 				$lien = "<a href=http://runrum/reinitPassword?&id=" . $user['id'] . "&token=" . $token . "\">Changer son mot de passe</a>";
 				
-				$subject ="changer son mot de passe sur l'application runrum";
+				$subject ="changer son mot de passe sur l'application run|rum";
 				$body ="Bonjour, pour changer votre mot de passe cliquer sur ce lien  : " .  $lien  ;
 				if(Outils::envoiMail('yvan.lebrigand@gmail.com', $_POST['form']['email'], $subject, $body))
 				{
 					// pour les tests on route comme si on avait cliquer sur le lien
-				$msg['info']  = "Vérifier votre messagerie. cliqer sur le lien dans le message de confirmation envoyé à " . $_POST['form']['email'] ;
+				$msg['info']  = "Vérifier votre messagerie. cliquer sur le lien dans le message de confirmation envoyé à " . $_POST['form']['email'] ;
 				$this->redirectToRoute('reinitPassword', ['user_id' => $user['id'],  'token_id' =>$token, 'msg' => $msg]);
 				/*$this->show('default/reinitPassword', ['user_id' => $user['id'],  'token_id' =>$token, 'msg' => $msg]);*/
 				
@@ -300,7 +300,7 @@ class AdminController extends Controller
 				// aucun token récen de trouvé
 				else
 				{
-					$msg['info']  = "Ce lien est périmé, veuillez reesayer";
+					$msg['info']  = "Ce lien est périmé, veuillez réessayer";
 					$this->show('default/home');
 				}
 			}
@@ -395,14 +395,14 @@ class AdminController extends Controller
 						$_SESSION["user"]['id']     = $user['id'];
 						$_SESSION["user"]['email']  = $user['email'];
 						$_SESSION["user"]['pseudo'] = $user['pseudo'];
-						$msg['info']  = "Bonjour " . ucfirst($user['pseudo']) . ", votre compte a été activé avec succès et vous êtes désormais connectés.";
+						$msg['info']  = "Bonjour " . ucfirst($user['pseudo']) . ", votre compte a été activé avec succès et vous êtes désormais connecté.";
 						$this->show('default/home', ['msg' => $msg]);
 					}
 				}
 			}
 		}
 	
-		$msg['info']  = "Ce lien n'est n\'est plus valide. Esaayer de vous réinscrire !";
+		$msg['info']  = "Ce lien n'est n\'est plus valide. Esaayez de vous réinscrire !";
 		$this->show('default/home', ['msg' => $msg]);
 	} 
 
