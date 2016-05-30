@@ -5,10 +5,10 @@
 <?php $this->layout('layout', ['title' => 'Forum  - Liste des réponses']) ?>
 
 <?php $this->start('side_content') ?>
-	<h3>Ajoutez votre commentaire,</h3>
+<h3>Ajoutez votre commentaire,</h3>
 <p>news ou compte-rendu ou tout simplement partagez !! </p>
 
-	
+
 <?php $this->stop('side_content') ?>
 <!-- ========================================================================================= -->
 
@@ -118,10 +118,11 @@
 			<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod odio ipsam id accusantium voluptatibus in ipsa iste ut optio suscipit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod.</small>
 		</p>
 
-
+<!-- modif affichage pages -->
 		<p>
             <ul id="navComment">
 			
+
                 <li>
                 	<a class="sansSoulign" href="<?= $this->url('forumListePosts') ?>">Annuler</a>
             	</li>
@@ -131,7 +132,7 @@
 						<button name="submit" type="submit" class="sansSoulign" >Commenter</button>
                 	<?php  } ?>
                 </li>
-              
+
             </ul>
 		</p>
 
