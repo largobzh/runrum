@@ -167,16 +167,16 @@ class AdminController extends Controller
 					$token  = md5(uniqid(rand(), true));
 					$date_validite = date("Y-m-d H:i:s" , strtotime('+1 day'));
 					$tok->insert(['id_utilisateur'=>$id_utilisateur['id'], 'token'=>$token, 'date_validite'=>$date_validite]);
-					// $lien = "<a href=\"runrum/activerCompte?&id=" . $id_utilisateur['id'] . "&token=" . $token . "\">Lien</a>";
-					$lien = "<a href=http://runrum/activerCompte?&id=" . $id_utilisateur['id'] . "&token=" . $token . "\">Activer votre compte</a>";
-					$subject = 'Activer votre compte sur run|rum';
-					$body ="Bonjour, Vous êtes désormais inscrit sur le site run|rum. Cliquer sur le lien afin de confirmer votre identification." .  $lien  ;
+					$lien = "<a href=runrum/activerCompte/".$id_utilisateur['id']."/".$token.">Confirmez votre inscription</a>";
+				
+					$subject = 'Activez votre compte sur run|rum';
+					$body ="Bonjour, Vous êtes désormais inscrit sur le site run|rum. Cliquez sur le lien afin de confirmer votre identification." .  $lien  ;
 					if(Outils::envoiMail('yvan.lebrigand@gmail.com', $_POST['form']['email'], $subject, $body))
 					{						
-						$msg['info']  = "Vérifier votre messagerie. cliquer sur le lien dans le message de confirmation envoyé à " . $_POST['form']['email'] ;
+						$msg['info']  = "Vérifiez votre messagerie. cliquez sur le lien dans le message de confirmation envoyé à " . $_POST['form']['email'] ;
 
-						$this->redirectToRoute('activerCompte', ['user_id' =>$id_utilisateur['id'],  'token_id' =>$token, 'msg' => $msg]);
-						// $this->show('default/home', ['msg' => $msg]);
+						// $this->redirectToRoute('activerCompte', ['user_id' =>$id_utilisateur['id'],  'token_id' =>$token, 'msg' => $msg]);
+						$this->show('default/home', ['msg' => $msg]);
 					}
 
 				}
@@ -251,18 +251,16 @@ class AdminController extends Controller
 				$token  = md5(uniqid(rand(), true));
 				$date_validite = date("Y-m-d H:i:s" , strtotime('+1 day'));
 				$tok->insert(['id_utilisateur'=>$user['id'], 'token'=>$token, 'date_validite'=>$date_validite]);
-				$lien = "<a href=http://runrum/reinitPassword?&id=" . $user['id'] . "&token=" . $token . "\">Changer son mot de passe</a>";
+				$lien = "<a href=runrum/reinitPassword/".$user['id']."/".$token.">Changer son mot de passe</a>";
 				
 				$subject ="changer son mot de passe sur l'application run|rum";
 				$body ="Bonjour, pour changer votre mot de passe cliquer sur ce lien  : " .  $lien  ;
 				if(Outils::envoiMail('yvan.lebrigand@gmail.com', $_POST['form']['email'], $subject, $body))
 				{
 					// pour les tests on route comme si on avait cliquer sur le lien
-				$msg['info']  = "Vérifier votre messagerie. cliquer sur le lien dans le message de confirmation envoyé à " . $_POST['form']['email'] ;
-				$this->redirectToRoute('reinitPassword', ['user_id' => $user['id'],  'token_id' =>$token, 'msg' => $msg]);
-				/*$this->show('default/reinitPassword', ['user_id' => $user['id'],  'token_id' =>$token, 'msg' => $msg]);*/
+				$msg['info']  = "Vérifiez votre messagerie. Cliquez sur le lien dans le message de confirmation envoyé à " . $_POST['form']['email'] ;
+				$this->show('default/home', ['msg' => $msg]);
 				
-
 				}
 
 			}
@@ -402,7 +400,7 @@ class AdminController extends Controller
 			}
 		}
 	
-		$msg['info']  = "Ce lien n'est n\'est plus valide. Esaayez de vous réinscrire !";
+		$msg['info']  = "Ce lien n'est n\'est plus valide. Essayez de vous réinscrire !";
 		$this->show('default/home', ['msg' => $msg]);
 	} 
 

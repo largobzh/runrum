@@ -79,9 +79,10 @@
 
         <p>
             <label>
-                En cas d'oubli :
+                Procédure d'inscription :
             </label>
-            <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod odio ipsam id accusantium voluptatibus in ipsa iste ut optio suscipit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod.</small>
+            <small>Inscription via une adresse mail valide et un mot de passe.</small>
+            <small>Un email de confirmation vous sera envoyé valable durant 24 heures, après quoi vous devrez vous réinscrire.</small>
         </p>
 
 
