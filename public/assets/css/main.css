@@ -1489,18 +1489,18 @@ aside h3 {
 
 
 
+/*@media (min-width: 1900px) {
+    html {
+    margin: 0 auto;
+    background-image: url(../img/fond_hor_1920px2.jpg);
+    background-attachment:fixed;
+    }
+}*/
+
 @media (min-width: 1900px) {
     html {
     margin: 0 auto;
-    background-image: url(../img/fond_hor_1920px 2.jpg);
-    background-attachment:fixed;
-    }
-}
-
-@media (min-width: 2400px) {
-    html {
-    margin: 0 auto;
-    background-image: url(../img/fond_hor_3075px2 2.jpg);
+    background-image: url(../img/fond_hor_1920px2.jpg);
     background-attachment:fixed;
     }
 
