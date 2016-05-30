@@ -16,7 +16,10 @@ class CarnetController extends Controller
 	// afin d'afficher la page creation carnet
 	public function creationCarnet(){
 
-		
+		$alert = "";
+		$noalert= "";
+		$alurt = "";
+		$noalurt = "";
 
 
 		// Afin d'afficher les données Epreuves de la base de données dans le select
@@ -62,8 +65,8 @@ class CarnetController extends Controller
 				else{
 					
 					$m = new CarnetManager();
-				// temporaire pour l'utilisateur a modifier
-					$_POST['form']['utilisateur_id'] = 1;
+				// Enregistrement de note avec l'id de l'utilisateur 
+					$_POST['form']['utilisateur_id'] = $_SESSION["user"]['id'];
 					$_POST['form']['moyenne'] = $_POST['form']['distance']/2;
 					// afin de convertir les trois champs en secondes et les enregistrer dans le champ de la base de données
 					$_POST['form']['duree']= $_POST['heure']*60*60+$_POST['minute']*60+$_POST['secondes'];
@@ -71,49 +74,417 @@ class CarnetController extends Controller
 
 					// La partie Compteur 
 					if ($m) {
-						echo "Note enregistrer <br>";
+						
 
 						// Partie Kilométrage
 						
 							// ne pa oublier le controlle pour savoir si il à déja eu le badge
+						$util= $_SESSION["user"]['id'];
+							//  somme des valeurs du champ "distance" dans la base de données  
+						$k = new DistanceManager();
+						$k->setTable('carnets');
+						$listeCarnet = $k->getDistance($util);
 
-							// Faire la somme des valeurs du champ "distance" dans la base de données
-							$id= 1; // a changer ? OUI
-							$k = new DistanceManager();
-							$k->setTable('carnets');
-							$listeCarnet = $k->getDistance($id);
-							echo $listeCarnet;
-							// en fonction de la base de données 
 
-							if ($listeCarnet >= 10 && $listeCarnet < 21) {
+
+						if ($listeCarnet["SUM(distance)"] >= 10 && $listeCarnet["SUM(distance)"] < 21) {
 								// mettre un controlle pour savoir si le badge à était obtenu
-								echo "Bravo vous obtenez un badge de 10 km au total de vos activités ";
+
+
+
+								// recherche du badge
+							$badge = 10;
+								// afficher les données du compteur en fonction du badge rechercher
+							$compt = new DistanceManager();
+							$compteur = $compt->finder($badge);
+
+								// Verifier si l'utilisateur a déja obtenu ce badge
+							$optention = new DistanceManager();
+							$optention->setTable('notes_compteurs');
+							$opt = $optention->findcontro($compteur["id"],$_SESSION["user"]['id']);
+
+							if ($opt == True) {
+								$noalert = "Note enregistrée, Vous avez déjà obtenu le badge $badge km";
+							} else{
+
+								// enregistre le badge obtenu pour chaque utilisateur
+								// Permet d'enregistrer dans le (note)user_compteur
+								$u = new DistanceManager();
+								$u->setTable('notes_compteurs');
+								$compte = $u->inserter($_SESSION["user"]['id'],$compteur["id"]);
+								$alert = "Note enregistrée, Bravo vous obtenez un badge de 10 km au total de vos activités ";
+
+								// afin de poster le badge dans le forum
+
+								$utilisateur = $_SESSION["user"]['id'];
+								$type_echange = 2;
+								$post = "Bravo, ".$_SESSION["user"]['pseudo']." obtient un badge de 10  Kilomètres au total de ses activités";
+								$date_pub = date('Y-m-d');
+								$titre = "Badge Kilomètres";
+
+
+								$bg = new DistanceManager();
+								$bg->setTable('posts');
+								$posta = $bg->insertu($utilisateur, $type_echange, $post, $date_pub, $titre);
 							}
-							elseif ($listeCarnet >= 21 && $listeCarnet < 42.195) {
+
+						}
+						elseif ($listeCarnet["SUM(distance)"] >= 21 && $listeCarnet["SUM(distance)"] < 42) {
 							// mettre un controlle pour savoir si le badge à était obtenu
-								echo "Bravo vous obtenez un badge de 21 km au total de vos activités ";
+
+								// recherche du badge
+							$badge = 21;
+								// afficher les données du compteur en fonction du badge rechercher
+							$compt = new DistanceManager();
+							$compteur = $compt->finder($badge);
+
+							// Verifier si l'utilisateur a déja obtenu ce badge
+							$optention = new DistanceManager();
+							$optention->setTable('notes_compteurs');
+							$opt = $optention->findcontro($compteur["id"],$_SESSION["user"]['id']);
+
+							if ($opt == True) {
+								$noalert = "Note enregistrée, Vous avez déjà obtenu le badge $badge km";
+							} else{
+
+								// enregistre le badge obtenu pour chaque utilisateur
+								// Permet d'enregistrer dans le (note)user_compteur
+								$u = new DistanceManager();
+								$u->setTable('notes_compteurs');
+								$compte = $u->inserter($_SESSION["user"]['id'],$compteur["id"]);
+								$alert = "Note enregistrée, Bravo vous obtenez un badge de 21 km au total de vos activités ";
+
+								// afin de poster le badge dans le forum
+
+								$utilisateur = $_SESSION["user"]['id'];
+								$type_echange = 2;
+								$post = "Bravo, ".$_SESSION["user"]['pseudo']." obtient un badge de 21 Kilomètres au total de ses activités";
+								$date_pub = date('Y-m-d');
+								$titre = "Badge Kilomètres";
+
+
+								$bg = new DistanceManager();
+								$bg->setTable('posts');
+								$posta = $bg->insertu($utilisateur, $type_echange, $post, $date_pub, $titre);
 							}
-							elseif ($listeCarnet >= 42.195 && $listeCarnet < 100) {
+						}
+						elseif ($listeCarnet["SUM(distance)"] >= 42 && $listeCarnet["SUM(distance)"] < 100) {
 							// mettre un controlle pour savoir si le badge à était obtenu
-								echo "Bravo vous obtenez un badge de 42.195 km au total de vos activités ";
+
+								// recherche du badge
+							$badge = 42;
+								// afficher les données du compteur en fonction du badge rechercher
+							$compt = new DistanceManager();
+							$compteur = $compt->finder($badge);
+
+							// Verifier si l'utilisateur a déja obtenu ce badge
+							$optention = new DistanceManager();
+							$optention->setTable('notes_compteurs');
+							$opt = $optention->findcontro($compteur["id"],$_SESSION["user"]['id']);
+
+							if ($opt == True) {
+								$noalert = "Note enregistrée, Vous avez déjà obtenu le badge $badge km";
+							} else{
+
+
+								// enregistre le badge obtenu pour chaque utilisateur
+								// Permet d'enregistrer dans le (note)user_compteur
+								$u = new DistanceManager();
+								$u->setTable('notes_compteurs');
+								$compte = $u->inserter($_SESSION["user"]['id'],$compteur["id"]);
+								$alert = "Note enregistrée, Bravo vous obtenez un badge de 42 km au total de vos activités ";
+
+								// afin de poster le badge dans le forum
+
+								$utilisateur = $_SESSION["user"]['id'];
+								$type_echange = 2;
+								$post = "Bravo, ".$_SESSION["user"]['pseudo']." obtient un badge de 42 Kilométres au total de ses activités";
+								$date_pub = date('Y-m-d');
+								$titre = "Badge Kilomètres";
+
+
+								$bg = new DistanceManager();
+								$bg->setTable('posts');
+								$posta = $bg->insertu($utilisateur, $type_echange, $post, $date_pub, $titre);
 							}
-							elseif ($listeCarnet >= 100 && $listeCarnet < 1000) {
+						}
+						elseif ($listeCarnet["SUM(distance)"] >= 100 && $listeCarnet["SUM(distance)"] < 1000) {
 							// mettre un controlle pour savoir si le badge à était obtenu
-								echo "Bravo vous obtenez un badge de 100 km au total de vos activités ";
+
+								// recherche du badge
+							$badge = 100;
+								// afficher les données du compteur en fonction du badge rechercher
+							$compt = new DistanceManager();
+							$compteur = $compt->finder($badge);
+
+							// Verifier si l'utilisateur a déja obtenu ce badge
+							$optention = new DistanceManager();
+							$optention->setTable('notes_compteurs');
+							$opt = $optention->findcontro($compteur["id"],$_SESSION["user"]['id']);
+
+							if ($opt == True) {
+								$noalert = "Note enregistrée, Vous avez déjà obtenu le badge $badge km";
+							} else{
+
+								// enregistre le badge obtenu pour chaque utilisateur
+								// Permet d'enregistrer dans le (note)user_compteur
+								$u = new DistanceManager();
+								$u->setTable('notes_compteurs');
+								$compte = $u->inserter($_SESSION["user"]['id'],$compteur["id"]);
+								$alert = "Note enregistrée, Bravo vous obtenez un badge de 100 km au total de vos activités ";
+
+									// afin de poster le badge dans le forum
+
+								$utilisateur = $_SESSION["user"]['id'];
+								$type_echange = 2;
+								$post = "Bravo, ".$_SESSION["user"]['pseudo']." obtient un badge de 100 Kilomètres au total de ses activités";
+								$date_pub = date('Y-m-d');
+								$titre = "Badge Kilomètres";
+
+
+								$bg = new DistanceManager();
+								$bg->setTable('posts');
+								$posta = $bg->insertu($utilisateur, $type_echange, $post, $date_pub, $titre);
 							}
-							elseif ($listeCarnet == 1000) {
+						}
+						elseif ($listeCarnet["SUM(distance)"] == 1000) {
 							// mettre un controlle pour savoir si le badge à était obtenu
-								echo "Bravo vous obtenez un badge de 1000 km au total de vos activités ";
+
+								// recherche du badge
+							$badge = 1000;
+								// afficher les données du compteur en fonction du badge rechercher
+							$compt = new DistanceManager();
+							$compteur = $compt->finder($badge);
+
+							// Verifier si l'utilisateur a déja obtenu ce badge
+							$optention = new DistanceManager();
+							$optention->setTable('notes_compteurs');
+							$opt = $optention->findcontro($compteur["id"],$_SESSION["user"]['id']);
+
+							if ($opt == True) {
+								$noalert = "Note enregistrée, Vous avez déjà obtenu le badge $badge km";
+							} else{
+
+								// enregistre le badge obtenu pour chaque utilisateur
+								// Permet d'enregistrer dans le (note)user_compteur
+								$u = new DistanceManager();
+								$u->setTable('notes_compteurs');
+								$compte = $u->inserter($_SESSION["user"]['id'],$compteur["id"]);
+								$alert = "Note enregistrée, Bravo vous obtenez un badge de 1000 km au total de vos activités ";
+
+									// afin de poster le badge dans le forum
+
+								$utilisateur = $_SESSION["user"]['id'];
+								$type_echange = 2;
+								$post = "Bravo, ".$_SESSION["user"]['pseudo']." obtient un badge de 1000 Kilomètres au total de ses activités";
+								$date_pub = date('Y-m-d');
+								$titre = "Badge Kilomètres";
+
+
+								$bg = new DistanceManager();
+								$bg->setTable('posts');
+								$posta = $bg->insertu($utilisateur, $type_echange, $post, $date_pub, $titre);
+								
 							}
-							else{
-								echo "Encore un effort, pour obtenir le prochain badge ";
-							}
+						}
+						else{
+							$noalert = "Note enregistrée. Encore un effort. pour obtenir le prochain badge Kilomètres, Vous avais couru ".$listeCarnet["SUM(distance)"]." Km au total";
+						}
 
 
 
 
 						
-						// Partie durée (temps)
+						// Partie durée (temps) *******************************************************
+
+						//  somme des valeurs du champ "duree" dans la base de données  
+						$k = new DistanceManager();
+						$k->setTable('carnets');
+						$listeCarnets = $k->getDuree($util);
+
+
+
+						if ($listeCarnets["SUM(duree)"] >= 60 && $listeCarnets["SUM(duree)"] < 120) {
+								// mettre un controlle pour savoir si le badge à était obtenu
+
+
+
+								// recherche du badge
+							$badge = 60;
+								// afficher les données du compteur en fonction du badge rechercher
+							$compt = new DistanceManager();
+							$duree = $compt->finder($badge);
+
+								// Verifier si l'utilisateur a déja obtenu ce badge
+							$optention = new DistanceManager();
+							$optention->setTable('notes_compteurs');
+							$opts = $optention->findcontro($duree["id"],$_SESSION["user"]['id']);
+
+							if ($opts == True) {
+								$noalurt = "Note enregistrée, Vous avez déjà obtenu le badge 1 heure";
+							} else{
+
+								// enregistre le badge obtenu pour chaque utilisateur
+								// Permet d'enregistrer dans le (note)user_compteur
+								$u = new DistanceManager();
+								$u->setTable('notes_compteurs');
+								$compte = $u->inserter($_SESSION["user"]['id'],$duree["id"]);
+								$alurt = "Note enregistrée, Bravo vous obtenez un badge de 1 heure au total de vos activités ";
+
+								// afin de poster le badge dans le forum
+
+								$utilisateur = $_SESSION["user"]['id'];
+								$type_echange = 2;
+								$post = "Bravo, ".$_SESSION["user"]['pseudo']." obtient un badge de 1 heure au total de ses activités";
+								$date_pub = date('Y-m-d');
+								$titre = "Badge Durée";
+
+
+								$bg = new DistanceManager();
+								$bg->setTable('posts');
+								$postb = $bg->insertu($utilisateur, $type_echange, $post, $date_pub, $titre);
+							}
+
+						}
+						elseif ($listeCarnets["SUM(duree)"] >= 120 && $listeCarnets["SUM(duree)"] < 180) {
+							// mettre un controlle pour savoir si le badge à était obtenu
+
+								// recherche du badge
+							$badge = 120;
+								// afficher les données du compteur en fonction du badge rechercher
+							$compt = new DistanceManager();
+							$duree = $compt->finder($badge);
+
+							// Verifier si l'utilisateur a déja obtenu ce badge
+							$optention = new DistanceManager();
+							$optention->setTable('notes_compteurs');
+							$opts = $optention->findcontro($duree["id"],$_SESSION["user"]['id']);
+
+							if ($opts == True) {
+								$noalurt = "Note enregistrée, Vous avez déjà obtenu le badge 2 heures";
+							} else{
+
+								// enregistre le badge obtenu pour chaque utilisateur
+								// Permet d'enregistrer dans le (note)user_compteur
+								$u = new DistanceManager();
+								$u->setTable('notes_compteurs');
+								$compte = $u->inserter($_SESSION["user"]['id'],$duree["id"]);
+								$alurt = "Note enregistrée, Bravo vous obtenez un badge de 2 heures au total de vos activités ";
+
+								// afin de poster le badge dans le forum
+
+								$utilisateur = $_SESSION["user"]['id'];
+								$type_echange = 2;
+								$post = "Bravo, ".$_SESSION["user"]['pseudo']." obtient un badge de 2 heures au total de ses activités";
+								$date_pub = date('Y-m-d');
+								$titre = "Badge Durée";
+
+
+								$bg = new DistanceManager();
+								$bg->setTable('posts');
+								$postb = $bg->insertu($utilisateur, $type_echange, $post, $date_pub, $titre);
+
+							}
+						}
+						elseif ($listeCarnets["SUM(duree)"] >= 180 && $listeCarnets["SUM(duree)"] < 360) {
+							// mettre un controlle pour savoir si le badge à était obtenu
+
+								// recherche du badge
+							$badge = 180;
+								// afficher les données du compteur en fonction du badge rechercher
+							$compt = new DistanceManager();
+							$duree = $compt->finder($badge);
+
+							// Verifier si l'utilisateur a déja obtenu ce badge
+							$optention = new DistanceManager();
+							$optention->setTable('notes_compteurs');
+							$opts = $optention->findcontro($duree["id"],$_SESSION["user"]['id']);
+
+							if ($opts == True) {
+								$noalurt = "Note enregistrée, Vous avez déjà obtenu le badge 3 heures";
+							} else{
+
+
+								// enregistre le badge obtenu pour chaque utilisateur
+								// Permet d'enregistrer dans le (note)user_compteur
+								$u = new DistanceManager();
+								$u->setTable('notes_compteurs');
+								$compte = $u->inserter($_SESSION["user"]['id'],$duree["id"]);
+								$alurt = "Note enregistrée, Bravo vous obtenez un badge de 3 heures au total de vos activités ";
+
+								// afin de poster le badge dans le forum
+
+								$utilisateur = $_SESSION["user"]['id'];
+								$type_echange = 2;
+								$post = "Bravo, ".$_SESSION["user"]['pseudo']." obtient un badge de 3 heures au total de ses activités";
+								$date_pub = date('Y-m-d');
+								$titre = "Badge Durée";
+
+
+								$bg = new DistanceManager();
+								$bg->setTable('posts');
+								$postb = $bg->insertu($utilisateur, $type_echange, $post, $date_pub, $titre);
+							}
+						}
+						elseif ($listeCarnets["SUM(duree)"] == 360 ) {
+							// mettre un controlle pour savoir si le badge à était obtenu
+
+								// recherche du badge
+							$badge = 100;
+								// afficher les données du compteur en fonction du badge rechercher
+							$compt = new DistanceManager();
+							$duree = $compt->finder($badge);
+
+							// Verifier si l'utilisateur a déja obtenu ce badge duree
+							$optention = new DistanceManager();
+							$optention->setTable('notes_compteurs');
+							$opts = $optention->findcontro($duree["id"],$_SESSION["user"]['id']);
+
+							if ($opts == True) {
+								$noalurt = "Note enregistrée, Vous avez déjà obtenu le badge 6 heures";
+							} else{
+
+								// enregistre le badge obtenu pour chaque utilisateur
+								// Permet d'enregistrer dans le (note)user_compteur
+								$u = new DistanceManager();
+								$u->setTable('notes_compteurs');
+								$compte = $u->inserter($_SESSION["user"]['id'],$duree["id"]);
+								$alurt = "Note enregistrée, Bravo vous obtenez un badge de 6 heures au total de vos activités ";
+
+								// afin de poster le badge dans le forum
+
+								$utilisateur = $_SESSION["user"]['id'];
+								$type_echange = 2;
+								$post = "Bravo, ".$_SESSION["user"]['pseudo']." obtient un badge de 6 heures au total de ses activités";
+								$date_pub = date('Y-m-d');
+								$titre = "Badge Durée";
+
+
+								$bg = new DistanceManager();
+								$bg->setTable('posts');
+								$postb = $bg->insertu($utilisateur, $type_echange, $post, $date_pub, $titre);
+							}
+						}
+						
+						else{
+							$total = $listeCarnets["SUM(duree)"]; //ton nombre de secondes 
+
+
+							$heure = intval(abs($total / 3600)); 
+
+
+							$total = $total - ($heure * 3600); 
+
+
+							$minute = intval(abs($total / 60)); 
+
+
+							$total = $total - ($minute * 60); 
+
+
+							$seconde = $total; 
+							$noalurt = "Note enregistrée. Encore un effort. pour obtenir le prochain badge Durée, Vous êtes à ".$heure." heure(s) ".$minute." minute(s) ".$seconde." secondes de sport total";
+						}
 
 					}
 				}
@@ -122,8 +493,8 @@ class CarnetController extends Controller
 
 		}
 
-
-		$this->show('default/creationCarnet', ['epreuves'=> $epreuves, 'exercices'=> $exercices]);
+		
+		$this->show('default/creationCarnet', ['epreuves'=> $epreuves, 'exercices'=> $exercices,'alert'=>$alert, 'noalert'=>$noalert, 'alurt'=>$alurt, 'noalurt'=>$noalurt]);
 	}
 
 // *****************************************************************************

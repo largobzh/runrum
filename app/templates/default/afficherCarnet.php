@@ -99,7 +99,7 @@
             <ul id="navComment">
             <!-- mettre la requête  -->
             	<? //= $this->url('supprimerCarnet', ['id' => $value['id']]) ?>
-                <li><a href="#" data-id="<?= $this->url('supprimerCarnet', ['id' => $value['id']])?>" class="sansSoulign" >Supprimer</a></li>
+                <li><a href="#" data-id="<?= $this->url('supprimerCarnet', ['id' => $value['id']])?>" class="sansSoulign choix" >Supprimer</a></li>
                 
                 <li><a class="sansSoulign" href="<?= $this->url('modifierCarnet', ['id' => $value['id']]) ?>">Éditer</a></li>
 
@@ -108,7 +108,10 @@
 
 
 		<?php } ?>
-		
+		<!-- Afin de prévenir l'utilisateur qu'il n'as pas de note -->
+		<?php if (!$listes) {
+			echo "<p>Aucune notes dans votre carnet</p>";
+		} ?>
 	</div>
 </article>
 <?php $this->stop('main_content') ?>

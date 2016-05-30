@@ -62,8 +62,12 @@
             
                 
                     
-           
-            <a href="<?=$this->url('afficherCarnet') ?>">Carnet</a>
+           <?php if(isset($_SESSION['user'])){  ?>
+                <a href="<?=$this->url('afficherCarnet') ?>">Carnet</a>
+           <?php }else{  ?>
+                <a href="<?=$this->url('login') ?>">Carnet</a>
+           <?php }?>
+            
             <a href="<?=$this->url('forumListePosts') ?>">forum</a>     
    
 
@@ -91,7 +95,8 @@
     <script src="<?= $this->assetUrl('newerton/fancy-box/source/jquery.fancybox.pack.js')?>"</script>
     <script src="<?= $this->assetUrl('newerton/fancy-box/lib/jquery.mousewheel.pack.js')?>"</script>
 
-    <script src="<?= $this->assetUrl('js/main.js')?>"></script> 
+    <script src="<?= $this->assetUrl('js/main.js')?>"></script>
+    <?= $this->section('javascripts') ?> 
 
 </body>
 

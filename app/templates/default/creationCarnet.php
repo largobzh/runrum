@@ -110,6 +110,38 @@
 <?php $this->stop('main_content') ?>
 
 
+		<?php $this->start('javascripts') ?>
+		<!-- Pour les kilométres -->
+		<?php if($alert == True) { ?>
+			<script>
+				swal({   title: "Badge kilomètres",   text: "<?= $alert ?>",   imageUrl: "<?= $this->assetUrl('img/logo/badgekilometre.png') ?>" });
+			</script>
+			<?php } ?>
+			<!--  -->
+			<?php if($noalert == True) { ?>
+				<script>
+				swal("<?= $noalert ?>");
+				</script>
+				<?php } ?>
+
+				<!-- Pour les durées -->
+				<?php if($alurt == True) { ?>
+					<script>
+					setTimeout(function(){ swal({ title: "Badge Durée",   text: "<?= $alurt ?>",   imageUrl: "<?= $this->assetUrl('img/logo/badgeduree.png') ?>" }); }, 4000);
+						
+					</script>
+					<?php } ?>
+					<!--  -->
+					<?php if($noalurt == True) { ?>
+					<script>
+					setTimeout(function(){ swal("<?= $noalurt ?>"); }, 4000);
+						
+					</script>
+					<?php } ?>
+
+					<?php $this->stop('javascripts') ?>
+
+
 
 
 
