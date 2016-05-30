@@ -24,7 +24,7 @@
     
             <p>
                 <label>En cas d'oubli :</label>
-                <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod odio ipsam id accusantium voluptatibus in ipsa iste ut optio suscipit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod.</small>
+                <small>Cliquer sur le bouton 'oubli', un et remplissez le champ 'email'. Le processus sécurisé de redéfinission du mot de passe vous est alors envoyé.</small>
             </p>
 
  
@@ -34,7 +34,7 @@
 
         <div class="colonne1_3">
 
-  <p>
+            <p>
                 <label for="emailId"   id="labelDateNote">Email : </label>
 
                 <input name="form[email]" type="text" tabindex="1" class="boxLogin"  placeholder="John.Doe@domain.com" value="<?php 
