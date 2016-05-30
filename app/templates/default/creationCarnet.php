@@ -93,7 +93,7 @@
 			</p>
 
 			<p>
-				<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod odio ipsam id accusantium voluptatibus in ipsa iste ut optio suscipit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod.</small>
+				<small>Pour vous encourager dans votre pratique de la course à pied, des badges vous sont décernés quand vous atteignez certains paliers de temps et de distance. Les distances ajoutées à chaque nouvelle note sont cumulées, le compteur temps est quant à lui remis à zéro à chaque sortie. L'obtention d'un nouveau badge est annoncé à la communauté 'rum' via un nouveau post. </small>
 			</p>
 
 			<p>
