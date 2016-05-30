@@ -5,7 +5,7 @@
 <?php $this->layout('layout', ['title' => 'Forum  - Liste des réponses']) ?>
 
 <?php $this->start('side_content') ?>
-	<h3>Ajoutez votre commentaire, news ou compte-rendu ou tout simplement partagez !! </h3>
+	<h3>Ajoutez votre commentaire, news ou compte-rendu ou tout simplement partagez !</h3>
 	
 
 
@@ -15,7 +15,7 @@
 			echo $nbReponsesAffiche  . " Réponses sont affichées.";
 			if($totalNbReponses > $nbReponsesAffiche)
 			{
-			 echo ". Utilisez les boutons de navigation pour afficher les réponses suivantes"; 
+			 echo "Utilisez les boutons de navigation pour afficher les réponses suivantes"; 
 			}
 		?><p>N° de page :<?php echo $page ?></p>
 		<?php }?>
@@ -131,9 +131,10 @@
 			<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod odio ipsam id accusantium voluptatibus in ipsa iste ut optio suscipit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod.</small>
 		</p>
 
-
+<!-- modif affichage pages -->
 		<p>
-            <ul id="navComment">
+<!--             <ul id="navComment"> -->
+            <ul id="navPages">
 
 				<li>
 	            	<!-- modif yvan 29/05/16 pagination -->
@@ -163,9 +164,15 @@
 	            	<!-- si le n° de la page courante est < au nombre de page total on affiche le bouton nav droit -->
 		            <<?php  if(isset($page) && isset($nbPage) && $page < $nbPage)
 		            { ?>
-		                 <a href="<?= $this->url('forumListeReponesN', ['id' => $post['id'], 'sens' => "suiv", 'page' => $page]) ?>" class="sansSoulign"  >Page suivante</a>
+		                 <a class="sansSoulign" href="<?= $this->url('forumListeReponesN', ['id' => $post['id'], 'sens' => "suiv", 'page' => $page]) ?>">Page suivante</a>
 
-	            	<?php } ?>
+	            	<?php }
+
+	            	else
+						{?>
+							<a>&nbsp;</a>
+						<?php
+						}?>
             	</li>
             </ul>
 		</p>

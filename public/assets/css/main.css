@@ -1,8 +1,13 @@
+/*=====================================================*/
+/*                 CSS principale                      */
+/*=====================================================*/
+
+
 html {
     @import url(https://fonts.googleapis.com/css?family=Oxygen:400,300,700);
-    margin: 0 auto;
     background-image: url(../img/fond_hor_1366px2.jpg);
     background-attachment:fixed;
+    margin: 0 auto;
 }
 
 
