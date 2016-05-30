@@ -5,28 +5,15 @@
 <?php $this->layout('layout', ['title' => 'Forum  - Liste des réponses']) ?>
 
 <?php $this->start('side_content') ?>
-	<h3>Ajoutez votre commentaire, news ou compte-rendu ou tout simplement partagez !</h3>
-	
+<h3>Ajoutez votre commentaire,</h3>
+<p>news ou compte-rendu ou tout simplement partagez !! </p>
 
 
-	<p>
-    	<?php if(isset($totalNbReponses) && isset($nbReponsesAffiche))
-		{
-			echo $nbReponsesAffiche  . " Réponses sont affichées.";
-			if($totalNbReponses > $nbReponsesAffiche)
-			{
-			 echo "Utilisez les boutons de navigation pour afficher les réponses suivantes"; 
-			}
-		?><p>N° de page :<?php echo $page ?></p>
-		<?php }?>
-        
-    </p> 
 <?php $this->stop('side_content') ?>
 <!-- ========================================================================================= -->
 
 <?php $this->start('main_content') ?>
 <article>
-
 
 
 	<?php foreach ($posts as $post) { ?>
@@ -133,20 +120,8 @@
 
 <!-- modif affichage pages -->
 		<p>
-<!--             <ul id="navComment"> -->
-            <ul id="navPages">
-
-				<li>
-	            	<!-- modif yvan 29/05/16 pagination -->
-	            	<!-- si le n° de la page courante est < au nombre de page total on affiche le bouton nav droit -->
-		            <?php  if(isset($page) && isset($nbPage) && $page>1)
-		            { ?>
-		                 <a href="<?= $this->url('forumListeReponesN', ['id' => $post['id'], 'sens' => "prec", 'page' => $page]) ?>" class="sansSoulign"  >Page précédente</a>
-
-	            	<?php } ?>
-            	</li>
-            <!-- ============================================= -->
-            	
+            <ul id="navComment">
+			
 
                 <li>
                 	<a class="sansSoulign" href="<?= $this->url('forumListePosts') ?>">Annuler</a>
@@ -158,22 +133,6 @@
                 	<?php  } ?>
                 </li>
 
-
-                <li>
-	            	<!-- modif yvan 29/05/16 pagination -->
-	            	<!-- si le n° de la page courante est < au nombre de page total on affiche le bouton nav droit -->
-		            <<?php  if(isset($page) && isset($nbPage) && $page < $nbPage)
-		            { ?>
-		                 <a class="sansSoulign" href="<?= $this->url('forumListeReponesN', ['id' => $post['id'], 'sens' => "suiv", 'page' => $page]) ?>">Page suivante</a>
-
-	            	<?php }
-
-	            	else
-						{?>
-							<a>&nbsp;</a>
-						<?php
-						}?>
-            	</li>
             </ul>
 		</p>
 
@@ -184,12 +143,5 @@
 
 </article>
 <?php $this->stop('main_content') ?>
-
-
-
-
-
-
-
 
 
