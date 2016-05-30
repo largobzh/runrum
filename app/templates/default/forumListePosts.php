@@ -65,7 +65,7 @@
 			</h4>
 
 
-	       <p>
+	        <p>
 				<?php if($post['utilisateur_id'] == $user['id'])
 				{?>
 					<a  href="<?= $this->url('forumModifierPost', ['id' => $post['id']]) ?>">

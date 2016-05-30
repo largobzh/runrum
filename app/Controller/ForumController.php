@@ -26,7 +26,7 @@ define('HEIGHT_MAX', 800);    // Hauteur max de l'image en pixels
  
 
 define('NBPOSTSPARPAGE', 5);    // nb de posts par page pour la pagination
-define('NBREPONSESPARPAGE', 5);    // nb de posts par page pour la pagination
+
 class ForumController extends Controller
 {
 
@@ -73,33 +73,31 @@ class ForumController extends Controller
 	// ***************************************************
 	// Afficher toutes les répones du poste sélectionné dans forumListePosts
 	// ***************************************************
-	public function forumListeReponses($id, $sens="", $page=0)
+	public function forumListeReponses($id)
 	{
 		$msg = array();
 		$manager = new PostManager();
+		$reponseManager = new ReponseManager();
 		$post = $manager->find($id);
 		// ========================================
 		// on incrémente le nombre de vues
 		$post['nbvues']++; 
 		$manager->update($post,$id);
-		
-		// ========================================
+
+	   // ========================================
 
 		if(isset($_POST['submit']))
 		{
 			if(empty($_POST['form']['reponse'])){
 				$msg['erreur']['reponse'] = 'La réponse doit etre renseignée';
 			}
-				
 			if(!empty($msg['erreur']))
 			{
 				// on réaffiche toutes les réponses  et le message d'erreur 
-				$manager = new PostManager();
+				//$manager = new PostManager();
 				$posts = $manager->getPosts($id, 'date_publication', 'DESC');
-		
 				if($posts)
 				{
-					$reponseManager = new ReponseManager();
 					$reponses = $reponseManager->getReponses($id, 'date_publication', 'DESC');
 				}
 
@@ -107,53 +105,25 @@ class ForumController extends Controller
 			}
 			else
 				// on enregistre la réponse et on réaffcihe toutes les questions
-
 			{
-				$reponseManager = new ReponseManager();
 				$user = $this->getUser();
 				$tbNewPost = ['utilisateur_id'=>$user['id'] , 'post_id'=>$id];
 				$_POST['form']['date_publication']=date('Y-m-d') ;
 				$reponseManager->insert(array_merge($_POST['form'],$tbNewPost));
 				$this->redirectToRoute('forumListePosts');
 			}
-			
 		}
 		else
-		{
-			$manager = new PostManager();
+		{			
 			$posts = $manager->getPosts($id, 'date_publication', 'DESC');
-			if($posts)
-			{
-				$reponseManager = new ReponseManager();
-				$reponses = $reponseManager->getReponses($id, 'date_publication', 'DESC');
-
-				// 1. nombre d'enregistrement retournés
-					$totalNbReponses= count($reponses);
-					// 2. Nombre de pages 
-					$nbPage = ceil($totalNbReponses / NBREPONSESPARPAGE) ;
-					// 3. on calcul les n° de page
-					for ($i= 1 ; $i <= $nbPage ; $i++)
-			        {
-			            $tbNumeroPage[] = $i;
-			        }
-			       
-			        if ($page ==0 ){$page = 1;}
-			        // 4. On calcule le numéro du premier post  qu'on prend pour le LIMIT de MySQL
-			        $premier = ($page - 1) * NBREPONSESPARPAGE;
-
-
-
-
-
-				$reponseManager = new ReponseManager();
-				$reponses = $reponseManager->getReponses($id, 'date_publication', 'DESC' ,$premier, NBREPONSESPARPAGE);
-			}
-		
-		}
-		$this->show('default/forumListeReponses', ['posts' => $posts, 'reponses'=> $reponses, 'msg' => $msg, 'page'=>$page,'nbPage'=>$nbPage,]);
+			$reponses = $reponseManager->getReponses($id, 'date_publication', 'DESC');
+			
+			
+     }
+		$this->show('default/forumListeReponses', ['posts' => $posts, 'reponses'=> $reponses, 'msg' => $msg]);
 	}
 	
-	
+	// **********************************************************************************************************************
 
 	public function forumAjouterPost()
 	{
