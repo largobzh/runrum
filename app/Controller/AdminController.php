@@ -80,7 +80,7 @@ class AdminController extends Controller
 								$_SESSION["user"]['id'] = $user['id'];
 								$_SESSION["user"]['email'] = $user['email'];
 								$_SESSION["user"]['pseudo'] = $user['pseudo'];
-								$msg['info']  = "Bonjour " . ucfirst($user['pseudo']) . ", vous êtes désormais connectés sur runrum !";	
+								$msg['info']  = "Bonjour " . ucfirst($user['pseudo']) . ", vous êtes désormais connecté sur runrum !";	
 								$this->show('default/home',['msg' => $msg]);
 								// $this->redirectToRoute('home');
 
