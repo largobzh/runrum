@@ -1497,13 +1497,23 @@ aside h3 {
     }
 }*/
 
-@media (min-width: 1900px) {
+
+
+@media (min-width: 1400px) {
     html {
     margin: 0 auto;
     background-image: url(../img/fond_hor_1920px2.jpg);
     background-attachment:fixed;
     }
+}
 
+@media (min-width: 1920px) {
+    html {
+    margin: 0 auto;
+    background-image: url(../img/fond_hor_3075px2.jpg);
+    background-attachment:fixed;
+    }
+}
 
 
 /*==============media queries================*/
