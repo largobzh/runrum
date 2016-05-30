@@ -1476,14 +1476,59 @@ aside h3 {
 
     a#lienTitrePost {
 /*        width: 90vw; */
-        padding-right: 150px;
+        padding-right: 10px;
+        paddin-left:1rem;
+
     }
+
     li.mod3 {
         font-size: .9rem;
     }
+    
+
+
     h4 span {
         font-size: 1.2rem;
+        padding:1rem 0 1rem 0;
+
+    }
+
+    h4.couleurCR {
+    /* background: red; */
+
+        padding: 1rem 0 1rem 1rem;
+    }
+
+}
+
+
+
+
+/*@media (min-width: 1900px) {
+    html {
+    margin: 0 auto;
+    background-image: url(../img/fond_hor_1920px2.jpg);
+    background-attachment:fixed;
+    }
+}*/
+
+
+
+@media (min-width: 1400px) {
+    html {
+    margin: 0 auto;
+    background-image: url(../img/fond_hor_1920px2.jpg);
+    background-attachment:fixed;
     }
 }
+
+@media (min-width: 1920px) {
+    html {
+    margin: 0 auto;
+    background-image: url(../img/fond_hor_3075px2.jpg);
+    background-attachment:fixed;
+    }
+}
+
 
 /*==============media queries================*/

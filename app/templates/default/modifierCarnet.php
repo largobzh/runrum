@@ -140,7 +140,7 @@
 		</p>
 
 		<p>
-			<small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod odio ipsam id accusantium voluptatibus in ipsa iste ut optio suscipit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iure sit ad soluta quae veniam architecto, nesciunt veritatis quod.</small>
+			<small>Modifiez les champs concernés par la modification de votre note. Ces modifications n'influent pas sur l'attribution ou non de badges.</small>
 		</p>
 
 		<p>
