@@ -27,12 +27,12 @@
         <div>
             <p>
                 <!-- champ caché -->
-                <input type="hidden" name="form[post_id]" value=<?php 
+                <input  type="hidden" name="form[post_id]" value=<?php 
                     if(!empty($_POST['form']['post_id']))
                         { echo trim($_POST['form']['post_id']);} 
                     elseif(isset($post['id'])) 
                         {echo trim($post['id']) ;}
-                    ?> 
+                    ?>
             </p>
 
             <p>
@@ -134,6 +134,20 @@
                        <!--  <input type="submit" name="submit" value="Valider"> -->
                         <button name="submit" type="submit" >Valider</button>
                     </li>
+                        
+                        <!-- suppression d'un post   -->
+                    <li>
+                        <?php  if(isset($_SESSION["user"]))
+                        {
+                          // on stocke l'id du post courant
+                          if(!empty($_POST['form']['post_id']))
+                          {$id = trim($_POST['form']['post_id']);} 
+                          elseif(isset($post['id'])) 
+                          {$id = trim($post['id']);}
+                        ?>
+                        <a class="suppPost sansSoulign" href="#" data-id="<?= $this->url('forumSupprimerPost', ['id' => $id ])?>">Supprimer</a> 
+                        <?php } ?>
+                    </li>
                 </ul>
             </div>
 
@@ -142,10 +156,4 @@
 
 </article>
 <?php $this->stop('main_content') ?>
-
-
-
-
-
-
 

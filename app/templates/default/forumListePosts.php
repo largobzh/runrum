@@ -149,6 +149,9 @@
 			<!-- modif yvan 29/05/16 pagination -->
 		   	<!-- si le n° de la page courante est < au nombre de page total on affiche le bouton nav droit -->
 		  
+
+			<!--  <li>&thinsp; -->
+
             <?php  if(isset($page) && isset($nbPage) && $page < $nbPage)
             {?>	
             

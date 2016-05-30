@@ -41,5 +41,20 @@ class ReponseManager extends  \W\Manager\Manager
 		return $sth->fetchAll();
 			
 	}
-}
 
+// suppresion de toutes les réponses d'un post
+	public function deleteReponses($id)
+	{
+		if (!is_numeric($id)){
+			return false;
+		}
+
+
+		$sql = "DELETE FROM reponses WHERE post_id = :id";
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(":id", $id);
+		$sth->execute();
+		return $sth->execute();
+	}
+}
+	
