@@ -98,7 +98,8 @@
 
                 <p>
                     <label for="photoId">Sélectionner une photo : </label>
-                    <input type="file" id="photoId" name="photo"  class="fondForum">
+                    
+                    <input type="file" id="photoId" name="photo[]" multiple="multiple"  class="fondForum">
 
                     <?php
                         foreach ($msg as $key => $value) {

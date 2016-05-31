@@ -23,7 +23,7 @@ define('TARGET', 'assets/img/runrum/');    // Repertoire cible pour les photos
 define('MAX_SIZE', 200000);    // Taille max en octets du fichier 
 define('WIDTH_MAX', 800);    // Largeur max de l'image en pixels
 define('HEIGHT_MAX', 800);    // Hauteur max de l'image en pixels
- 
+ define('MAXPHOTO', 5);    // Hauteur max de l'image en pixels
 
 define('NBPOSTSPARPAGE', 5);    // nb de posts par page pour la pagination
 
@@ -129,43 +129,57 @@ class ForumController extends Controller
 	{
 		$msg = array();
 		$image = false;
-
-		// Afficher les données type-echange de la base de données dans le select
 		$n = new Type_echangeManager();
-
+		$manager = new PostManager();
+		$echanges_imageManager = new Echanges_imageManager();
+		
+		// Afficher les données type-echange de la base de données dans le select
 		$n->setTable('Type_echange');
 		$type_echange = $n->findAll();
 		
-
+		// 1. controle du formulaire
 		if(isset($_POST['submit'])) 
 		{
 			if(empty($_POST['form']['titre'])){
 				$msg['erreur']['titre'] = 'Le titre est obligatoire';
 			}
-
-
-
 			if(empty($_POST['form']['type_echange_id'])){
 				$msg['erreur']['type_echange_id'] = 'La catégorie est obligatoire';
 			}
- 		//========================================
- 		// controle si on sélectionne un fichier
-		//========================================
-			if (is_uploaded_file($_FILES['photo']['tmp_name']))
+
+ 			// 2. vérifications des photos sélectionnées
+			
+			if(count($_FILES['photo']['name']) > 0)
 			{
-
-				$extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
-				$extension_upload = strtolower(  substr(strrchr($_FILES['photo']['name'], '.')  ,1)  );
-				if (!in_array($extension_upload,$extensions_valides) )
-				{
-					$msg['erreur']['photo'] = "L'extension est invalide. ( jpg - jpeg - gif - png)";
+				if(count($_FILES['photo']['name']) > MAXPHOTO){
+					$msg['erreur']['photo'] = "Le nombre maximum d'images ne doit pas dépasser " . MAXPHOTO; 
 				}
-
-
-				$image_sizes = getimagesize($_FILES['photo']['tmp_name']);
-				if ($image_sizes[0] > MAX_SIZE OR $image_sizes[1] > MAX_SIZE) 
+				else
 				{
-					$msg['erreur']['photo'] = "La taille de l'image est trop grande ";
+
+					$extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
+					for($i=0; $i<count($_FILES['photo']['name']); $i++) 
+					{
+						$extension_upload = strtolower(substr(strrchr($_FILES['photo']['name'][$i], '.')  ,1)  );
+						if (!in_array($extension_upload,$extensions_valides) )
+						{
+							$msg['erreur']['photo'] = "L'extension est invalide. ( jpg - jpeg - gif - png)";
+						}
+
+						if (empty($_FILES['photo']['tmp_name'][$i]))
+						{
+							$msg['erreur']['photo'] = "Veuillez sélectionner une image";
+						}
+						else
+						{
+							$image_sizes = getimagesize($_FILES['photo']['tmp_name'][$i]);	
+						}
+		
+						if ($image_sizes[0] > MAX_SIZE OR $image_sizes[1] > MAX_SIZE) 
+						{
+							$msg['erreur']['photo'] = "Veuillez sélectionner une taille d'image moins importante";
+						}
+					}
 				}
 			}
 
@@ -176,68 +190,68 @@ class ForumController extends Controller
 			}
 			else
 			{
+				// 3.  ajout d'un post dans la BDD
+				$user = $this->getUser();
+				$tbNewPost = ['utilisateur_id'=>$user['id'] , 'nbvues'=>0, 'nbreponses'=>0];
+				$_POST['form']['date_publication']=date('Y-m-d') ;
+				$postId = $manager->insert(array_merge($_POST['form'],$tbNewPost));
 
-				// ============  gestion de l'ajout de photo ======================
-		     
+		// 4. ============  gestion de l'ajout de photo ======================
+
 	          // pour une photo on en crée 2 photos 
 	          	//  - 1 photo mignature : hauteur de 100  préfixe min)
 	            //  - 1 photo grande : hauteur de 600  préfixe max)
-          	if (is_uploaded_file($_FILES['photo']['tmp_name']))
-          	{
-	            $tmp_name  = $_FILES['photo']['tmp_name'];
-	            $extension = pathinfo($_FILES['photo']['name'])['extension'];
-	            $hash      = md5_file($_FILES['photo']['tmp_name']) ;
-
-	            $fichierMin = "min_"."$hash.$extension"; // extension avec le point
-	            $fichierMax = "max_"."$hash.$extension"; // extension avec le point
-	            
-				$targetMin = TARGET . $fichierMin ;
-				$targetMax = TARGET . $fichierMax ;
-				
-	            move_uploaded_file($tmp_name, $targetMin);
-	            if (file_exists($targetMin))
-	            {
-	            	copy($targetMin, $targetMax);
-	            	$imageMin = new ImageResize($targetMin);
-		            $imageMin->resizeToHeight(100 );
-		            $imageMin->save($targetMin);
-
-					$imageMax= new ImageResize($targetMax);
-		            $imageMax->resizeToHeight(600 );
-		            $imageMax->save($targetMax);
-		            $image = true;
-            	}
-	        }
-
-
-	        	// ajout d'un post
-				$manager = new PostManager();
-				$user = $this->getUser();
-				print_r($user);
-				$tbNewPost = ['utilisateur_id'=>$user['id'] , 'nbvues'=>0, 'nbreponses'=>0];
-				$_POST['form']['date_publication']=date('Y-m-d') ;
-				$lastUserId = $manager->insert(array_merge($_POST['form'],$tbNewPost));
-				// ajout des images dans la table images 
-				
-				if($lastUserId && $image)
+				if(count($_FILES['photo']['name']) > 0)
 				{
-					$managerImg = new ImageManager();
-					$managerImg->setTable('images');
-					$lastImgIdMin = $managerImg->insert(['ref_image'=>$targetMin]);
-					$lastImgIdMax = $managerImg->insert(['ref_image'=>$targetMax]);
-					// ajout lien post/images dans  echanges_imageManager
-					$managerPostImg = new echanges_imageManager();
-					$managerPostImg->setTable('echanges_images');
-					
-					$managerPostImg->insert(['id_post'=>$lastUserId['id'], 'id_image'=>$lastImgIdMin['id']]);
-					$managerPostImg->insert(['id_post'=>$lastUserId['id'], 'id_image'=>$lastImgIdMax['id']]);
-				}
+					$managerImg     = new ImageManager();
 
-				// $this->show('default/forumHome');
-				$this->redirectToRoute('forumListePosts');
-			}
-			
-		}
+					for($i=0; $i<count($_FILES['photo']['name']); $i++) 
+					{
+						$tmp_name  = $_FILES['photo']['tmp_name'][$i];
+						$extension = pathinfo($_FILES['photo']['name'][$i])['extension'];
+						$hash      = md5_file($_FILES['photo']['tmp_name'][$i]) ;
+						$tmp       = date('d-m-Y-H-i-s');
+
+			            $fichierMin = "min_". $tmp.'-'."$hash.$extension"; // extension avec le point
+			            $fichierMax = "max_". $tmp.'-'."$hash.$extension"; // extension avec le point
+			            
+			            $targetMin = TARGET . $fichierMin ;
+			            $targetMax = TARGET . $fichierMax ;
+
+			            if(move_uploaded_file($tmp_name, $targetMin));
+			            {
+			            	if (file_exists($targetMin))
+			            	{
+			            		copy($targetMin, $targetMax);
+			            		$imageMin = new ImageResize($targetMin);
+			            		$imageMin->resizeToHeight(100 );
+			            		$imageMin->save($targetMin);
+
+			            		$imageMax= new ImageResize($targetMax);
+			            		$imageMax->resizeToHeight(600 );
+			            		$imageMax->save($targetMax);
+
+			            		$managerImg->setTable('images');
+			            		$lastImgIdMin = $managerImg->insert(['ref_image'=>$targetMin]);
+			            		$lastImgIdMax = $managerImg->insert(['ref_image'=>$targetMax]);
+
+						// ajout lien post/images dans  echanges_imageManager
+
+			            		$echanges_imageManager->setTable('echanges_images');
+			            		$result= $echanges_imageManager->InsertEchanges_Images($postId['id'], $lastImgIdMin['id']);
+
+			            		$result= $echanges_imageManager->InsertEchanges_Images($postId['id'], $lastImgIdMax['id']);
+
+			            	}
+			            }
+	            	} //for
+	            	
+	            } // if count
+	            $this->redirectToRoute('forumListePosts');
+	        } // empty erreur
+
+
+		} // submit
 		$this->show('default/forumAjouterPost',['msg' => $msg, 'type_echange' => $type_echange]);
 		
 	}
