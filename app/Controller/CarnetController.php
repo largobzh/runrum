@@ -576,7 +576,7 @@ class CarnetController extends Controller
 
 					$d = new ModifierCarnetManager();
 				// temporaire
-					$_POST['form']['utilisateur_id'] = 1;
+					$_POST['form']['utilisateur_id'] = $_SESSION["user"]["id"];
 					$_POST['form']['moyenne'] = $_POST['form']['distance']/2;
 					// afin de convertir les trois champs en secondes et les enregistrer dans le champ de la base de données
 					$_POST['form']['duree']= $_POST['heure']*60*60+$_POST['minute']*60+$_POST['secondes'];

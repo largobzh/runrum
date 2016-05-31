@@ -55,7 +55,7 @@
 
 			<tr><td>Heure de départ : </td><td><?= $value['heuredepart'] ?> </td></tr>
 			
-			<tr><td>Distance parcouru : </td><td><?= $value['distance'] ?> km</td></tr>
+			<tr><td>Distance parcourue : </td><td><?= $value['distance'] ?> km</td></tr>
 			
 			<tr><td>Moyenne : </td><td><?= $value['moyenne'] ?> km/h </td></tr>
 
@@ -98,7 +98,7 @@
 		<div>
             <ul id="navComment">
             <!-- mettre la requête  -->
-            	<? //= $this->url('supprimerCarnet', ['id' => $value['id']]) ?>
+            	
                 <li><a href="#" data-id="<?= $this->url('supprimerCarnet', ['id' => $value['id']])?>" class="sansSoulign choix" >Supprimer</a></li>
                 
                 <li><a class="sansSoulign" href="<?= $this->url('modifierCarnet', ['id' => $value['id']]) ?>">Éditer</a></li>
